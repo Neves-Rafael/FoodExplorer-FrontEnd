@@ -3,6 +3,7 @@ import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
 import cardImage from "../../assets/pngegg 1.png";
 import { Section } from "../../components/Section";
+import { Card } from "../../components/Card";
 
 export function Home() {
   return (
@@ -15,7 +16,9 @@ export function Home() {
           <p>Sinta o cuidado do preparo com ingredients selecionados.</p>
         </div>
       </div>
-      <Section title={"Refeições"}>abc</Section>
+      <Section title={"Refeições"}>
+        <Card />
+      </Section>
       <Footer />
     </Container>
   );
