@@ -1,9 +1,10 @@
 import { Container } from "./style";
+import { Input } from "../components/Inputs";
 
 export function SignUp() {
   return (
     <Container>
-      <p>Teste</p>
+      <Input placeholder="Digite sua Senha!" type="password" />
     </Container>
   );
 }
