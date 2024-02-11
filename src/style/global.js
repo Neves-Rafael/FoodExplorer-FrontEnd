@@ -35,5 +35,33 @@ export default createGlobalStyle`
 
     button:hover, a:hover {
         filter: brightness(0.9);
-    }
+    }    
 `;
+
+//     /* Estilos para navegadores WebKit (Chrome, Safari) */
+// ::-webkit-scrollbar {
+//   width: 10px; /* largura da barra de rolagem */
+// }
+
+// ::-webkit-scrollbar-thumb {
+//   background-color: ${({ theme }) => theme.COLORS.DARK_900}; /* cor da alça da barra de rolagem */
+//   border-radius: 6px; /* bordas arredondadas da alça da barra de rolagem */
+// }
+
+// ::-webkit-scrollbar-track {
+//   background-color: #808080; /* cor de fundo da barra de rolagem */
+// }
+
+// /* Estilos para navegadores Firefox */
+// scrollbar {
+//   width: 6px; /* largura da barra de rolagem */
+// }
+
+// scrollbar-thumb {
+//   background-color: ${({ theme }) => theme.COLORS.DARK_900};; /* cor da alça da barra de rolagem */
+//   border-radius: 6px; /* bordas arredondadas da alça da barra de rolagem */
+// }
+
+// scrollbar-track {
+//   background-color: #808080; /* cor de fundo da barra de rolagem */
+// }

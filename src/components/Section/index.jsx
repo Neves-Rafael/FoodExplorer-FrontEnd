@@ -5,7 +5,7 @@ export function Section({ title, children }) {
   return (
     <Container>
       <p>{title}</p>
-      {children}
+      <div className="cardScroll">{children}</div>
     </Container>
   );
 }

@@ -18,6 +18,36 @@ export function Home() {
       </div>
       <Section title={"Refeições"}>
         <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+      </Section>
+      <Section title={"Refeições"}>
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+      </Section>
+      <Section title={"Refeições"}>
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
       </Section>
       <Footer />
     </Container>

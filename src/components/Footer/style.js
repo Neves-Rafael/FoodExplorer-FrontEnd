@@ -9,9 +9,6 @@ export const Container = styled.div`
   align-items: center;
   justify-content: space-around;
 
-  position: absolute;
-  bottom: 0;
-
   p {
     font-size: 1.2rem;
   }

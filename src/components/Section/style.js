@@ -5,6 +5,11 @@ export const Container = styled.div`
   margin-left: 2.4rem;
   overflow-x: auto;
 
+  .cardScroll {
+    display: flex;
+    gap: 2rem;
+  }
+
   p:first-child {
     font-size: 1.8rem;
     font-family: "Poppins", sans-serif;
