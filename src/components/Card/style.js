@@ -22,8 +22,12 @@ export const Container = styled.div`
     border-radius: 100%;
   }
 
+  div {
+    margin-top: 1rem;
+  }
+
   button {
-    margin: 2.4rem;
+    margin: 1.2rem 2.4rem 2.4rem;
     width: 80%;
     height: 3.2rem;
   }
@@ -33,5 +37,10 @@ export const Container = styled.div`
     right: 1rem;
     top: 1rem;
     font-size: 2.6rem;
+  }
+
+  .value {
+    color: ${({ theme }) => theme.COLORS.CAKE_200};
+    font-size: 2rem;
   }
 `;
