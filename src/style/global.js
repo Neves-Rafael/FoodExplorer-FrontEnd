@@ -11,20 +11,22 @@ export default createGlobalStyle`
         box-sizing: border-box;
         font-family: 'Roboto', sans-serif;
         font-size: 1.6rem;
+        color: ${({ theme }) => theme.COLORS.LIGHT_100};
     }
 
     body {
-        //background: theme
-        color: ${({ theme }) => theme.COLORS.LIGHT_100};
+        background-color: ${({ theme }) => theme.COLORS.DARK_400};
     }
 
     a {
         text-decoration: none;
     }
 
+
     button, a {
         cursor: pointer;
         transition: filter 0.2s;
+        border: none;
     }
 
     input {
