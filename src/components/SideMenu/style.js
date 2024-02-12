@@ -9,6 +9,10 @@ export const Container = styled.div`
   flex-direction: column;
   background-color: ${({ theme }) => theme.COLORS.DARK_400};
   z-index: 1;
+  display: none;
+  &[data-menu-is-open="true"] {
+    display: block;
+  }
 
   div:nth-child(4) {
     position: absolute;
