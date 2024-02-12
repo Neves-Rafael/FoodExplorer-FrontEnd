@@ -4,6 +4,8 @@ import { Footer } from "../../components/Footer";
 import cardImage from "../../assets/pngegg 1.png";
 import { Section } from "../../components/Section";
 import { Card } from "../../components/Card";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
 
 export function Home() {
   return (
@@ -17,37 +19,25 @@ export function Home() {
         </div>
       </div>
       <Section title={"Refeições"}>
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-      </Section>
-      <Section title={"Refeições"}>
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-      </Section>
-      <Section title={"Refeições"}>
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
+        <Swiper
+          spaceBetween={50}
+          slidesPerView={2}
+          onSlideChange={() => console.log("slide change")}
+          onSwiper={(swiper) => console.log(swiper)}>
+          <SwiperSlide>
+            <Card />
+          </SwiperSlide>
+          <SwiperSlide>
+            <Card />
+          </SwiperSlide>
+          <SwiperSlide>
+            <Card />
+          </SwiperSlide>
+          <SwiperSlide>
+            <Card />
+          </SwiperSlide>
+          ...
+        </Swiper>
       </Section>
       <Footer />
     </Container>

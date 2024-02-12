@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const Container = styled.div`
   margin-top: 6rem;
   margin-left: 2.4rem;
-  overflow-x: auto;
 
   .cardScroll {
     display: flex;
