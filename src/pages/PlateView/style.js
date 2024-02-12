@@ -9,7 +9,6 @@ export const Container = styled.div`
     width: 30rem;
     height: 30rem;
     object-fit: cover;
-    background-color: red;
     border-radius: 50%;
   }
 
@@ -31,7 +30,6 @@ export const Container = styled.div`
     padding-left: 15%;
     font-size: 2.4rem;
     text-align: start;
-    background-color: red;
     width: 100%;
   }
 
@@ -41,6 +39,7 @@ export const Container = styled.div`
     justify-content: center;
     align-items: center;
     gap: 3rem;
+    margin-bottom: 5rem;
   }
 
   .tags {
@@ -50,5 +49,6 @@ export const Container = styled.div`
     justify-content: center;
     flex-wrap: wrap;
     gap: 2rem;
+    margin: 2.4rem 0 4rem;
   }
 `;
