@@ -20,7 +20,7 @@ export const Container = styled.div`
     }
   }
 
-  input {
+  div:nth-child(2) {
     width: 90%;
     margin: 3rem 0 0 5%;
   }
