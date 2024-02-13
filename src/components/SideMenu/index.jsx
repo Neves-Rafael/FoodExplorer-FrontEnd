@@ -9,8 +9,8 @@ export function SideMenu({ menuIsOpen, menuIsClose }) {
   return (
     <Container data-menu-is-open={menuIsOpen}>
       <div className="menu-header">
-        <div>
-          <IoMdClose size={34} onClick={menuIsClose} /> Menu
+        <div onClick={menuIsClose}>
+          <IoMdClose size={34} /> Menu
         </div>
       </div>
       <Input icon={IoSearchOutline} placeholder={"Busque por pratos ou ingredients"} />

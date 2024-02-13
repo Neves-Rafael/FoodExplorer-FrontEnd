@@ -7,13 +7,14 @@ import GlobalStyles from "./style/global";
 // import { SignIn } from "./pages/SignIn";
 // import { SignUp } from "./pages/SignUp";
 // import { Home } from "./pages/Home";
-import { PlateView } from "./pages/PlateView";
+// import { PlateView } from "./pages/PlateView";
+import { NewPlate } from "./pages/NewPlate";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <ThemeProvider theme={Theme}>
       <GlobalStyles />
-      <PlateView />
+      <NewPlate />
     </ThemeProvider>
   </React.StrictMode>
 );
