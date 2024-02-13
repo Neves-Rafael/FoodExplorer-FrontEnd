@@ -1,13 +1,18 @@
 import { Container } from "./style";
-import { Input } from "../../components/Inputs";
+import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
 import { FoodExplorer } from "../../components/FoodExplorer";
 
 export function SignIn() {
   return (
     <Container>
-      <div>
+      <div className="desktop-logo">
         <FoodExplorer />
+      </div>
+
+      <div className="container-login">
+        <FoodExplorer />
+        <p className="desktop-text">Faça Login</p>
         <div>
           <p>Email</p>
           <Input placeholder="Exemplo: exemplo@exemplo.com" type="email" />
