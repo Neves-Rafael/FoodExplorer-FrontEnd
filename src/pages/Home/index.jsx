@@ -1,13 +1,27 @@
+import "swiper/css";
 import { Container } from "./style";
+import { Card } from "../../components/Card";
 import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
 import cardImage from "../../assets/pngegg 1.png";
 import { Section } from "../../components/Section";
-import { Card } from "../../components/Card";
 import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
+import { useEffect, useState } from "react";
 
 export function Home() {
+  const [widthScreen, setWidthScreen] = useState(window.innerWidth);
+
+  const updateWidthScreen = () => {
+    setWidthScreen(window.innerWidth);
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", updateWidthScreen);
+  }, []);
+
+  const quantityCards = widthScreen / 240;
+  console.log(quantityCards);
+
   return (
     <Container>
       <Header />
@@ -20,8 +34,8 @@ export function Home() {
       </div>
       <Section title={"Refeições"}>
         <Swiper
-          spaceBetween={50}
-          slidesPerView={2}
+          spaceBetween={quantityCards * 30}
+          slidesPerView={quantityCards}
           onSlideChange={() => console.log("slide change")}
           onSwiper={(swiper) => console.log(swiper)}>
           <SwiperSlide>

@@ -1,16 +1,21 @@
 import { Container } from "./style";
-import { Input } from "../../components/Inputs";
+import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
 import { FoodExplorer } from "../../components/FoodExplorer";
 
 export function SignUp() {
   return (
     <Container>
-      <div>
+      <div className="desktop-logo">
         <FoodExplorer />
+      </div>
+
+      <div className="container-login">
+        <FoodExplorer />
+        <p className="desktop-text">Crie Sua Conta</p>
         <div>
-          <p>Seu Nome</p>
-          <Input placeholder="Exemplo: exemplo@exemplo.com" type="Text" />
+          <p>Nome</p>
+          <Input placeholder="Digite seu nome" type="email" />
         </div>
         <div>
           <p>Email</p>
@@ -24,8 +29,8 @@ export function SignUp() {
           <p>Confirme a Senha</p>
           <Input placeholder="Digite sua Senha!" type="password" />
         </div>
-        <Button title="Criar conta"></Button>
-        <p>Já tenho uma conta</p>
+        <Button title="Criar Conta"></Button>
+        <p>Já possui uma conta?</p>
       </div>
     </Container>
   );

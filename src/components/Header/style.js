@@ -16,6 +16,12 @@ export const Container = styled.div`
     width: 2.6rem;
   }
 
+  .desktop-content {
+    width: 50%;
+    display: flex;
+    align-items: center;
+  }
+
   .order-counter {
     position: relative;
     span {
@@ -25,6 +31,16 @@ export const Container = styled.div`
       position: absolute;
       right: -0.4rem;
       top: -0.6rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .order-counter {
+      display: none;
+    }
+
+    .menu-hamburger {
+      display: none;
     }
   }
 `;
