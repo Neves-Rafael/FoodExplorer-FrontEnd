@@ -17,7 +17,7 @@ export const Container = styled.header`
   }
 
   button {
-    width: 22rem;
+    width: 21rem;
     display: none;
   }
 

@@ -20,6 +20,7 @@ export const Container = styled.div`
 
     > img {
       position: absolute;
+      width: 25rem;
       left: -2.8rem;
       bottom: 0;
     }
@@ -42,6 +43,33 @@ export const Container = styled.div`
 
       > p {
         font-size: 1.2rem;
+      }
+
+      @media (min-width: 1000px) {
+        width: auto;
+        margin-right: 5rem;
+        h3 {
+          font-size: 4rem;
+        }
+        p {
+          font-size: 1.5rem;
+        }
+      }
+    }
+
+    @media (min-width: 1000px) {
+      max-width: 110rem;
+      margin-left: auto;
+      height: 26rem;
+      margin-top: 10rem;
+
+      h3 {
+        font-size: 5rem;
+      }
+
+      > img {
+        width: 50rem;
+        left: -10rem;
       }
     }
   }

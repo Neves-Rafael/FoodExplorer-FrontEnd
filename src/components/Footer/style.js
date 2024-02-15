@@ -23,4 +23,9 @@ export const Container = styled.div`
       width: 2.2rem;
     }
   }
+
+  @media (min-width: 800px) {
+    justify-content: space-between;
+    padding: 0 10%;
+  }
 `;
