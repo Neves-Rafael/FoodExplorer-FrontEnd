@@ -17,13 +17,15 @@ export function Header() {
       </div>
       <FoodExplorer />
 
-      <div>
+      <div className="desktop-input">
         <Input placeholder={"Busque por pratos ou ingredients"} />
       </div>
-      <div>
-        <Button title={"Pedidos"} />
+
+      <Button title={"Pedidos"} />
+
+      <div className="desktop-leave">
+        <RxExit size={32} />
       </div>
-      <RxExit size={32} />
 
       <div className="order-counter">
         <PiReceipt size={32} />

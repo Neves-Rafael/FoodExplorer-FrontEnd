@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
+export const Container = styled.header`
   height: 11.4rem;
   background-color: ${({ theme }) => theme.COLORS.DARK_700};
   display: flex;
-  align-items: end;
-  padding-bottom: 2.8rem;
-  justify-content: space-around;
+  align-items: center;
+  justify-content: space-evenly;
+  grid-area: header;
 
   div p {
     font-size: 2rem;
@@ -16,10 +16,18 @@ export const Container = styled.div`
     width: 2.6rem;
   }
 
-  .desktop-content {
+  button {
+    width: 22rem;
+    display: none;
+  }
+
+  .desktop-input {
     width: 50%;
-    display: flex;
-    align-items: center;
+    display: none;
+  }
+
+  .desktop-leave {
+    display: none;
   }
 
   .order-counter {
@@ -35,12 +43,18 @@ export const Container = styled.div`
   }
 
   @media (min-width: 768px) {
+    padding: 0 10%;
+    justify-content: space-between;
+
+    .menu-hamburger,
     .order-counter {
       display: none;
     }
 
-    .menu-hamburger {
-      display: none;
+    button,
+    .desktop-leave,
+    .desktop-input {
+      display: block;
     }
   }
 `;
