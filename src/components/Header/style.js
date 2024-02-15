@@ -21,15 +21,6 @@ export const Container = styled.header`
     display: none;
   }
 
-  .desktop-input {
-    width: 50%;
-    display: none;
-  }
-
-  .desktop-leave {
-    display: none;
-  }
-
   .order-counter {
     position: relative;
     span {
@@ -46,15 +37,37 @@ export const Container = styled.header`
     padding: 0 10%;
     justify-content: space-between;
 
-    .menu-hamburger,
     .order-counter {
       display: none;
     }
 
-    button,
-    .desktop-leave,
-    .desktop-input {
+    button {
       display: block;
     }
+  }
+`;
+
+export const MenuHamburger = styled.div`
+  display: block;
+
+  @media (min-width: 768px) {
+    display: none;
+  }
+`;
+
+export const Logout = styled.div`
+  display: none;
+
+  @media (min-width: 768px) {
+    display: block;
+  }
+`;
+
+export const SearchBar = styled.div`
+  width: 50%;
+  display: none;
+
+  @media (min-width: 768px) {
+    display: block;
   }
 `;

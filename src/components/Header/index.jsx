@@ -1,4 +1,3 @@
-import { Container } from "./style";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { PiReceipt } from "react-icons/pi";
 import { FoodExplorer } from "../FoodExplorer";
@@ -7,30 +6,33 @@ import { useState } from "react";
 import { Input } from "../Input";
 import { Button } from "../Button";
 import { RxExit } from "react-icons/rx";
+import { Container, MenuHamburger, Logout, SearchBar } from "./style";
 
 export function Header() {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
   return (
     <Container>
-      <div className="menu-hamburger">
+      <MenuHamburger>
         <RxHamburgerMenu size={32} onClick={() => setMenuIsOpen(true)} />
-      </div>
+      </MenuHamburger>
+
       <FoodExplorer />
 
-      <div className="desktop-input">
+      <SearchBar>
         <Input placeholder={"Busque por pratos ou ingredients"} />
-      </div>
+      </SearchBar>
 
       <Button title={"Pedidos"} />
 
-      <div className="desktop-leave">
+      <Logout>
         <RxExit size={32} />
-      </div>
+      </Logout>
 
       <div className="order-counter">
         <PiReceipt size={32} />
         <span>1</span>
       </div>
+
       <SideMenu menuIsOpen={menuIsOpen} menuIsClose={() => setMenuIsOpen(false)} />
     </Container>
   );

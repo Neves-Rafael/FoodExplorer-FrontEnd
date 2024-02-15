@@ -1,12 +1,23 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+  display: grid;
+  grid-template-rows: 120px auto;
+  grid-template-areas:
+    "header"
+    "content";
+
+  main {
+    display: grid;
+    grid-area: content;
+    overflow-y: auto;
+  }
+
   .cardHomePage {
     height: 12rem;
     background: rgb(9, 30, 38);
     background: linear-gradient(180deg, rgba(9, 30, 38, 1) 0%, rgba(0, 19, 28, 1) 100%);
 
-    display: flex;
     width: 90%;
     flex-direction: column;
     align-items: center;
@@ -15,6 +26,7 @@ export const Container = styled.div`
     border-radius: 0.4rem;
     margin-top: 4.4rem;
     margin-left: 7%;
+    display: flex;
 
     position: relative;
 

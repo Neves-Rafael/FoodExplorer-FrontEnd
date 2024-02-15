@@ -20,39 +20,39 @@ export function Home() {
   }, []);
 
   const quantityCards = widthScreen / 240;
-  console.log(quantityCards);
 
   return (
     <Container>
       <Header />
-      <div className="cardHomePage">
-        <img src={cardImage} alt="" />
-        <div className="cardHomePageText">
-          <h3>Sabores inigualáveis</h3>
-          <p>Sinta o cuidado do preparo com ingredients selecionados.</p>
+      <main>
+        <div className="cardHomePage">
+          <img src={cardImage} alt="" />
+          <div className="cardHomePageText">
+            <h3>Sabores inigualáveis</h3>
+            <p>Sinta o cuidado do preparo com ingredients selecionados.</p>
+          </div>
         </div>
-      </div>
-      <Section title={"Refeições"}>
-        <Swiper
-          spaceBetween={quantityCards * 30}
-          slidesPerView={quantityCards}
-          onSlideChange={() => console.log("slide change")}
-          onSwiper={(swiper) => console.log(swiper)}>
-          <SwiperSlide>
-            <Card />
-          </SwiperSlide>
-          <SwiperSlide>
-            <Card />
-          </SwiperSlide>
-          <SwiperSlide>
-            <Card />
-          </SwiperSlide>
-          <SwiperSlide>
-            <Card />
-          </SwiperSlide>
-          ...
-        </Swiper>
-      </Section>
+        <Section title={"Refeições"}>
+          <Swiper
+            spaceBetween={quantityCards * 30}
+            slidesPerView={quantityCards}
+            onSlideChange={() => console.log("slide change")}>
+            <SwiperSlide>
+              <Card />
+            </SwiperSlide>
+            <SwiperSlide>
+              <Card />
+            </SwiperSlide>
+            <SwiperSlide>
+              <Card />
+            </SwiperSlide>
+            <SwiperSlide>
+              <Card />
+            </SwiperSlide>
+            ...
+          </Swiper>
+        </Section>
+      </main>
       <Footer />
     </Container>
   );
