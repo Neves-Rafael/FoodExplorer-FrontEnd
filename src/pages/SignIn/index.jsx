@@ -3,7 +3,13 @@ import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
 import { FoodExplorer } from "../../components/FoodExplorer";
 
+import { useAuth } from "../../hooks/auth";
+
 export function SignIn() {
+
+  const data = useAuth();
+  console.log(data)
+
   return (
     <Container>
       <div className="desktop-logo">
