@@ -7,13 +7,25 @@ import cardImage from "../../assets/pngegg 1.png";
 import { Section } from "../../components/Section";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useEffect, useState } from "react";
+import { api } from "../../service/api";
 
 export function Home() {
   const [widthScreen, setWidthScreen] = useState(window.innerWidth);
+  const [plates, setPlates] = useState([]);
 
   const updateWidthScreen = () => {
     setWidthScreen(window.innerWidth);
   };
+
+  useEffect(() => {
+    async function fetchPlates() {
+      const response = await api.get("/plates");
+      const data = response.data;
+      setPlates(data);
+    }
+
+    fetchPlates();
+  }, []);
 
   useEffect(() => {
     window.addEventListener("resize", updateWidthScreen);
@@ -40,16 +52,17 @@ export function Home() {
             <SwiperSlide>
               <Card />
             </SwiperSlide>
-            <SwiperSlide>
-              <Card />
-            </SwiperSlide>
-            <SwiperSlide>
-              <Card />
-            </SwiperSlide>
-            <SwiperSlide>
-              <Card />
-            </SwiperSlide>
-            ...
+            ;
+            {plates &&
+              plates.map((plate) => (
+                <SwiperSlide key={String(plate.id)}>
+                  <Card
+                    title={plate.name}
+                    value={plate.value}
+                    plateImage={plate.image}
+                  />
+                </SwiperSlide>
+              ))}
           </Swiper>
         </Section>
       </main>

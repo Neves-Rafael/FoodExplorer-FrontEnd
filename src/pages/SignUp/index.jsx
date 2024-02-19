@@ -47,19 +47,35 @@ export function SignUp() {
         <p className="desktop-text">Crie Sua Conta</p>
         <div>
           <p>Nome</p>
-          <Input placeholder="Digite seu nome" type="email" onChange={(e) => setName(e.target.value)} />
+          <Input
+            placeholder="Digite seu nome"
+            type="email"
+            onChange={(e) => setName(e.target.value)}
+          />
         </div>
         <div>
           <p>Email</p>
-          <Input placeholder="Exemplo: exemplo@exemplo.com" type="email" onChange={(e) => setEmail(e.target.value)} />
+          <Input
+            placeholder="Exemplo: exemplo@exemplo.com"
+            type="email"
+            onChange={(e) => setEmail(e.target.value)}
+          />
         </div>
         <div>
           <p>Senha</p>
-          <Input placeholder="Digite sua Senha!" type="password" onChange={(e) => setPassword(e.target.value)} />
+          <Input
+            placeholder="Digite sua Senha!"
+            type="password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
         </div>
         <div>
           <p>Confirme a Senha</p>
-          <Input placeholder="Digite sua Senha!" type="password" onChange={(e) => setConfirmPassword(e.target.value)} />
+          <Input
+            placeholder="Digite sua Senha!"
+            type="password"
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
         </div>
         <Button title="Criar Conta" onClick={handleSignUp} />
         <p>Já possui uma conta?</p>

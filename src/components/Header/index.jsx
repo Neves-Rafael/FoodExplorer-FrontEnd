@@ -7,8 +7,11 @@ import { Input } from "../Input";
 import { Button } from "../Button";
 import { RxExit } from "react-icons/rx";
 import { Container, MenuHamburger, Logout, SearchBar } from "./style";
+import { useAuth } from "../../hooks/auth";
 
 export function Header() {
+  const { logout } = useAuth();
+
   const [menuIsOpen, setMenuIsOpen] = useState(false);
 
   return (
@@ -25,7 +28,7 @@ export function Header() {
 
       <Button title={"Pedidos"} />
 
-      <Logout onClick={handleLogout}>
+      <Logout onClick={logout}>
         <RxExit size={32} />
       </Logout>
 

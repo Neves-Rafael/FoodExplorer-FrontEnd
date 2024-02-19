@@ -1,29 +1,35 @@
-import { Container } from "./style";
+import { Container, Logo, Section, MakeLogin, MakeAccount } from "./style";
 import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
 import { FoodExplorer } from "../../components/FoodExplorer";
 
 import { useAuth } from "../../hooks/auth";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const navigate = useNavigate();
+
   const { sessionLogin } = useAuth();
+
   function handleSessionLogin() {
     sessionLogin({ email, password });
   }
 
   return (
     <Container>
-      <div className="desktop-logo">
+      <Logo>
         <FoodExplorer />
-      </div>
+      </Logo>
 
-      <div className="container-login">
+      <Section>
         <FoodExplorer />
-        <p className="desktop-text">Faça Login</p>
+
+        <MakeLogin>Faça Login</MakeLogin>
+
         <div>
           <p>Email</p>
           <Input
@@ -32,6 +38,7 @@ export function SignIn() {
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
+
         <div>
           <p>Senha</p>
           <Input
@@ -40,9 +47,13 @@ export function SignIn() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
+
         <Button title="Entrar" onClick={handleSessionLogin}></Button>
-        <p>Criar uma conta</p>
-      </div>
+
+        <MakeAccount onClick={() => navigate("/signUp")}>
+          Criar uma conta
+        </MakeAccount>
+      </Section>
     </Container>
   );
 }

@@ -5,14 +5,14 @@ import tempImage from "../../assets/pngegg 1.png";
 import { Button } from "../Button";
 import { Count } from "../Count";
 
-export function Card() {
+export function Card({ title, value, plateImage, ...rest }) {
   return (
-    <Container>
+    <Container {...rest}>
       <FaRegHeart className="favorite" />
 
-      <img src={tempImage} alt="" />
-      <p>Salada Ravanello</p>
-      <p className="value">R$ 49,99</p>
+      <img src={plateImage} alt="" />
+      <p>teste</p>
+      <p className="value">R$ {value}</p>
 
       <Count />
       <Button title={"Incluir"} />
