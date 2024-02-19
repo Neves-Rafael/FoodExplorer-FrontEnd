@@ -7,6 +7,7 @@ export const Container = styled.button`
   border-radius: 0.6rem;
   display: flex;
   align-items: center;
+  gap: 1rem;
   justify-content: center;
   font-family: "Poppins";
 

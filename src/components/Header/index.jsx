@@ -17,7 +17,7 @@ import { Button } from "../Button";
 import { RxExit } from "react-icons/rx";
 import { useAuth } from "../../hooks/auth";
 
-export function Header() {
+export function Header({ icon }) {
   const { logout } = useAuth();
 
   const [menuIsOpen, setMenuIsOpen] = useState(false);
@@ -33,11 +33,11 @@ export function Header() {
       </Logo>
 
       <SearchBar>
-        <Input placeholder={"Busque por pratos ou ingredients"} />
+        <Input placeholder={"Busque por pratos ou ingredients"} icon={icon} />
       </SearchBar>
 
       <Requests>
-        <Button title={"Pedidos"} />
+        <Button title={`Pedidos (${0})`} icon={PiReceipt} />
       </Requests>
 
       <Logout onClick={logout}>

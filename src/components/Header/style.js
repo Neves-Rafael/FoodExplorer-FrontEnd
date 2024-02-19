@@ -34,6 +34,12 @@ export const SearchBar = styled.div`
   width: 40%;
   display: none;
 
+  div input {
+    &::placeholder {
+      padding-left: 25%;
+    }
+  }
+
   @media (min-width: 1024px) {
     display: block;
   }

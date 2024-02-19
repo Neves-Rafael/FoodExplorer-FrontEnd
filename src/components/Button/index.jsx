@@ -1,5 +1,10 @@
 /* eslint-disable react/prop-types */
 import { Container } from "./style";
-export function Button({ title, ...rest }) {
-  return <Container {...rest}>{title}</Container>;
+export function Button({ title, icon: Icon, ...rest }) {
+  return (
+    <Container {...rest}>
+      {Icon && <Icon size={32} />}
+      {title}
+    </Container>
+  );
 }

@@ -1,5 +1,6 @@
 import "swiper/css";
-import { Container } from "./style";
+import { IoSearchOutline } from "react-icons/io5";
+import { Container, Banner, BannerText } from "./style";
 import { Card } from "../../components/Card";
 import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
@@ -34,15 +35,17 @@ export function Home() {
 
   return (
     <Container>
-      <Header />
+      <Header icon={IoSearchOutline} />
+
       <main>
-        {/* <div className="cardHomePage">
+        <Banner>
           <img src={cardImage} alt="" />
-          <div className="cardHomePageText">
+
+          <BannerText>
             <h3>Sabores inigualáveis</h3>
             <p>Sinta o cuidado do preparo com ingredients selecionados.</p>
-          </div>
-        </div> */}
+          </BannerText>
+        </Banner>
         {/* <Section title={"Refeições"}>
           <Swiper
             spaceBetween={quantityCards * 30}
