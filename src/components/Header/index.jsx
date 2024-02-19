@@ -10,6 +10,7 @@ import { Container, MenuHamburger, Logout, SearchBar } from "./style";
 
 export function Header() {
   const [menuIsOpen, setMenuIsOpen] = useState(false);
+
   return (
     <Container>
       <MenuHamburger>
@@ -24,7 +25,7 @@ export function Header() {
 
       <Button title={"Pedidos"} />
 
-      <Logout>
+      <Logout onClick={handleLogout}>
         <RxExit size={32} />
       </Logout>
 
@@ -33,7 +34,10 @@ export function Header() {
         <span>1</span>
       </div>
 
-      <SideMenu menuIsOpen={menuIsOpen} menuIsClose={() => setMenuIsOpen(false)} />
+      <SideMenu
+        menuIsOpen={menuIsOpen}
+        menuIsClose={() => setMenuIsOpen(false)}
+      />
     </Container>
   );
 }
