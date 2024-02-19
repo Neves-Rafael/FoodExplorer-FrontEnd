@@ -1,9 +1,10 @@
-import { Container } from "./style";
+import { Container, Logo, Section, MakeLogin, MakeAccount } from "./style";
 import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
 import { FoodExplorer } from "../../components/FoodExplorer";
+import hamburger from "../../assets/Hamburger-rafiki.svg";
+
 import { useState } from "react";
-import { api } from "../../service/api";
 import { useNavigate } from "react-router-dom";
 
 export function SignUp() {
@@ -38,13 +39,16 @@ export function SignUp() {
 
   return (
     <Container>
-      <div className="desktop-logo">
+      <Logo>
         <FoodExplorer />
-      </div>
+        <img src={hamburger} alt="" />
+      </Logo>
 
-      <div className="container-login">
+      <Section>
         <FoodExplorer />
-        <p className="desktop-text">Crie Sua Conta</p>
+
+        <MakeLogin>Crie Sua Conta</MakeLogin>
+
         <div>
           <p>Nome</p>
           <Input
@@ -53,6 +57,7 @@ export function SignUp() {
             onChange={(e) => setName(e.target.value)}
           />
         </div>
+
         <div>
           <p>Email</p>
           <Input
@@ -61,6 +66,7 @@ export function SignUp() {
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
+
         <div>
           <p>Senha</p>
           <Input
@@ -69,17 +75,22 @@ export function SignUp() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
+
         <div>
           <p>Confirme a Senha</p>
           <Input
-            placeholder="Digite sua Senha!"
+            placeholder="Confirme sua Senha!"
             type="password"
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
         </div>
-        <Button title="Criar Conta" onClick={handleSignUp} />
-        <p>Já possui uma conta?</p>
-      </div>
+
+        <Button title="Criar Conta" onClick={handleSignUp}></Button>
+
+        <MakeAccount onClick={() => navigate(-1)}>
+          Já possui uma conta?
+        </MakeAccount>
+      </Section>
     </Container>
   );
 }
