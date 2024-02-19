@@ -1,3 +1,12 @@
+import {
+  Container,
+  MenuHamburger,
+  Logout,
+  SearchBar,
+  OrderCount,
+  Logo,
+  Requests,
+} from "./style";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { PiReceipt } from "react-icons/pi";
 import { FoodExplorer } from "../FoodExplorer";
@@ -6,7 +15,6 @@ import { useState } from "react";
 import { Input } from "../Input";
 import { Button } from "../Button";
 import { RxExit } from "react-icons/rx";
-import { Container, MenuHamburger, Logout, SearchBar } from "./style";
 import { useAuth } from "../../hooks/auth";
 
 export function Header() {
@@ -20,22 +28,26 @@ export function Header() {
         <RxHamburgerMenu size={32} onClick={() => setMenuIsOpen(true)} />
       </MenuHamburger>
 
-      <FoodExplorer />
+      <Logo>
+        <FoodExplorer />
+      </Logo>
 
       <SearchBar>
         <Input placeholder={"Busque por pratos ou ingredients"} />
       </SearchBar>
 
-      <Button title={"Pedidos"} />
+      <Requests>
+        <Button title={"Pedidos"} />
+      </Requests>
 
       <Logout onClick={logout}>
         <RxExit size={32} />
       </Logout>
 
-      <div className="order-counter">
+      <OrderCount>
         <PiReceipt size={32} />
         <span>1</span>
-      </div>
+      </OrderCount>
 
       <SideMenu
         menuIsOpen={menuIsOpen}

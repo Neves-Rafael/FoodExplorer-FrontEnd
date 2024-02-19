@@ -23,7 +23,6 @@ export function Home() {
       const data = response.data;
       setPlates(data);
     }
-
     fetchPlates();
   }, []);
 
@@ -37,14 +36,14 @@ export function Home() {
     <Container>
       <Header />
       <main>
-        <div className="cardHomePage">
+        {/* <div className="cardHomePage">
           <img src={cardImage} alt="" />
           <div className="cardHomePageText">
             <h3>Sabores inigualáveis</h3>
             <p>Sinta o cuidado do preparo com ingredients selecionados.</p>
           </div>
-        </div>
-        <Section title={"Refeições"}>
+        </div> */}
+        {/* <Section title={"Refeições"}>
           <Swiper
             spaceBetween={quantityCards * 30}
             slidesPerView={quantityCards}
@@ -64,9 +63,9 @@ export function Home() {
                 </SwiperSlide>
               ))}
           </Swiper>
-        </Section>
+        </Section> */}
       </main>
-      <Footer />
+      {/* <Footer /> */}
     </Container>
   );
 }

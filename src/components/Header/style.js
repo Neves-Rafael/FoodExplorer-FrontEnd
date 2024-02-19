@@ -8,49 +8,16 @@ export const Container = styled.header`
   justify-content: space-evenly;
   grid-area: header;
 
-  div p {
-    font-size: 2rem;
-  }
-
-  div img {
-    width: 2.6rem;
-  }
-
-  button {
-    width: 21rem;
-    display: none;
-  }
-
-  .order-counter {
-    position: relative;
-    span {
-      background-color: ${({ theme }) => theme.COLORS.TOMATO_100};
-      padding: 0.1rem 0.6rem;
-      border-radius: 100%;
-      position: absolute;
-      right: -0.4rem;
-      top: -0.6rem;
-    }
-  }
-
-  @media (min-width: 768px) {
-    padding: 0 10%;
-    justify-content: space-between;
-
-    .order-counter {
-      display: none;
-    }
-
-    button {
-      display: block;
-    }
+  @media (min-width: 1024px) {
+    justify-content: center;
+    gap: 5rem;
   }
 `;
 
 export const MenuHamburger = styled.div`
   display: block;
 
-  @media (min-width: 768px) {
+  @media (min-width: 1024px) {
     display: none;
   }
 `;
@@ -58,16 +25,56 @@ export const MenuHamburger = styled.div`
 export const Logout = styled.div`
   display: none;
 
-  @media (min-width: 768px) {
+  @media (min-width: 1024px) {
     display: block;
   }
 `;
 
 export const SearchBar = styled.div`
-  width: 50%;
+  width: 40%;
   display: none;
 
-  @media (min-width: 768px) {
+  @media (min-width: 1024px) {
     display: block;
+  }
+
+  @media (min-width: 1440px) {
+    width: 58rem;
+  }
+`;
+
+export const OrderCount = styled.div`
+  position: relative;
+
+  span {
+    background-color: ${({ theme }) => theme.COLORS.TOMATO_100};
+    padding: 0.1rem 0.6rem;
+    border-radius: 100%;
+    position: absolute;
+    right: -0.4rem;
+    top: -0.6rem;
+  }
+
+  @media (min-width: 1024px) {
+    display: none;
+  }
+`;
+
+export const Logo = styled.div`
+  div p {
+    font-size: 2rem;
+  }
+
+  div img {
+    width: 2.8rem;
+  }
+`;
+
+export const Requests = styled.div`
+  display: none;
+
+  @media (min-width: 1024px) {
+    display: block;
+    width: 20rem;
   }
 `;
