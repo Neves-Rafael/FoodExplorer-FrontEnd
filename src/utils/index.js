@@ -35,3 +35,9 @@ const addDefaultPlates = [
     ingredients: ["frango", "peixe", "arroz", "feijão"],
   },
 ];
+
+function teste() {
+  console.log("abc");
+}
+
+teste();

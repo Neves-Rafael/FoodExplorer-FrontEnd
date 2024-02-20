@@ -2,15 +2,15 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   display: grid;
-  grid-template-rows: 120px auto;
   grid-template-areas:
     "header"
     "content";
+  grid-template-rows: 120px auto;
 
   main {
     display: grid;
     grid-area: content;
-    overflow-y: scroll;
+    overflow-y: auto;
   }
 `;
 

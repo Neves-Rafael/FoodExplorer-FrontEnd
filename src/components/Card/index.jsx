@@ -11,7 +11,7 @@ export function Card({ title, value, plateImage, ...rest }) {
       <FaRegHeart className="favorite" />
 
       <img src={plateImage} alt="" />
-      <p>teste</p>
+      <p>{title}</p>
       <p className="value">R$ {value}</p>
 
       <Count />
