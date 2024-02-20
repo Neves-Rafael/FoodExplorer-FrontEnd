@@ -7,6 +7,7 @@ import cardImage from "../../assets/pngegg 1.png";
 import { Section } from "../../components/Section";
 import { useEffect, useState } from "react";
 import { api } from "../../service/api";
+import { defaultPlates } from "../../utils/plates";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -19,7 +20,6 @@ export function Home() {
   register();
   const [plates, setPlates] = useState([]);
   const [cardView, setCardView] = useState(2);
-  const [showPagination, setShowPagination] = useState(false);
 
   useEffect(() => {
     function handleResize() {
@@ -30,7 +30,6 @@ export function Home() {
         setCardView(viewPerWidth);
       } else {
         setCardView(4.4);
-        setShowPagination(true);
       }
 
       console.log(viewPerWidth);
@@ -49,10 +48,12 @@ export function Home() {
     async function fetchPlates() {
       const response = await api.get("/plates");
       const data = response.data;
-      setPlates(data);
+      const allPlates = [...defaultPlates, ...data];
+      setPlates(allPlates);
     }
     fetchPlates();
   }, []);
+  console.log(plates);
 
   return (
     <Container>
@@ -72,22 +73,57 @@ export function Home() {
           <Swiper
             slidesPerView={cardView}
             spaceBetween={cardView * 40}
-            // pagination={{ clickable: true }}
-          >
+            loop={true}>
             {plates &&
               plates.map((plate) => (
                 <SwiperSlide key={String(plate.id)}>
                   <Card
                     title={plate.name}
                     value={plate.value}
-                    plateImage={plate.image}
+                    plateImage={String(plate.image)}
                   />
                 </SwiperSlide>
               ))}
           </Swiper>
         </Section>
+
+        <Section title={"Sobremesas"}>
+          <Swiper
+            slidesPerView={cardView}
+            spaceBetween={cardView * 40}
+            loop={true}>
+            {plates &&
+              plates.map((plate) => (
+                <SwiperSlide key={String(plate.id)}>
+                  <Card
+                    title={plate.name}
+                    value={plate.value}
+                    plateImage={String(plate.image)}
+                  />
+                </SwiperSlide>
+              ))}
+          </Swiper>
+        </Section>
+
+        <Section title={"Bebidas"}>
+          <Swiper
+            slidesPerView={cardView}
+            spaceBetween={cardView * 40}
+            loop={true}>
+            {plates &&
+              plates.map((plate) => (
+                <SwiperSlide key={String(plate.id)}>
+                  <Card
+                    title={plate.name}
+                    value={plate.value}
+                    plateImage={String(plate.image)}
+                  />
+                </SwiperSlide>
+              ))}
+          </Swiper>
+        </Section>
+        <Footer />
       </main>
-      {/* <Footer /> */}
     </Container>
   );
 }

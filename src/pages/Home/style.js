@@ -1,16 +1,17 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+  height: 100dvh;
   display: grid;
   grid-template-areas:
     "header"
     "content";
   grid-template-rows: 120px auto;
 
-  main {
-    display: grid;
+  > main {
     grid-area: content;
-    overflow-y: auto;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
   }
 `;
 

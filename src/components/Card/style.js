@@ -18,7 +18,6 @@ export const Container = styled.div`
     margin-top: 2.4rem;
     margin-bottom: 1rem;
     object-fit: cover;
-    background-color: red;
     border-radius: 100%;
   }
 
