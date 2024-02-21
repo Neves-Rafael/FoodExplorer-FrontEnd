@@ -1,4 +1,3 @@
-import { IoSearchOutline } from "react-icons/io5";
 import { Container, Banner, BannerText } from "./style";
 import { Card } from "../../components/Card";
 import { Header } from "../../components/Header";
@@ -8,6 +7,7 @@ import { Section } from "../../components/Section";
 import { useEffect, useState } from "react";
 import { api } from "../../service/api";
 import { defaultPlates } from "../../utils/plates";
+import { useNavigate } from "react-router-dom";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -20,6 +20,7 @@ export function Home() {
   register();
   const [plates, setPlates] = useState([]);
   const [cardView, setCardView] = useState(2);
+  const navigate = new useNavigate();
 
   useEffect(() => {
     function handleResize() {
@@ -31,8 +32,6 @@ export function Home() {
       } else {
         setCardView(4.4);
       }
-
-      console.log(viewPerWidth);
     }
 
     handleResize();
@@ -53,11 +52,10 @@ export function Home() {
     }
     fetchPlates();
   }, []);
-  console.log(plates);
 
   return (
     <Container>
-      <Header icon={IoSearchOutline} />
+      <Header />
 
       <main>
         <Banner>
@@ -78,6 +76,7 @@ export function Home() {
               plates.map((plate) => (
                 <SwiperSlide key={String(plate.id)}>
                   <Card
+                    view={() => navigate(`/plateview/${plate.id}`)}
                     title={plate.name}
                     value={plate.value}
                     plateImage={String(plate.image)}

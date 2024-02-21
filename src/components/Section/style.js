@@ -7,6 +7,7 @@ export const Container = styled.section`
   overflow: hidden;
   margin-left: 5%;
   margin-right: 5%;
+  position: relative;
 
   p:first-child {
     font-size: 1.8rem;
@@ -19,4 +20,22 @@ export const Container = styled.section`
     margin-left: auto;
     margin-right: auto;
   }
+`;
+
+export const Fov = styled.div`
+  /* background: rgb(0, 10, 15);
+  background: linear-gradient(
+    90deg,
+    rgba(0, 10, 15, 1) 8%,
+    rgba(255, 255, 255, 0) 28%,
+    rgba(255, 255, 255, 0) 72%,
+    rgba(0, 10, 15, 1) 92%
+  );
+
+  z-index: 1;
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: 0;
+  bottom: 0; */
 `;

@@ -19,6 +19,11 @@ export const Container = styled.div`
     margin-bottom: 1rem;
     object-fit: cover;
     border-radius: 100%;
+    cursor: pointer;
+  }
+
+  p {
+    cursor: pointer;
   }
 
   div {

@@ -16,8 +16,9 @@ import { Input } from "../Input";
 import { Button } from "../Button";
 import { RxExit } from "react-icons/rx";
 import { useAuth } from "../../hooks/auth";
+import { IoSearchOutline } from "react-icons/io5";
 
-export function Header({ icon }) {
+export function Header() {
   const { logout } = useAuth();
 
   const [menuIsOpen, setMenuIsOpen] = useState(false);
@@ -33,7 +34,10 @@ export function Header({ icon }) {
       </Logo>
 
       <SearchBar>
-        <Input placeholder={"Busque por pratos ou ingredients"} icon={icon} />
+        <Input
+          placeholder={"Busque por pratos ou ingredients"}
+          icon={IoSearchOutline}
+        />
       </SearchBar>
 
       <Requests>

@@ -8,10 +8,10 @@ export function AppRoutes() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/plateView" element={<PlateView />} />
-      <Route path="/newPlate" element={<NewPlate />} />
+      <Route path="/plateview/:id" element={<PlateView />} />
+      <Route path="/newplate" element={<NewPlate />} />
 
-      <Route path="*" element={<Navigate to="/" />} />
+      {/* <Route path="*" element={<Navigate to="/" />} /> */}
     </Routes>
   );
 }
