@@ -5,7 +5,7 @@ export const Container = styled.div`
 `;
 
 export const Placeholder = styled.div`
-  background-color: blue;
+  background-color: ${({ theme }) => theme.COLORS.DARK_900};
   border-radius: 8px;
 
   > div {
@@ -14,6 +14,12 @@ export const Placeholder = styled.div`
     padding: 0 2rem;
     justify-content: space-between;
     align-items: center;
+
+    span {
+      cursor: pointer;
+      rotate: ${({ $isOpen }) => ($isOpen ? "180deg" : "0deg")};
+      transition: rotate 0.3s ease-in-out;
+    }
   }
 
   button {
@@ -23,16 +29,18 @@ export const Placeholder = styled.div`
 `;
 
 export const Options = styled.li`
-  background-color: red;
   max-height: 50rem;
   display: ${({ $isOpen }) => ($isOpen ? "flex" : "none")};
   flex-direction: column;
-  gap: 2rem;
   overflow-y: auto;
 
-  padding: 2rem 2rem;
-
   ul {
+    padding: 1rem 2rem;
     cursor: pointer;
+
+    &:hover {
+      background-color: ${({ theme }) => theme.COLORS.DARK_700};
+      border-radius: 8px;
+    }
   }
 `;
