@@ -32,6 +32,26 @@ function AuthProvider({ children }) {
     setData({});
   }
 
+  async function createPlate({ plate, image }) {
+    try {
+      const plateForm = await api.post("/plates", plate);
+      const { plateId } = plateForm.data;
+
+      if (image) {
+        const uploadImage = new FormData();
+        uploadImage.append("image", image);
+
+        await api.patch(`/plates/image/${plateId}`, uploadImage);
+      }
+    } catch (error) {
+      if (error.response) {
+        alert(error.response.data.message);
+      } else {
+        alert("Não foi possível entrar.");
+      }
+    }
+  }
+
   useEffect(() => {
     const token = localStorage.getItem("@foodexplorer:token");
     const user = localStorage.getItem("@foodexplorer:user");
@@ -45,7 +65,8 @@ function AuthProvider({ children }) {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ sessionLogin, logout, user: data.user }}>
+    <AuthContext.Provider
+      value={{ sessionLogin, logout, createPlate, user: data.user }}>
       {children}
     </AuthContext.Provider>
   );

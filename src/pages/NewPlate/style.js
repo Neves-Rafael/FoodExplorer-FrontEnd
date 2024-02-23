@@ -135,3 +135,21 @@ export const Ingredients = styled.div`
   background-color: ${({ theme, $isNew }) =>
     $isNew ? "transparent" : theme.COLORS.DARK_900};
 `;
+
+export const UploadImage = styled.label`
+  background-color: ${({ theme }) => theme.COLORS.TOMATO_100};
+  height: 4.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 8px;
+
+  input {
+    display: none;
+  }
+
+  svg {
+    margin-right: 1rem;
+  }
+`;
