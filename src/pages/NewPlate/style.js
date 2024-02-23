@@ -8,8 +8,8 @@ export const Container = styled.div`
 export const Section = styled.section`
   max-width: 90%;
   margin: auto;
-  /* display: flex; */
-
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   gap: 3.2rem;
   padding-bottom: 10rem;
@@ -21,7 +21,6 @@ export const Section = styled.section`
     border: none;
     height: 20rem;
     background-color: ${({ theme }) => theme.COLORS.DARK_800};
-    margin-top: 2rem;
   }
 
   p {
@@ -34,8 +33,12 @@ export const Section = styled.section`
     margin-top: 2.4rem;
   }
 
+  @media (min-width: 450px) {
+    max-width: 400px;
+  }
+
   @media (min-width: 1120px) {
-    flex-direction: column;
+    max-width: 1024px;
   }
 `;
 
@@ -45,20 +48,24 @@ export const Line1 = styled.div`
   justify-content: center;
   gap: 2.4rem;
 
-  > div {
-    width: 100%;
-  }
-
-  > div:nth-child(1) {
-    /* max-width: 25%; */
-  }
-
-  > div:nth-child(3) {
-    /* max-width: 35%; */
-  }
-
   p {
     margin-bottom: 1.6rem;
+  }
+
+  @media (min-width: 1120px) {
+    flex-direction: row;
+
+    > div {
+      width: 100%;
+    }
+
+    > div:nth-child(1) {
+      max-width: 25%;
+    }
+
+    > div:nth-child(3) {
+      max-width: 35%;
+    }
   }
 `;
 
@@ -73,12 +80,20 @@ export const Line2 = styled.div`
     width: 100%;
   }
 
-  > div:nth-child(2) {
-    /* max-width: 20%; */
-  }
-
   p {
     margin-bottom: 1.6rem;
+  }
+
+  @media (min-width: 1120px) {
+    flex-direction: row;
+
+    > div {
+      width: 100%;
+    }
+
+    > div:nth-child(2) {
+      max-width: 20%;
+    }
   }
 `;
 
@@ -99,4 +114,24 @@ export const Titles = styled.div`
     font-weight: 500;
     font-family: "Poppins";
   }
+
+  @media (min-width: 450px) {
+    max-width: 400px;
+  }
+  @media (min-width: 1120px) {
+    max-width: 1024px;
+  }
+`;
+
+export const Ingredients = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 1rem;
+  min-height: 4.8rem;
+  border-radius: 8px;
+  gap: 1rem;
+
+  background-color: ${({ theme, $isNew }) =>
+    $isNew ? "transparent" : theme.COLORS.DARK_900};
 `;

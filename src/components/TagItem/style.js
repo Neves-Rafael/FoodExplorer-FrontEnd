@@ -2,25 +2,29 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   background-color: ${({ theme, $isNew }) =>
-    $isNew ? "transparent" : theme.COLORS.DARK_900};
+    $isNew ? "transparent" : theme.COLORS.LIGHT_500};
 
-  border: ${({ $isNew }) => ($isNew ? `1px dashed red` : "none")};
-  margin-bottom: 8px;
-  padding-right: 16px;
+  border: ${({ $isNew }) => ($isNew ? `1px dashed gray` : "none")};
 
   display: flex;
   align-items: center;
+  height: 3rem;
+  border-radius: 8px;
+  padding: 12px;
+  max-width: 12.9rem;
+
+  @media (min-width: 425px) {
+    max-width: 15rem;
+  }
 
   button {
     background: none;
     border: none;
+    display: flex;
   }
 
   input {
-    height: 4.8rem;
     width: 100%;
-
-    padding: 12px;
 
     background: transparent;
     border: none;
@@ -29,9 +33,4 @@ export const Container = styled.div`
       color: blue;
     }
   }
-`;
-
-export const Ingredients = styled.div`
-  display: flex;
-  flex-direction: row;
 `;

@@ -41,8 +41,8 @@ export function NewPlate() {
           <div>
             <p>Ingredients</p>
             <Ingredients>
+              <TagItem value={"Peixe frito"} />
               <TagItem $isNew={true} />
-              <TagItem />
             </Ingredients>
           </div>
 
