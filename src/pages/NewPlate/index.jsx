@@ -22,7 +22,7 @@ export function NewPlate() {
   const { createPlate } = useAuth();
 
   const [name, setName] = useState("adsadasd");
-  const [category, setCategory] = useState("asdasdas");
+  const [category, setCategory] = useState("Bebida");
   const [ingredients, setIngredients] = useState(["dasda", "sjksjlkajsa"]);
   const [value, setValue] = useState(25);
   const [description, setDescription] = useState("dasdsadsa");

@@ -6,7 +6,7 @@ import cardImage from "../../assets/pngegg 1.png";
 import { Section } from "../../components/Section";
 import { useEffect, useState } from "react";
 import { api } from "../../service/api";
-import { defaultPlates } from "../../utils/plates";
+// import { defaultPlates } from "../../utils/plates";
 import { useNavigate } from "react-router-dom";
 
 import "swiper/css";
@@ -21,6 +21,28 @@ export function Home() {
   const [plates, setPlates] = useState([]);
   const [cardView, setCardView] = useState(2);
   const navigate = new useNavigate();
+
+  const [refeicao, setRefeicao] = useState([]);
+  const [sobremesa, setSobremesa] = useState([]);
+  const [bebida, setBebida] = useState([]);
+
+  const imageURL = `${api.defaults.baseURL}/files/`;
+
+  function separePerSection() {
+    const filteredRefeicao = plates.filter(
+      (item) => item.category === "Refeição"
+    );
+
+    const filteredBebidas = plates.filter((item) => item.category === "Bebida");
+
+    const filteredSobremesas = plates.filter(
+      (item) => item.category === "Sobremesas"
+    );
+
+    setRefeicao(filteredRefeicao);
+    setBebida(filteredBebidas);
+    setSobremesa(filteredSobremesas);
+  }
 
   useEffect(() => {
     function handleResize() {
@@ -46,11 +68,13 @@ export function Home() {
   useEffect(() => {
     async function fetchPlates() {
       const response = await api.get("/plates");
+
       const data = response.data;
-      const allPlates = [...defaultPlates, ...data];
-      setPlates(allPlates);
+      setPlates(data);
     }
     fetchPlates();
+
+    separePerSection();
   }, []);
 
   return (
@@ -72,14 +96,14 @@ export function Home() {
             slidesPerView={cardView}
             spaceBetween={cardView * 40}
             loop={true}>
-            {plates &&
-              plates.map((plate) => (
+            {refeicao &&
+              refeicao.map((plate) => (
                 <SwiperSlide key={String(plate.id)}>
                   <Card
                     view={() => navigate(`/plateview/${plate.id}`)}
                     title={plate.name}
                     value={plate.value}
-                    plateImage={String(plate.image)}
+                    plateImage={`${imageURL}/${String(plate.image)}`}
                   />
                 </SwiperSlide>
               ))}
@@ -91,13 +115,14 @@ export function Home() {
             slidesPerView={cardView}
             spaceBetween={cardView * 40}
             loop={true}>
-            {plates &&
-              plates.map((plate) => (
+            {sobremesa &&
+              sobremesa.map((plate) => (
                 <SwiperSlide key={String(plate.id)}>
                   <Card
+                    view={() => navigate(`/plateview/${plate.id}`)}
                     title={plate.name}
                     value={plate.value}
-                    plateImage={String(plate.image)}
+                    plateImage={`${imageURL}/${String(plate.image)}`}
                   />
                 </SwiperSlide>
               ))}
@@ -109,18 +134,20 @@ export function Home() {
             slidesPerView={cardView}
             spaceBetween={cardView * 40}
             loop={true}>
-            {plates &&
-              plates.map((plate) => (
+            {bebida &&
+              bebida.map((plate) => (
                 <SwiperSlide key={String(plate.id)}>
                   <Card
+                    view={() => navigate(`/plateview/${plate.id}`)}
                     title={plate.name}
                     value={plate.value}
-                    plateImage={String(plate.image)}
+                    plateImage={`${imageURL}/${String(plate.image)}`}
                   />
                 </SwiperSlide>
               ))}
           </Swiper>
         </Section>
+
         <Footer />
       </main>
     </Container>

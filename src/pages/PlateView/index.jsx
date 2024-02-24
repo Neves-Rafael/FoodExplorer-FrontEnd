@@ -16,10 +16,14 @@ import { api } from "../../service/api";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { ButtonText } from "../../components/ButtonText";
+import { useNavigate } from "react-router-dom";
 
 export function PlateView() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [plate, setPlate] = useState({});
+
+  const imageURL = `${api.defaults.baseURL}/files/`;
 
   useEffect(() => {
     async function searchPlate() {
@@ -36,11 +40,11 @@ export function PlateView() {
 
       <Main>
         <BackButton>
-          <ButtonText title={"Voltar"} />
+          <ButtonText title={"Voltar"} onClick={() => navigate(-1)} />
         </BackButton>
 
         <div>
-          <PlateImage src={plate.image} alt="" />
+          <PlateImage src={`${imageURL}/${String(plate.image)}`} alt="" />
         </div>
 
         <div>
