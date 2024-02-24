@@ -18,31 +18,14 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 export function Home() {
   register();
-  const [plates, setPlates] = useState([]);
   const [cardView, setCardView] = useState(2);
   const navigate = new useNavigate();
 
-  const [refeicao, setRefeicao] = useState([]);
-  const [sobremesa, setSobremesa] = useState([]);
-  const [bebida, setBebida] = useState([]);
+  const [ref, setRef] = useState("");
+  const [beb, setBeb] = useState("");
+  const [sob, setSob] = useState("");
 
   const imageURL = `${api.defaults.baseURL}/files/`;
-
-  function separePerSection() {
-    const filteredRefeicao = plates.filter(
-      (item) => item.category === "Refeição"
-    );
-
-    const filteredBebidas = plates.filter((item) => item.category === "Bebida");
-
-    const filteredSobremesas = plates.filter(
-      (item) => item.category === "Sobremesas"
-    );
-
-    setRefeicao(filteredRefeicao);
-    setBebida(filteredBebidas);
-    setSobremesa(filteredSobremesas);
-  }
 
   useEffect(() => {
     function handleResize() {
@@ -69,12 +52,22 @@ export function Home() {
     async function fetchPlates() {
       const response = await api.get("/plates");
 
-      const data = response.data;
-      setPlates(data);
-    }
-    fetchPlates();
+      const refeicaoFiltered = response.data.filter((item) => {
+        return item.category === "Refeição";
+      });
+      const bebidaFiltered = response.data.filter((item) => {
+        return item.category === "Sobremesa";
+      });
+      const sobremesaFiltered = response.data.filter((item) => {
+        return item.category === "Bebida";
+      });
 
-    separePerSection();
+      setRef(refeicaoFiltered);
+      setBeb(bebidaFiltered);
+      setSob(sobremesaFiltered);
+    }
+
+    fetchPlates();
   }, []);
 
   return (
@@ -96,8 +89,28 @@ export function Home() {
             slidesPerView={cardView}
             spaceBetween={cardView * 40}
             loop={true}>
-            {refeicao &&
-              refeicao.map((plate) => (
+            {ref &&
+              ref.map((plate) => (
+                <SwiperSlide key={String(plate.id)}>
+                  <Card
+                    plate={plate}
+                    view={() => navigate(`/plateview/${plate.id}`)}
+                    title={plate.name}
+                    value={plate.value}
+                    plateImage={`${imageURL}/${String(plate.image)}`}
+                  />
+                </SwiperSlide>
+              ))}
+          </Swiper>
+        </Section>
+
+        {/* <Section title={"Refeições"}>
+          <Swiper
+            slidesPerView={cardView}
+            spaceBetween={cardView * 40}
+            loop={true}>
+            {sob &&
+              sob.map((plate) => (
                 <SwiperSlide key={String(plate.id)}>
                   <Card
                     view={() => navigate(`/plateview/${plate.id}`)}
@@ -110,13 +123,13 @@ export function Home() {
           </Swiper>
         </Section>
 
-        <Section title={"Sobremesas"}>
+        <Section title={"Refeições"}>
           <Swiper
             slidesPerView={cardView}
             spaceBetween={cardView * 40}
             loop={true}>
-            {sobremesa &&
-              sobremesa.map((plate) => (
+            {beb &&
+              beb.map((plate) => (
                 <SwiperSlide key={String(plate.id)}>
                   <Card
                     view={() => navigate(`/plateview/${plate.id}`)}
@@ -127,26 +140,7 @@ export function Home() {
                 </SwiperSlide>
               ))}
           </Swiper>
-        </Section>
-
-        <Section title={"Bebidas"}>
-          <Swiper
-            slidesPerView={cardView}
-            spaceBetween={cardView * 40}
-            loop={true}>
-            {bebida &&
-              bebida.map((plate) => (
-                <SwiperSlide key={String(plate.id)}>
-                  <Card
-                    view={() => navigate(`/plateview/${plate.id}`)}
-                    title={plate.name}
-                    value={plate.value}
-                    plateImage={`${imageURL}/${String(plate.image)}`}
-                  />
-                </SwiperSlide>
-              ))}
-          </Swiper>
-        </Section>
+        </Section> */}
 
         <Footer />
       </main>

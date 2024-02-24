@@ -3,6 +3,7 @@ import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
 import { FoodExplorer } from "../../components/FoodExplorer";
 import hamburger from "../../assets/Hamburger-rafiki.svg";
+import { api } from "../../service/api";
 
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
