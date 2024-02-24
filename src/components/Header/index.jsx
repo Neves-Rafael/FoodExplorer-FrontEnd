@@ -11,17 +11,25 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { PiReceipt } from "react-icons/pi";
 import { FoodExplorer } from "../FoodExplorer";
 import { SideMenu } from "../SideMenu";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Input } from "../Input";
 import { Button } from "../Button";
 import { RxExit } from "react-icons/rx";
 import { useAuth } from "../../hooks/auth";
 import { IoSearchOutline } from "react-icons/io5";
+import { useContext } from "react";
+import { PlateContext } from "../../hooks/plateRequest";
 
 export function Header() {
   const { logout } = useAuth();
 
   const [menuIsOpen, setMenuIsOpen] = useState(false);
+
+  const { plateRequest, updateRequest } = useContext(PlateContext);
+
+  useEffect(() => {
+    updateRequest();
+  }, []);
 
   return (
     <Container>
@@ -41,7 +49,7 @@ export function Header() {
       </SearchBar>
 
       <Requests>
-        <Button title={`Pedidos (${0})`} icon={PiReceipt} />
+        <Button title={`Pedidos (${plateRequest.length})`} icon={PiReceipt} />
       </Requests>
 
       <Logout onClick={logout}>

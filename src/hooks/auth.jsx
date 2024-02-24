@@ -52,6 +52,12 @@ function AuthProvider({ children }) {
     }
   }
 
+  function createRequest() {
+    const actualRequest = JSON.parse(localStorage.getItem("pedidos"));
+
+    setRequest(actualRequest);
+  }
+
   useEffect(() => {
     const token = localStorage.getItem("@foodexplorer:token");
     const user = localStorage.getItem("@foodexplorer:user");
@@ -66,7 +72,12 @@ function AuthProvider({ children }) {
 
   return (
     <AuthContext.Provider
-      value={{ sessionLogin, logout, createPlate, user: data.user }}>
+      value={{
+        sessionLogin,
+        logout,
+        createPlate,
+        user: data.user,
+      }}>
       {children}
     </AuthContext.Provider>
   );

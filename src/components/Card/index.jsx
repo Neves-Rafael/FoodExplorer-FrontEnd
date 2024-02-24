@@ -5,6 +5,9 @@ import { Button } from "../Button";
 import { Count } from "../Count";
 import { useState } from "react";
 
+import { useContext } from "react";
+import { PlateContext } from "../../hooks/plateRequest";
+
 export function Card({
   onCountChange,
   title,
@@ -15,6 +18,8 @@ export function Card({
   ...rest
 }) {
   const [countValue, setCountValue] = useState(1);
+
+  const { updateRequest } = useContext(PlateContext);
 
   const handleCountChange = (newValue) => {
     setCountValue(newValue);
@@ -32,7 +37,7 @@ export function Card({
 
     allRequest.push(newRequest);
     localStorage.setItem("pedidos", JSON.stringify(allRequest));
-    console.log(allRequest);
+    updateRequest();
   }
 
   return (
