@@ -26,6 +26,7 @@ export function Card({
   };
 
   function calculate() {
+    updateRequest();
     // localStorage.removeItem("pedidos");
     const price = value * countValue;
     const allRequest = JSON.parse(localStorage.getItem("pedidos")) || [];
@@ -37,7 +38,6 @@ export function Card({
 
     allRequest.push(newRequest);
     localStorage.setItem("pedidos", JSON.stringify(allRequest));
-    updateRequest();
   }
 
   return (

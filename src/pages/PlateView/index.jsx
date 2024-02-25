@@ -17,6 +17,8 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { ButtonText } from "../../components/ButtonText";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { PlateContext } from "../../hooks/plateRequest";
 
 export function PlateView() {
   const { id } = useParams();
@@ -24,6 +26,30 @@ export function PlateView() {
   const [plate, setPlate] = useState({});
 
   const imageURL = `${api.defaults.baseURL}/files/`;
+
+  const [countValue, setCountValue] = useState(1);
+  const price = plate.value * countValue;
+
+  const { updateRequest } = useContext(PlateContext);
+
+  const handleCountChange = (newValue) => {
+    setCountValue(newValue);
+  };
+
+  function calculate() {
+    updateRequest();
+    // localStorage.removeItem("pedidos");
+    const allRequest = JSON.parse(localStorage.getItem("pedidos")) || [];
+
+    const newRequest = {
+      plate,
+      price,
+    };
+
+    allRequest.push(newRequest);
+    localStorage.setItem("pedidos", JSON.stringify(allRequest));
+    console.log("pedido feito com sucesso!");
+  }
 
   useEffect(() => {
     async function searchPlate() {
@@ -61,8 +87,8 @@ export function PlateView() {
           </Tags>
 
           <ConfirmOrder>
-            <Count />
-            <Button title={"Fazer pedido"} />
+            <Count onCountChange={handleCountChange} />
+            <Button title={`Incluir R$ - ${price},00`} onClick={calculate} />
           </ConfirmOrder>
         </div>
       </Main>

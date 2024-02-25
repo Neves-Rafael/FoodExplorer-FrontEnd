@@ -21,11 +21,11 @@ import { useAuth } from "../../hooks/auth";
 export function NewPlate() {
   const { createPlate } = useAuth();
 
-  const [name, setName] = useState("adsadasd");
-  const [category, setCategory] = useState("Bebida");
-  const [ingredients, setIngredients] = useState(["dasda", "sjksjlkajsa"]);
-  const [value, setValue] = useState(25);
-  const [description, setDescription] = useState("dasdsadsa");
+  const [name, setName] = useState("Teste");
+  const [category, setCategory] = useState("Bebidas");
+  const [ingredients, setIngredients] = useState(["carne", "feijão"]);
+  const [value, setValue] = useState(75);
+  const [description, setDescription] = useState("Descrição aqui");
   const [image, setImage] = useState(null);
 
   async function handleChangeImage(event) {

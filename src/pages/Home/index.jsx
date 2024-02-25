@@ -8,6 +8,8 @@ import { useEffect, useState } from "react";
 import { api } from "../../service/api";
 // import { defaultPlates } from "../../utils/plates";
 import { useNavigate } from "react-router-dom";
+import { RiArrowLeftSLine } from "react-icons/ri";
+import { RiArrowRightSLine } from "react-icons/ri";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -21,9 +23,9 @@ export function Home() {
   const [cardView, setCardView] = useState(2);
   const navigate = new useNavigate();
 
-  const [ref, setRef] = useState("");
-  const [beb, setBeb] = useState("");
-  const [sob, setSob] = useState("");
+  const [platesPerCategory, setPlatesPerCategory] = useState("");
+
+  const plateSections = ["Refeição", "Sobremesas", "Bebidas"];
 
   const imageURL = `${api.defaults.baseURL}/files/`;
 
@@ -51,20 +53,9 @@ export function Home() {
   useEffect(() => {
     async function fetchPlates() {
       const response = await api.get("/plates");
+      console.log(response.data);
 
-      const refeicaoFiltered = response.data.filter((item) => {
-        return item.category === "Refeição";
-      });
-      const bebidaFiltered = response.data.filter((item) => {
-        return item.category === "Sobremesa";
-      });
-      const sobremesaFiltered = response.data.filter((item) => {
-        return item.category === "Bebida";
-      });
-
-      setRef(refeicaoFiltered);
-      setBeb(bebidaFiltered);
-      setSob(sobremesaFiltered);
+      setPlatesPerCategory(response.data);
     }
 
     fetchPlates();
@@ -84,63 +75,38 @@ export function Home() {
           </BannerText>
         </Banner>
 
-        <Section title={"Refeições"}>
-          <Swiper
-            slidesPerView={cardView}
-            spaceBetween={cardView * 40}
-            loop={true}>
-            {ref &&
-              ref.map((plate) => (
-                <SwiperSlide key={String(plate.id)}>
-                  <Card
-                    plate={plate}
-                    view={() => navigate(`/plateview/${plate.id}`)}
-                    title={plate.name}
-                    value={plate.value}
-                    plateImage={`${imageURL}/${String(plate.image)}`}
-                  />
-                </SwiperSlide>
-              ))}
-          </Swiper>
-        </Section>
-
-        {/* <Section title={"Refeições"}>
-          <Swiper
-            slidesPerView={cardView}
-            spaceBetween={cardView * 40}
-            loop={true}>
-            {sob &&
-              sob.map((plate) => (
-                <SwiperSlide key={String(plate.id)}>
-                  <Card
-                    view={() => navigate(`/plateview/${plate.id}`)}
-                    title={plate.name}
-                    value={plate.value}
-                    plateImage={`${imageURL}/${String(plate.image)}`}
-                  />
-                </SwiperSlide>
-              ))}
-          </Swiper>
-        </Section>
-
-        <Section title={"Refeições"}>
-          <Swiper
-            slidesPerView={cardView}
-            spaceBetween={cardView * 40}
-            loop={true}>
-            {beb &&
-              beb.map((plate) => (
-                <SwiperSlide key={String(plate.id)}>
-                  <Card
-                    view={() => navigate(`/plateview/${plate.id}`)}
-                    title={plate.name}
-                    value={plate.value}
-                    plateImage={`${imageURL}/${String(plate.image)}`}
-                  />
-                </SwiperSlide>
-              ))}
-          </Swiper>
-        </Section> */}
+        {plateSections &&
+          plateSections.map((section) => (
+            <Section title={section} key={section}>
+              <Swiper
+                slidesPerView={cardView}
+                spaceBetween={cardView * 40}
+                loop={true}
+                navigation={{
+                  nextEl: ".swiper-button-next",
+                  prevEl: ".swiper-button-prev",
+                }}>
+                <div className="smooth">
+                  <RiArrowLeftSLine size={50} className="swiper-button-prev" />
+                  <RiArrowRightSLine size={50} className="swiper-button-next" />
+                </div>
+                {platesPerCategory &&
+                  platesPerCategory
+                    .filter((plate) => plate.category === section)
+                    .map((plate) => (
+                      <SwiperSlide key={String(plate.id)}>
+                        <Card
+                          plate={plate}
+                          view={() => navigate(`/plateview/${plate.id}`)}
+                          title={plate.name}
+                          value={plate.value}
+                          plateImage={`${imageURL}/${String(plate.image)}`}
+                        />
+                      </SwiperSlide>
+                    ))}
+              </Swiper>
+            </Section>
+          ))}
 
         <Footer />
       </main>
