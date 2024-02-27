@@ -19,13 +19,18 @@ import { useAuth } from "../../hooks/auth";
 import { IoSearchOutline } from "react-icons/io5";
 import { useContext } from "react";
 import { PlateContext } from "../../hooks/plateRequest";
+import { USER_ROLE } from "../../utils/roles"
 
 export function Header() {
-  const { logout } = useAuth();
+  const { logout, user } = useAuth();
 
   const [menuIsOpen, setMenuIsOpen] = useState(false);
 
   const { plateRequest, updateRequest } = useContext(PlateContext);
+
+  const verifyAdminRole = user.role === USER_ROLE.ADMIN;
+
+  const messageToAdminAccess = verifyAdminRole ? "Novo Prato" : `Pedidos (${plateRequest.length})`;
 
   useEffect(() => {
     updateRequest();
@@ -49,7 +54,7 @@ export function Header() {
       </SearchBar>
 
       <Requests>
-        <Button title={`Pedidos (${plateRequest.length})`} icon={PiReceipt} />
+        <Button title={messageToAdminAccess} icon={verifyAdminRole ? null : PiReceipt} />
       </Requests>
 
       <Logout onClick={logout}>

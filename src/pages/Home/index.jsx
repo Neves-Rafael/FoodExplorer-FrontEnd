@@ -90,6 +90,7 @@ export function Home() {
                   <RiArrowLeftSLine size={50} className="swiper-button-prev" />
                   <RiArrowRightSLine size={50} className="swiper-button-next" />
                 </div>
+
                 {platesPerCategory &&
                   platesPerCategory
                     .filter((plate) => plate.category === section)

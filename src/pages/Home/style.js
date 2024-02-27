@@ -15,15 +15,6 @@ export const Container = styled.div`
   }
 
   .smooth {
-    background: rgb(0, 10, 15);
-    background: linear-gradient(
-      90deg,
-      rgba(0, 10, 15, 1) 8%,
-      rgba(255, 255, 255, 0) 28%,
-      rgba(255, 255, 255, 0) 72%,
-      rgba(0, 10, 15, 1) 92%
-    );
-
     inset: 0;
     position: absolute;
     display: flex;
@@ -31,12 +22,7 @@ export const Container = styled.div`
     justify-content: space-between;
 
     &::before {
-      content: "";
-      width: 15rem;
-      height: 100%;
-      position: absolute;
       left: 0;
-      z-index: 2;
       background: rgb(0, 10, 15);
       background: linear-gradient(
         90deg,
@@ -46,12 +32,7 @@ export const Container = styled.div`
     }
 
     &::after {
-      content: "";
-      width: 15rem;
-      height: 100%;
-      position: absolute;
       right: 0;
-      z-index: 2;
       background: rgb(0, 10, 15);
       background: linear-gradient(
         270deg,
@@ -60,12 +41,26 @@ export const Container = styled.div`
       );
     }
 
+    &::before,
+    &::after {
+      content: "";
+      width: 15rem;
+      height: 100%;
+      position: absolute;
+      z-index: 1;
+      display: none;
+
+      @media (min-width: 768px) {
+        display: block;
+      }
+    }
+
     .swiper-button-next,
     .swiper-button-prev {
       width: 5rem;
       display: none;
 
-      @media (min-width: 1024px) {
+      @media (min-width: 768px) {
         display: block;
       }
     }
