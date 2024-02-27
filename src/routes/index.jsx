@@ -12,7 +12,7 @@ export function Routes() {
   const { user, logout } = useAuth();
 
   useEffect(() => {
-    api.post("/users/validated").catch((error) => {
+    api.get("/users/validated").catch((error) => {
       if(error.response?.status === 401)
       logout();
     })

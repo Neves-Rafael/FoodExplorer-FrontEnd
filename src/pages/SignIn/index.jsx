@@ -1,18 +1,18 @@
-import { Container, Logo, Section, MakeLogin, MakeAccount } from "./style";
-import { Input } from "../../components/Input";
+import { Form } from "../../components/Forms"
 import { Button } from "../../components/Button";
 import { FoodExplorer } from "../../components/FoodExplorer";
+import { Container, Logo, Section, MakeLogin, MakeAccount } from "./style";
 
-import { useAuth } from "../../hooks/auth";
 import { useState } from "react";
+import { useAuth } from "../../hooks/auth";
 import { useNavigate } from "react-router-dom";
+import login from "../../assets/Hamburger-rafiki.svg";
 
 export function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
-
   const { sessionLogin } = useAuth();
 
   function handleSessionLogin() {
@@ -23,36 +23,32 @@ export function SignIn() {
     <Container>
       <Logo>
         <FoodExplorer />
+        <img src={login} alt="Uma mulher alegre comendo donuts com cobertura e recheio" />
       </Logo>
 
       <Section>
-        <FoodExplorer />
+        <MakeLogin>Faça Login</MakeLogin> 
+        <FoodExplorer className="logo"/>
 
-        <MakeLogin>Faça Login</MakeLogin>
-
-        <div>
-          <p>Email</p>
-          <Input
-            placeholder="Exemplo: exemplo@exemplo.com"
+        <div className="loginForm">
+          <Form
+            label={"Email"}
+            placeholder="Exemplo: teste@exemplo.com"
             type="email"
             onChange={(e) => setEmail(e.target.value)}
           />
-        </div>
 
-        <div>
-          <p>Senha</p>
-          <Input
-            placeholder="Digite sua Senha!"
+          <Form
+            label={"Senha"}
+            placeholder="No mínimo 6 caracteres"
             type="password"
             onChange={(e) => setPassword(e.target.value)}
           />
+        
+          <Button title="Entrar" onClick={handleSessionLogin}/>
         </div>
 
-        <Button title="Entrar" onClick={handleSessionLogin}></Button>
-
-        <MakeAccount onClick={() => navigate("/signUp")}>
-          Criar uma conta
-        </MakeAccount>
+        <MakeAccount onClick={() => navigate("/signUp")}>Criar uma conta</MakeAccount>
       </Section>
     </Container>
   );

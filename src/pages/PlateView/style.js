@@ -3,22 +3,23 @@ import styled from "styled-components";
 export const Container = styled.div`
   width: 100%;
   height: 100dvh;
+  position: relative;
 
   display: grid;
   grid-template-areas:
     "header"
     "content";
   grid-template-rows: 120px auto;
+
 `;
 
 export const Main = styled.main`
   display: grid;
   grid-area: content;
-  overflow-y: auto;
   justify-content: center;
   position: relative;
   padding: 8rem 0;
-  /* height: calc(100dvh - 120px); */
+  margin-bottom: 5rem;
 
   img {
     margin: auto;
@@ -35,9 +36,9 @@ export const Main = styled.main`
     gap: 5rem;
     width: 100%;
     padding: 10rem;
+    height: calc(100dvh - 200px);
 
     margin: auto;
-    background-color: red;
   }
 `;
 
@@ -96,7 +97,13 @@ export const BackButton = styled.div`
   font-size: 2.4rem;
   text-align: start;
   width: 100%;
-  background-color: red;
+
+  button{
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 140%; /* 33.6px */
+  }
 `;
 
 export const InfoText = styled.div`

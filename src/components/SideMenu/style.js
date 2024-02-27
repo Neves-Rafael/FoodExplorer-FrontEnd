@@ -8,19 +8,25 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   background-color: ${({ theme }) => theme.COLORS.DARK_400};
-  z-index: 1;
+  z-index: 99;
   display: none;
+
   &[data-menu-is-open="true"] {
     display: block;
   }
 
-  div:nth-child(4) {
+  footer {
     position: absolute;
     bottom: 0;
 
     > p {
+      width: 12rem;
       font-size: 1.2rem;
       font-family: "Poppins";
+
+      @media(min-width: 425px){
+        width: auto;
+      }
     }
   }
 

@@ -19,6 +19,7 @@ import { ButtonText } from "../../components/ButtonText";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { PlateContext } from "../../hooks/plateRequest";
+import { RiArrowLeftSLine } from "react-icons/ri";
 
 export function PlateView() {
   const { id } = useParams();
@@ -38,7 +39,7 @@ export function PlateView() {
 
   function calculate() {
     updateRequest();
-    // localStorage.removeItem("pedidos");
+    localStorage.removeItem("pedidos");
     const allRequest = JSON.parse(localStorage.getItem("pedidos")) || [];
 
     const newRequest = {
@@ -66,7 +67,7 @@ export function PlateView() {
 
       <Main>
         <BackButton>
-          <ButtonText title={"Voltar"} onClick={() => navigate(-1)} />
+          <ButtonText title={"Voltar"} icon={RiArrowLeftSLine} onClick={() => navigate(-1)} />
         </BackButton>
 
         <div>
@@ -92,6 +93,7 @@ export function PlateView() {
           </ConfirmOrder>
         </div>
       </Main>
+      <Footer/>
     </Container>
   );
 }

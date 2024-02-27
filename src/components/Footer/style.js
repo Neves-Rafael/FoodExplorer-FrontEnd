@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
+export const Container = styled.footer`
   width: 100%;
   height: 8rem;
   background-color: ${({ theme }) => theme.COLORS.DARK_600};
@@ -9,9 +9,15 @@ export const Container = styled.div`
   align-items: center;
   justify-content: space-around;
 
-  p {
-    font-size: 1.2rem;
+> p {
+  font-size: 1.2rem;
+  width: 12rem;
+  font-family: "Poppins";
+  
+  @media(min-width: 425px){
+    width: auto;
   }
+}
 
   > div {
     filter: contrast(0);

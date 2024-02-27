@@ -8,22 +8,14 @@ export const Container = styled.div`
   height: 100dvh;
   max-width: 100%;
 
-  @media (min-width: 1024px) {
+  @media (min-width: ${({ theme }) => theme.MEDIA_QUERY.LARGE}) {
     justify-content: space-around;
     padding: 0 5%;
   }
 
-  @media (min-width: 1440px) {
+  @media (min-width: ${({ theme }) => theme.MEDIA_QUERY.LARGE_G}) {
     justify-content: center;
-    gap: 260px;
-  }
-`;
-
-export const Logo = styled.div`
-  display: none;
-
-  @media (min-width: 1024px) {
-    display: block;
+    gap: 200px;
   }
 `;
 
@@ -31,49 +23,40 @@ export const Section = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 5rem;
+  margin-top: -10rem;
+  width: 100%;
+  padding: 4rem 1.6rem;
 
-  > div {
+  .loginForm{
     width: 100%;
-    > p {
-      margin-bottom: 0.8rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3.2rem;
+    margin: 7.3rem 0 3.2rem 0;
+
+    @media (min-width: ${({ theme }) => theme.MEDIA_QUERY.SMALL_M}) {
+      max-width: 32rem;
+    }
+
+    @media (min-width: ${({ theme }) => theme.MEDIA_QUERY.LARGE}) {
+      margin: 3.2rem 0 ;
+      max-width: 100%;
     }
   }
 
-  @media (min-width: 320px) {
-    width: 100%;
-    padding: 4rem 2rem;
-
-    div:nth-child(1) {
-      > p {
-        font-size: 3.6rem;
-      }
-    }
-  }
-
-  @media (min-width: 425px) {
-    max-width: 42rem;
-  }
-
-  @media (min-width: 768px) {
-    background-color: ${({ theme }) => theme.COLORS.DARK_700};
+  @media (min-width: ${({ theme }) => theme.MEDIA_QUERY.MEDIUM}){
     max-width: 50rem;
     padding: 6rem;
     border-radius: 1.6rem;
+    background-color: ${({ theme }) => theme.COLORS.DARK_700};
+    margin-top: 0;
+  }  
 
-    div:nth-child(1) {
-      display: flex;
-      p {
-        font-size: 4.4rem;
-      }
+  @media (min-width: ${({ theme }) => theme.MEDIA_QUERY.LARGE}){
+    >div:nth-child(1){
+    display: none;
     }
-  }
-
-  @media (min-width: 1024px) {
-    div:nth-child(1) {
-      display: none;
-    }
-  }
+  } 
 `;
 
 export const MakeLogin = styled.p`
@@ -81,15 +64,28 @@ export const MakeLogin = styled.p`
   font-family: "Poppins";
   display: none;
 
-  @media (min-width: 1024px) {
+  @media (min-width: ${({ theme }) => theme.MEDIA_QUERY.LARGE}) {
     display: block;
   }
 `;
 
 export const MakeAccount = styled.p`
   cursor: pointer;
+  font-family: "Poppins";
+  font-size: 1.4rem;
 
   &:hover {
     color: ${({ theme }) => theme.COLORS.CAKE_200};
+  }
+`;
+
+export const Logo = styled.div`
+  display: none;
+
+  @media (min-width: ${({ theme }) => theme.MEDIA_QUERY.LARGE}){
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 30rem;
   }
 `;
