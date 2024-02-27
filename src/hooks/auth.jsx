@@ -8,14 +8,12 @@ function AuthProvider({ children }) {
 
   async function sessionLogin({ email, password }) {
     try {
-      const response = await api.post("/sessions", { email, password });
-      const { user, token } = response.data;
+      const response = await api.post("/sessions", { email, password },{  withCredentials: true });
+      const { user } = response.data;
 
       localStorage.setItem("@foodexplorer:user", JSON.stringify(user));
-      localStorage.setItem("@foodexplorer:token", token);
 
-      api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-      setData({ user, token });
+      setData({ user });
     } catch (error) {
       if (error.response) {
         alert(error.response.data.message);
@@ -27,7 +25,6 @@ function AuthProvider({ children }) {
 
   function logout() {
     localStorage.removeItem("@foodexplorer:user");
-    localStorage.removeItem("@foodexplorer:token");
 
     setData({});
   }
@@ -52,19 +49,11 @@ function AuthProvider({ children }) {
     }
   }
 
-  function createRequest() {
-    const actualRequest = JSON.parse(localStorage.getItem("pedidos"));
-
-    setRequest(actualRequest);
-  }
-
   useEffect(() => {
-    const token = localStorage.getItem("@foodexplorer:token");
     const user = localStorage.getItem("@foodexplorer:user");
 
-    if (user && token) {
-      api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-      setData({ user: JSON.parse(user), token });
+    if (user) {
+      setData({ user: JSON.parse(user)});
     } else {
       return;
     }
