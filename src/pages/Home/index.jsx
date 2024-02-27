@@ -52,7 +52,7 @@ export function Home() {
 
   useEffect(() => {
     async function fetchPlates() {
-      const response = await api.get("/plates");
+      const response = await api.get("/plates",);
       console.log(response.data);
 
       setPlatesPerCategory(response.data);

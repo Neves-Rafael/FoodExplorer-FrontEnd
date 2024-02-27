@@ -5,9 +5,18 @@ import { UserRoutes } from "./user.routes";
 import { USER_ROLE } from "../utils/roles"; 
 
 import { useAuth } from "../hooks/auth";
+import { useEffect } from "react";
+import { api } from "../service/api";
 
 export function Routes() {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
+
+  useEffect(() => {
+    api.post("/users/validated").catch((error) => {
+      if(error.response?.status === 401)
+      logout();
+    })
+  },[])
 
   function AccessRoute(){
     switch(user.role){
