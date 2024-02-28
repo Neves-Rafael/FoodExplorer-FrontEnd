@@ -15,6 +15,10 @@ export const Container = styled.div`
     display: block;
   }
 
+  input{
+    padding-right: 2rem;
+  }
+
   footer {
     position: absolute;
     bottom: 0;

@@ -6,7 +6,6 @@ import cardImage from "../../assets/pngegg 1.png";
 import { Section } from "../../components/Section";
 import { useEffect, useState } from "react";
 import { api } from "../../service/api";
-// import { defaultPlates } from "../../utils/plates";
 import { useNavigate } from "react-router-dom";
 import { RiArrowLeftSLine } from "react-icons/ri";
 import { RiArrowRightSLine } from "react-icons/ri";
@@ -28,6 +27,10 @@ export function Home() {
   const plateSections = ["Refeição", "Sobremesas", "Bebidas"];
 
   const imageURL = `${api.defaults.baseURL}/files/`;
+
+  const testeCallback = () => {
+    return platesPerCategory;
+  }
 
   useEffect(() => {
     function handleResize() {
@@ -53,7 +56,6 @@ export function Home() {
   useEffect(() => {
     async function fetchPlates() {
       const response = await api.get("/plates",);
-      console.log(response.data);
 
       setPlatesPerCategory(response.data);
     }
@@ -63,7 +65,7 @@ export function Home() {
 
   return (
     <Container>
-      <Header />
+      <Header plates={testeCallback}/>
 
       <main>
         <Banner>
