@@ -30,7 +30,7 @@ export const SearchResult = styled.div`
   background-color: ${({theme}) => theme.COLORS.DARK_900};
   display: ${({ $isOpen}) => $isOpen ? "flex" : "none"};
   flex-direction: column;
-  gap: 1rem;
+  gap: 2rem;
 
   p {
     cursor: pointer;

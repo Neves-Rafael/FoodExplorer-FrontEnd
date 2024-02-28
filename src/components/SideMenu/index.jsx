@@ -1,15 +1,14 @@
-import { Input } from "../Input";
 import { Footer } from "../Footer";
 import { IoMdClose } from "react-icons/io";
+import { InputSearch } from "../InputSearch";
 import { Container, MenuHeader } from "./style";
-import { IoSearchOutline } from "react-icons/io5";
 
 import { useEffect } from "react";
 import { useAuth } from "../../hooks/auth"
 import { USER_ROLE } from "../../utils/roles"
 import { useNavigate } from "react-router-dom";
 
-export function SideMenu({ menuIsOpen, menuIsClose }) {
+export function SideMenu({ menuIsOpen, menuIsClose, plates }) {
   const { user, logout } = useAuth();
   const navigate = useNavigate()
   const verifyAdminRole = user.role === USER_ROLE.ADMIN;
@@ -34,7 +33,8 @@ export function SideMenu({ menuIsOpen, menuIsClose }) {
         <div onClick={menuIsClose}> <IoMdClose size={34}/> Menu </div>
       </MenuHeader>
 
-      <Input icon={IoSearchOutline} placeholder={"Busque por pratos ou ingredients"}/>
+      <InputSearch plates={plates}/>
+      
       <p className="option" onClick={() => {logout(), navigate("/")}}>Sair</p>
 
       {verifyAdminRole && 

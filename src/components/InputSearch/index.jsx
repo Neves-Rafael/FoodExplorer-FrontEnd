@@ -26,13 +26,16 @@ export function InputSearch({plates}){
 
   useEffect(() => {
     document.addEventListener("mousedown", handleOutsideClick);
-
     return () => {
       document.removeEventListener("mousedown", handleOutsideClick);
     };
   }, []);
 
   useEffect(() => {
+    if(inputSearch.length < 1){
+      return
+    }
+
     const filteredPlatesBySearch = allPlates.filter(plate => plate.name.includes(inputSearch))
 
     const filteredPlatesByIngredients = allPlates.filter(plate => {
@@ -41,7 +44,11 @@ export function InputSearch({plates}){
       })
     })
 
-    setPlateAndIngredients([...filteredPlatesBySearch, ...filteredPlatesByIngredients])
+    const teste = [...filteredPlatesBySearch, ...filteredPlatesByIngredients]
+    const teste2 = [...new Set(teste)];
+    console.log(teste2)
+
+    setPlateAndIngredients(teste2)
   }, [inputSearch])
 
   return (
@@ -55,7 +62,7 @@ export function InputSearch({plates}){
       <SearchResult $isOpen={isOpen} >
         {platesAndIngredients && 
           platesAndIngredients.map(item => (
-            <p onClick={() => navigate(`/plateview/${item.id}`)} >{item.name}</p>
+            <p onClick={() => navigate(`/plateview/${item.id}`)} key={item.id}>{item.name}</p>
         ))}
       </SearchResult>
     </Container>

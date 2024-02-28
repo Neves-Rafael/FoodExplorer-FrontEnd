@@ -11,7 +11,7 @@ import { Container, MenuHamburger, Logout, OrderCount, Logo, Requests } from "./
 
 import { USER_ROLE } from "../../utils/roles"
 import { PlateContext } from "../../hooks/plateRequest";
-import { useState, useEffect, useContext, useRef } from "react";
+import { useState, useEffect, useContext } from "react";
 
 export function Header({plates}) {
   const { logout, user } = useAuth();
@@ -56,7 +56,7 @@ export function Header({plates}) {
         } 
       </OrderCount>
 
-      <SideMenu menuIsOpen={menuIsOpen} menuIsClose={() => setMenuIsOpen(false)}/>
+      <SideMenu menuIsOpen={menuIsOpen} menuIsClose={() => setMenuIsOpen(false)} plates={plates}/>
     </Container>
   );
 }

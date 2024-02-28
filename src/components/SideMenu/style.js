@@ -35,6 +35,18 @@ export const Container = styled.div`
   }
 
   div:nth-child(2) {
+    display: flex;
+
+    div:nth-child(2) {
+      display: none;
+    } 
+
+    div:nth-child(1):has(:focus) + div:nth-child(2),
+    div:nth-child(2):has(:hover) {
+      margin-top: 0;
+      display: flex; 
+    }
+    
     width: calc(100% - 6rem);
     margin: 3rem 0 0 3rem;
   }
