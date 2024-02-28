@@ -24,46 +24,47 @@ export const Container = styled.div`
       font-size: 1.2rem;
       font-family: "Poppins";
 
-      @media(min-width: 425px){
+      @media(min-width: ${({ theme }) => theme.MEDIA_QUERY.SMALL_G}){
         width: auto;
       }
     }
   }
 
   div:nth-child(2) {
-    width: 90%;
-    margin: 3rem 0 0 5%;
+    width: calc(100% - 6rem);
+    margin: 3rem 0 0 3rem;
   }
 
-  .leave {
-    font-size: 3rem;
+  .option {
+    font-size: 2.4rem;
     font-family: "Poppins";
-    margin-left: 8%;
+    margin-left: 4rem;
     margin-top: 4.6rem;
+    cursor: pointer;
 
     &::after {
       content: "";
       display: block;
       height: 2px;
       background-color: ${({ theme }) => theme.COLORS.DARK_1000};
-      width: 96%;
-      margin: 1rem 0 0 -2%;
+      width: calc(100% - 2rem);
+      margin: 1rem 0 0 -1rem;
     }
   }
+`;
 
-  .menu-header {
+export const MenuHeader = styled.div`
+  display: flex;
+  align-items: end;
+  background-color: ${({ theme }) => theme.COLORS.DARK_700};
+  height: 11.4rem;
+  cursor: pointer;
+
+  div {
     display: flex;
-    align-items: end;
-    background-color: ${({ theme }) => theme.COLORS.DARK_700};
-    height: 11.4rem;
-
-    div {
-      display: flex;
-      gap: 1rem;
-      align-items: center;
-      font-size: 2.2rem;
-      padding-left: 2rem;
-      padding-bottom: 2rem;
-    }
+    gap: 1rem;
+    align-items: center;
+    font-size: 2.2rem;
+    padding: 0 0 2rem 2rem ;
   }
 `;
