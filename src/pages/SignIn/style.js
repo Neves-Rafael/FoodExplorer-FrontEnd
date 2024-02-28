@@ -53,7 +53,7 @@ export const Section = styled.section`
   }  
 
   @media (min-width: ${({ theme }) => theme.MEDIA_QUERY.LARGE}){
-    >div:nth-child(1){
+    >div:nth-child(2){
     display: none;
     }
   } 

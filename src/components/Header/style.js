@@ -5,19 +5,20 @@ export const Container = styled.header`
   background-color: ${({ theme }) => theme.COLORS.DARK_700};
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-around;
   grid-area: header;
-
-  @media (min-width: 1024px) {
+  
+  @media (min-width: ${({ theme }) => theme.MEDIA_QUERY.LARGE}) {
     justify-content: center;
-    gap: 5rem;
+    gap: 3.2rem;
+    padding: 0 5rem;
   }
 `;
 
 export const MenuHamburger = styled.div`
   display: block;
 
-  @media (min-width: 1024px) {
+  @media (min-width: ${({ theme }) => theme.MEDIA_QUERY.LARGE}) {
     display: none;
   }
 `;
@@ -25,27 +26,22 @@ export const MenuHamburger = styled.div`
 export const Logout = styled.div`
   display: none;
 
-  @media (min-width: 1024px) {
+  @media (min-width: ${({ theme }) => theme.MEDIA_QUERY.LARGE}) {
     display: block;
   }
 `;
 
 export const SearchBar = styled.div`
-  width: 40%;
   display: none;
 
-  div input {
-    &::placeholder {
-      padding-left: 25%;
-    }
+  div input::placeholder {
+      text-align: center;
   }
 
-  @media (min-width: 1024px) {
-    display: block;
-  }
-
-  @media (min-width: 1440px) {
-    width: 58rem;
+  @media (min-width: ${({ theme }) => theme.MEDIA_QUERY.LARGE}) {
+    display: flex;
+    flex: 1;
+    max-width: 58rem;
   }
 `;
 
@@ -61,25 +57,25 @@ export const OrderCount = styled.div`
     top: -0.6rem;
   }
 
-  @media (min-width: 1024px) {
+  @media (min-width: ${({ theme }) => theme.MEDIA_QUERY.LARGE}) {
     display: none;
   }
 `;
 
 export const Logo = styled.div`
   div p {
-    font-size: 2rem;
+    font-size: 2.4rem;
   }
 
   div img {
-    width: 2.8rem;
+    width: 3rem;
   }
 `;
 
 export const Requests = styled.div`
   display: none;
 
-  @media (min-width: 1024px) {
+  @media (min-width: ${({ theme }) => theme.MEDIA_QUERY.LARGE}) {
     display: block;
     width: 20rem;
   }
