@@ -14,57 +14,6 @@ export const Container = styled.div`
     scroll-behavior: smooth;
   }
 
-  .smooth {
-    inset: 0;
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    &::before {
-      left: 0;
-      background: rgb(0, 10, 15);
-      background: linear-gradient(
-        90deg,
-        rgba(0, 10, 15, 1) 30%,
-        rgba(255, 255, 255, 0) 100%
-      );
-    }
-
-    &::after {
-      right: 0;
-      background: rgb(0, 10, 15);
-      background: linear-gradient(
-        270deg,
-        rgba(0, 10, 15, 1) 30%,
-        rgba(255, 255, 255, 0) 100%
-      );
-    }
-
-    &::before,
-    &::after {
-      content: "";
-      width: 15rem;
-      height: 100%;
-      position: absolute;
-      z-index: 1;
-      display: none;
-
-      @media (min-width: 768px) {
-        display: block;
-      }
-    }
-
-    .swiper-button-next,
-    .swiper-button-prev {
-      width: 5rem;
-      display: none;
-
-      @media (min-width: 768px) {
-        display: block;
-      }
-    }
-  }
 `;
 
 export const Banner = styled.div`
@@ -85,12 +34,11 @@ export const Banner = styled.div`
 
   > img {
     position: absolute;
-    width: 25rem;
     left: -2.8rem;
     bottom: 0;
   }
 
-  @media (max-width: 450px) {
+  @media (max-width: ${({ theme }) => theme.MEDIA_QUERY.SMALL_G}) {
     margin: auto;
     flex-direction: column-reverse;
 
@@ -105,11 +53,12 @@ export const Banner = styled.div`
     > img {
       position: static;
       width: 25rem;
+      object-fit: cover;
     }
   }
 
-  @media (min-width: 450px) {
-    max-width: 500px;
+  @media (min-width: ${({ theme }) => theme.MEDIA_QUERY.SMALL_G}) {
+    max-width: 85%;
     margin: auto;
     flex-direction: row;
 
@@ -123,8 +72,8 @@ export const Banner = styled.div`
     }
   }
 
-  @media (min-width: 768px) {
-    max-width: 75%;
+  @media (min-width: ${({ theme }) => theme.MEDIA_QUERY.MEDIUM}) {
+    max-width: 80%;
     margin: auto;
     flex-direction: row;
 
@@ -138,15 +87,12 @@ export const Banner = styled.div`
     }
   }
 
-  @media (min-width: 1024px) {
-    max-width: 100rem;
+  @media (min-width: ${({ theme }) => theme.MEDIA_QUERY.LARGE}) {
+    max-width: 110rem;
     height: 26rem;
     margin: auto;
     margin-top: 10rem;
-
-    h3 {
-      font-size: 5rem;
-    }
+    background-color: red;
 
     > img {
       width: 50rem;
@@ -156,9 +102,9 @@ export const Banner = styled.div`
 `;
 
 export const BannerText = styled.div`
-  width: 100%;
   display: flex;
   flex-direction: column;
+  z-index: 2;
 
   h3,
   p {
@@ -167,67 +113,67 @@ export const BannerText = styled.div`
   }
 
   > h3 {
-    font-size: 1.9rem;
-    font-weight: 600;
+    font-size: 1.84rem;
+    font-weight: 500;
   }
 
   > p {
     font-size: 1.2rem;
   }
 
-  @media (max-width: 450px) {
-    justify-content: center;
-    text-align: center;
+  @media (max-width: ${({ theme }) => theme.MEDIA_QUERY.SMALL_G}) {
     margin-top: 2rem;
+    text-align: center;
 
     p {
       padding: 0.4rem 2rem;
     }
   }
 
-  @media (min-width: 450px) {
+  @media (min-width: ${({ theme }) => theme.MEDIA_QUERY.SMALL_G}) {
     margin-top: 2rem;
     display: flex;
     margin: auto;
     padding-right: 1rem;
+    position: absolute;
+    right: 0;
 
     p {
-      align-self: end;
       width: 20rem;
       padding: 0;
     }
+  }
 
+  @media (min-width: 550px) {
+    margin-right: 2rem;
+    
     h3 {
-      align-self: flex-end;
+      font-size: 2.3rem;
+    }
+    p {
+      width: 25.2rem;
+      font-size: 1.45rem;
     }
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: ${({ theme }) => theme.MEDIA_QUERY.MEDIUM}) {
     margin-top: 2rem;
     display: flex;
     margin: auto;
-    padding-right: 2rem;
+    padding-right: 1.6rem;
 
     p {
-      align-self: end;
       width: auto;
-      padding: 0;
     }
 
-    h3 {
-      font-size: 3.3rem;
-      align-self: flex-end;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    width: auto;
-    margin-right: 5rem;
     h3 {
       font-size: 4rem;
     }
-    p {
-      font-size: 1.5rem;
-    }
+  }
+
+  @media (min-width: ${({ theme }) => theme.MEDIA_QUERY.LARGE}) {
+    width: auto;
+    padding: 0;
+    margin-right: 8rem;
   }
 `;

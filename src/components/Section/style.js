@@ -1,41 +1,126 @@
 import styled from "styled-components";
 
 export const Container = styled.section`
-  margin-top: 6rem;
-  margin-left: 2rem;
-  max-width: 1000px;
-  overflow: hidden;
-  margin-left: 5%;
-  margin-right: 5%;
+  margin: 6rem 0 4rem 2rem;
   position: relative;
+  max-width: 1100px;
 
-  p:first-child {
+  @media(min-width: ${({ theme }) => theme.MEDIA_QUERY.MEDIUM}){
+    margin: 6rem 8rem 10rem 8rem;
+    &::before {
+    left: -3px;
+    top: 0;
+    z-index: 1;
+    background: rgb(0, 10, 15);
+    background: linear-gradient(
+      90deg,
+      rgba(0, 10, 15, 1) 30%,
+      rgba(255, 255, 255, 0) 100%
+    );
+  }
+
+  &::after {
+    right: -3px;
+    top: 0;
+    z-index: 0;
+    background: rgb(0, 10, 15);
+    background: linear-gradient(
+      270deg,
+      rgba(0, 10, 15, 1) 30%,
+      rgba(255, 255, 255, 0) 100%
+    );
+  }
+
+  &::before,
+  &::after {
+    content: "";
+    width: 15rem;
+    height: 100%;
+    position: absolute;
+    display: block;
+  }
+
+  }
+
+  @media(min-width: 1250px){
+    margin: 6rem auto;
+    /* padding: 0 5rem; */
+  }
+
+  >p:first-child {
     font-size: 1.8rem;
     font-family: "Poppins", sans-serif;
     font-weight: 500;
     margin-bottom: 2.4rem;
+    position: relative;
+    z-index: 3;
   }
 
-  @media (min-width: 1100px) {
-    margin-left: auto;
-    margin-right: auto;
+  #teste {
+    >ul{
+      bottom: -3rem;
+    }
+    padding: 0;
   }
+
+
 `;
 
-export const Fov = styled.div`
-  /* background: rgb(0, 10, 15);
-  background: linear-gradient(
-    90deg,
-    rgba(0, 10, 15, 1) 8%,
-    rgba(255, 255, 255, 0) 28%,
-    rgba(255, 255, 255, 0) 72%,
-    rgba(0, 10, 15, 1) 92%
-  );
+export const Carrousel = styled.div`
+  /* .teste{
 
-  z-index: 1;
-  position: absolute;
-  right: 0;
-  left: 0;
-  top: 0;
-  bottom: 0; */
-`;
+    width: 100%;
+    display: flex;
+    gap: 2rem;
+    overflow-x: scroll;
+    position: relative;
+  } */
+
+  /* &::before {
+    left: 0;
+    background: rgb(0, 10, 15);
+    background: linear-gradient(
+      90deg,
+      rgba(0, 10, 15, 1) 30%,
+      rgba(255, 255, 255, 0) 100%
+    );
+  }
+
+  &::after {
+    right: 0;
+    background: rgb(0, 10, 15);
+    background: linear-gradient(
+      270deg,
+      rgba(0, 10, 15, 1) 30%,
+      rgba(255, 255, 255, 0) 100%
+    );
+  }
+
+  &::before,
+  &::after {
+    z-index: 2;
+    content: "";
+    width: 15rem;
+    height: 100%;
+    position: absolute;
+    display: block;
+    background-color: red;
+  }
+
+  .button-next,
+  .button-prev{
+    position: absolute;
+    display: flex;
+    z-index: 3;
+    top: 35%;
+    cursor: pointer;
+  }
+
+  .button-prev {
+    left: 0;
+  }
+
+  .button-next {
+    right: 0;
+  } */
+`

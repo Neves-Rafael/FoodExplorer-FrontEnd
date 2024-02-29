@@ -4,12 +4,14 @@ export const Container = styled.header`
   height: 11.4rem;
   background-color: ${({ theme }) => theme.COLORS.DARK_700};
   display: flex;
-  align-items: center;
+  align-items: end;
   justify-content: space-around;
   grid-area: header;
+  padding-bottom: 2.4rem;
   
   @media (min-width: ${({ theme }) => theme.MEDIA_QUERY.LARGE}) {
     justify-content: center;
+    align-items: center;
     gap: 3.2rem;
     padding: 0 5rem;
   }

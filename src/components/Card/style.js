@@ -9,7 +9,7 @@ export const Container = styled.div`
   align-items: center;
   gap: 1.2rem;
 
-  width: 24rem;
+  min-width: 24rem;
   position: relative;
 
   img {
