@@ -3,7 +3,7 @@ import { Count } from "../Count";
 import { Button } from "../Button";
 import { Container } from "./style";
 import { FaRegHeart } from "react-icons/fa";
-
+import { TbArrowBadgeRightFilled } from "react-icons/tb";
 
 import { useContext } from "react";
 import { PlateContext } from "../../hooks/plateRequest";
@@ -37,11 +37,14 @@ export function Card({ onCountChange, plateImage, view, plate, ...rest }) {
       <FaRegHeart className="favorite" />
 
       <img src={plateImage && plateImage} alt="" onClick={view} />
-      <p onClick={view}>{plate.title}</p>
+      <p className="plate-name" onClick={view}>{plate.name} <TbArrowBadgeRightFilled size={18} /></p>
+      <p className="plate-description">{plate.description}</p>
       <p className="value">R$ {plate.value}</p>
 
-      <Count onCountChange={handleCountChange} />
-      <Button title={"Incluir"} onClick={calculate} />
+      <div className="plate-count">
+        <Count onCountChange={handleCountChange} />
+        <Button title={"Incluir"} onClick={calculate} />
+      </div>
     </Container>
   );
 }

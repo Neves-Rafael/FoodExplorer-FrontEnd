@@ -7,8 +7,8 @@ import '@splidejs/react-splide/css/sea-green';
 export function Section({ title, children }) {
   const splideOptions = {
     type: 'loop',
-    fixedWidth : 240,
-    gap: 16,
+    fixedWidth : 304,
+    gap: 27,
     focus: 'center',
     rewind: true,
     rewindByDrag: true,
@@ -17,10 +17,15 @@ export function Section({ title, children }) {
     isNavigation: true,
     breakpoints: {
       768: {
+        fixedWidth : 210,
         focus: 'start',
         arrows: false,
         pagination: false,
       },
+      1024:{
+        gap: 16,
+        fixedWidth : 210,
+      }
     }
   };
 
@@ -36,16 +41,6 @@ export function Section({ title, children }) {
             </SplideSlide>
           ))}
         </Splide> 
-
-
-        {/* <Splide options={splideOptions}>
-            <SplideSlide className="teste">
-              {children}
-            </SplideSlide>
-        </Splide>  */}
-
-
-
     </Container>
   );
 }

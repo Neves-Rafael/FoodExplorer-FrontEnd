@@ -8,43 +8,89 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 1.2rem;
+  padding: 2rem;
 
-  min-width: 24rem;
+  width: 21rem;
   position: relative;
+  border-radius: 8px;
 
   img {
-    width: 15rem;
-    height: 15rem;
-    margin-top: 2.4rem;
-    margin-bottom: 1rem;
+    width: 9rem;
+    height: 9rem;
     object-fit: cover;
     border-radius: 100%;
     cursor: pointer;
   }
 
-  p {
+  .plate-name {
+    font-family: "Poppins";
+    display: flex;
+    gap: 1rem;
+    align-items: center;
     cursor: pointer;
   }
 
-  div {
-    margin-top: 1rem;
+  .plate-description{
+    display: none;
+    font-size: 1.4rem;
+    color: ${({theme}) => theme.COLORS.LIGHT_400};
   }
 
   button {
-    margin: 1.2rem 2.4rem 2.4rem;
-    width: 80%;
+    width: 160px;
     height: 3.2rem;
+  }
+
+  .plate-count{
+    display: flex;
+    flex-direction: column;
+    gap: 2.4rem;
   }
 
   .favorite {
     position: absolute;
-    right: 1rem;
-    top: 1rem;
+    right: 1.6rem;
+    top: 1.6rem;
     font-size: 2.6rem;
   }
 
   .value {
     color: ${({ theme }) => theme.COLORS.CAKE_200};
     font-size: 2rem;
+  }
+
+  @media(min-width: ${({ theme }) => theme.MEDIA_QUERY.LARGE}){
+    width: 30.4rem;
+
+    img {
+      width: 18rem;
+      height: 18rem;
+    }
+
+    .plate-name {
+      font-size: 2.4rem;
+      font-weight: 700;
+      line-height: 140%;
+    }
+
+    .plate-description{
+      display: block;
+    }
+
+    .value{
+      font-size: 3.2rem;
+      line-height: 160%;
+    }
+
+    .plate-count{
+      flex-direction: row;
+      gap: 1.6rem;
+      margin-bottom: 1.2rem;
+    }
+
+    button {
+      width: 92px;
+      height: 4.8rem;
+    }
   }
 `;
