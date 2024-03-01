@@ -47,7 +47,7 @@ export const Container = styled.div`
     gap: 2.4rem;
   }
 
-  .favorite {
+  .favorite-edit {
     position: absolute;
     right: 1.6rem;
     top: 1.6rem;

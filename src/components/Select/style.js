@@ -1,12 +1,14 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  width: 100%;
+  position: relative;
 `;
 
 export const Placeholder = styled.div`
   background-color: ${({ theme }) => theme.COLORS.DARK_900};
   border-radius: 8px;
+  position: absolute;
+  width: 100%;
 
   > div {
     height: 4.8rem;

@@ -84,6 +84,10 @@ export const ConfirmOrder = styled.div`
   gap: 3rem;
   margin: auto;
 
+  button{
+    max-width: 20rem;
+  }
+
   @media (min-width: 1024px) {
     justify-content: flex-start;
     margin: 0;
@@ -99,9 +103,10 @@ export const BackButton = styled.div`
   width: 100%;
 
   button{
+    font-family: "Poppins";
     font-size: 24px;
     font-style: normal;
-    font-weight: 700;
+    font-weight: 600;
     line-height: 140%; /* 33.6px */
   }
 `;

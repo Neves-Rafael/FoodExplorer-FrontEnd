@@ -20,13 +20,18 @@ import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { PlateContext } from "../../hooks/plateRequest";
 import { RiArrowLeftSLine } from "react-icons/ri";
+import { USER_ROLE } from "../../utils/roles"
+import { useAuth } from "../../hooks/auth";
 
 export function PlateView() {
+  const { user } = useAuth();
   const { id } = useParams();
   const navigate = useNavigate();
-  const [plate, setPlate] = useState({});
+  const [ plate, setPlate ] = useState({});
 
   const imageURL = `${api.defaults.baseURL}/files/`;
+
+  const verifyAdminRole = user.role === USER_ROLE.ADMIN;
 
   const [countValue, setCountValue] = useState(1);
   const price = plate.value * countValue;
@@ -88,8 +93,8 @@ export function PlateView() {
           </Tags>
 
           <ConfirmOrder>
-            <Count onCountChange={handleCountChange} />
-            <Button title={`Incluir R$ - ${price},00`} onClick={calculate} />
+            {verifyAdminRole ? null: <Count onCountChange={handleCountChange} />}
+            <Button title={verifyAdminRole ? "Editar prato" : `Incluir R$ - ${price}`} onClick={calculate} />
           </ConfirmOrder>
         </div>
       </Main>

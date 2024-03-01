@@ -11,7 +11,8 @@ export const Container = styled.button`
   justify-content: center;
   font-family: "Poppins";
 
-  &:disable {
-    opacity: 0.5;
+  &:disabled {
+    filter: brightness(0.3);
+    cursor: not-allowed;
   }
 `;

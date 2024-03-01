@@ -15,28 +15,44 @@ import { ButtonText } from "../../components/ButtonText";
 import { BsBoxArrowUp } from "react-icons/bs";
 import { IoChevronBack } from "react-icons/io5";
 import { TagItem } from "../../components/TagItem";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "../../hooks/auth";
 
 export function NewPlate() {
   const { createPlate } = useAuth();
 
-  const [name, setName] = useState("Teste");
-  const [category, setCategory] = useState("Bebidas");
-  const [ingredients, setIngredients] = useState(["carne", "feijão"]);
+  const [name, setName] = useState("");
+  const [category, setCategory] = useState("");
+  const [ingredients, setIngredients] = useState([]);
   const [value, setValue] = useState(75);
-  const [description, setDescription] = useState("Descrição aqui");
+  const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
+  const [isDisable, setIsDisable] = useState(true);
+
+  const handleCategoryInSelectComponent = (category) => {
+    setCategory(category)
+  }
+
 
   async function handleChangeImage(event) {
     const file = event.target.files[0];
     setImage(file);
   }
 
-  async function handleUpdate() {
-    const plate = { name, category, ingredients, value, description };
-    await createPlate({ plate, image });
+  async function handleCreatePlate() {
+    if(name && category && ingredients && value && description && image){
+      const plate = { name, category, ingredients, value, description };
+      await createPlate({ plate, image });
+    }
+    return
   }
+
+  useEffect(() =>{
+    if(name && category && ingredients && value && description && image){
+      setIsDisable(false)
+    }
+
+  }, [name, category, ingredients, value, description, image])
 
   return (
     <Container>
@@ -72,6 +88,7 @@ export function NewPlate() {
             <Select
               itemOption={["Refeição", "Sobremesa", "Prato Principal"]}
               onChange={(e) => setCategory(e.target.value)}
+              handleCategory={handleCategoryInSelectComponent}
             />
           </div>
         </Line1>
@@ -96,10 +113,15 @@ export function NewPlate() {
 
         <div>
           <p>Descrição</p>
-          <textarea onChange={(e) => setDescription(e.target.value)}></textarea>
+          <textarea 
+            onChange={(e) => setDescription(e.target.value)}
+            placeholder="Fale brevemente sobre o prato, seus ingredients e composição"/>
         </div>
 
-        <Button title={"Salvar alterações"} onClick={handleUpdate} />
+        <Button 
+          title={"Salvar alterações"} 
+          onClick={handleCreatePlate}
+          disabled={isDisable}/> 
       </Section>
     </Container>
   );

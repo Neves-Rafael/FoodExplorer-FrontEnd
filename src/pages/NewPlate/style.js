@@ -11,11 +11,12 @@ export const Section = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 3.2rem;
+  gap: 2.4rem;
   padding-bottom: 10rem;
 
   textarea {
     width: 100%;
+    padding: 1rem;
     resize: none;
     border-radius: 0.8rem;
     border: none;
@@ -29,9 +30,13 @@ export const Section = styled.section`
 
   button:nth-child(4) {
     align-self: end;
-    width: 172px;
     margin-top: 2.4rem;
+
+    @media(min-width: ${({ theme }) => theme.MEDIA_QUERY.SMALL_G}){
+      width: 20rem; 
+    }
   }
+
 
   @media (min-width: 450px) {
     max-width: 400px;
@@ -39,6 +44,7 @@ export const Section = styled.section`
 
   @media (min-width: 1120px) {
     max-width: 1024px;
+    gap: 3.2rem;
   }
 `;
 
@@ -74,7 +80,7 @@ export const Line2 = styled.div`
   flex-direction: column;
   justify-content: center;
   gap: 2.4rem;
-  margin-top: 2rem;
+  margin-top: 5rem;
 
   > div {
     width: 100%;
@@ -86,6 +92,7 @@ export const Line2 = styled.div`
 
   @media (min-width: 1120px) {
     flex-direction: row;
+    margin-top: 0;
 
     > div {
       width: 100%;
@@ -103,8 +110,10 @@ export const Titles = styled.div`
   margin: 4rem auto 3rem;
 
   button {
-    font-size: 2.4rem;
-    font-weight: 700;
+    >svg{
+      width: 2.2rem;
+    }
+    font-weight: 600;
     font-family: "Poppins";
     margin-bottom: 2.4rem;
   }
