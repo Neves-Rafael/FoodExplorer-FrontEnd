@@ -1,0 +1,182 @@
+import styled from "styled-components";
+
+export const Container = styled.div`
+  width: 100%;
+  height: 100dvh;
+`;
+
+export const Section = styled.section`
+  max-width: 90%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2.4rem;
+  padding-bottom: 10rem;
+
+  textarea {
+    width: 100%;
+    padding: 1rem;
+    resize: none;
+    border-radius: 0.8rem;
+    border: none;
+    height: 20rem;
+    background-color: ${({ theme }) => theme.COLORS.DARK_800};
+  }
+
+  p {
+    margin-bottom: 1.6rem;
+  }
+
+  button:nth-child(4) {
+    align-self: end;
+    margin-top: 2.4rem;
+
+    @media(min-width: ${({ theme }) => theme.MEDIA_QUERY.SMALL_G}){
+      width: 20rem; 
+    }
+  }
+
+
+  @media (min-width: 450px) {
+    max-width: 400px;
+  }
+
+  @media (min-width: 1120px) {
+    max-width: 1024px;
+    gap: 3.2rem;
+  }
+`;
+
+export const Line1 = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2.4rem;
+
+  p {
+    margin-bottom: 1.6rem;
+  }
+
+  @media (min-width: 1120px) {
+    flex-direction: row;
+
+    > div {
+      width: 100%;
+    }
+
+    > div:nth-child(1) {
+      max-width: 25%;
+    }
+
+    > div:nth-child(3) {
+      max-width: 35%;
+    }
+  }
+`;
+
+export const Line2 = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2.4rem;
+  margin-top: 5rem;
+
+  > div {
+    width: 100%;
+  }
+
+  p {
+    margin-bottom: 1.6rem;
+  }
+
+  @media (min-width: 1120px) {
+    flex-direction: row;
+    margin-top: 0;
+
+    > div {
+      width: 100%;
+    }
+
+    > div:nth-child(2) {
+      max-width: 20%;
+    }
+  }
+`;
+
+export const Titles = styled.div`
+  font-family: "Poppins";
+  max-width: 90%;
+  margin: 4rem auto 3rem;
+
+  button {
+    >svg{
+      width: 2.2rem;
+    }
+    font-weight: 600;
+    font-family: "Poppins";
+    margin-bottom: 2.4rem;
+  }
+
+  h2 {
+    font-size: 3.2rem;
+    font-weight: 500;
+    font-family: "Poppins";
+  }
+
+  @media (min-width: 450px) {
+    max-width: 400px;
+  }
+  @media (min-width: 1120px) {
+    max-width: 1024px;
+  }
+`;
+
+export const Ingredients = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 1rem;
+  min-height: 4.8rem;
+  border-radius: 8px;
+  gap: 1rem;
+
+  background-color: ${({ theme, $isNew }) =>
+    $isNew ? "transparent" : theme.COLORS.DARK_900};
+`;
+
+export const UploadImage = styled.label`
+  background-color: ${({ theme }) => theme.COLORS.TOMATO_100};
+  height: 4.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 8px;
+
+  input {
+    display: none;
+  }
+
+  svg {
+    margin-right: 1rem;
+  }
+`;
+
+export const ButtonAction = styled.div`
+  display: flex;
+  justify-content: end;
+  gap: 4rem;
+
+  button:nth-child(1){
+    background-color: black;
+  }
+
+
+  button {
+    margin-top: 2.4rem;
+    @media(min-width: ${({ theme }) => theme.MEDIA_QUERY.SMALL_G}){
+      width: 20rem; 
+    }
+  }
+`
