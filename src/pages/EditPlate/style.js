@@ -172,11 +172,18 @@ export const ButtonAction = styled.div`
     background-color: black;
   }
 
+  @media(max-width: 1120px){
+    gap: 2rem;
+    flex-direction: column;
+  }
+
 
   button {
-    margin-top: 2.4rem;
-    @media(min-width: ${({ theme }) => theme.MEDIA_QUERY.SMALL_G}){
+    margin-top: 0;
+
+    @media(min-width: 1120px){
       width: 20rem; 
-    }
+      margin-top: 2.4rem;
   }
+}
 `

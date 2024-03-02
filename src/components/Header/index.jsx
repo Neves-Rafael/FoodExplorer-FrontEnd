@@ -8,6 +8,7 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { InputSearch } from "../InputSearch";
 import { FoodExplorerAdmin } from "../FoodExplorerAdmin";
 import { Container, MenuHamburger, Logout, OrderCount, Logo, Requests } from "./style";
+import { useNavigate } from "react-router-dom";
 
 import { USER_ROLE } from "../../utils/roles"
 import { PlateContext } from "../../hooks/plateRequest";
@@ -16,6 +17,8 @@ import { useState, useEffect, useContext } from "react";
 export function Header({plates}) {
   const { logout, user } = useAuth();
   const { plateRequest, updateRequest } = useContext(PlateContext);
+
+  const navigate = useNavigate();
 
   const [ menuIsOpen, setMenuIsOpen ] = useState(false);
 
@@ -40,7 +43,10 @@ export function Header({plates}) {
       <InputSearch plates={plates}/>
 
       <Requests>
-        <Button title={messageToAdminAccess} icon={verifyAdminRole ? null : PiReceipt} />
+        <Button 
+          title={messageToAdminAccess} icon={verifyAdminRole ? null : PiReceipt} 
+          onClick={verifyAdminRole ? () => navigate("/newplate") : null }
+        />
       </Requests>
 
       <Logout onClick={logout}>

@@ -49,6 +49,27 @@ function AuthProvider({ children }) {
     }
   }
 
+  async function updatePlate({ plate, image}){
+    try {
+      await api.put(`/plates/${plate.id}`, plate);
+
+      if (image) {
+        const uploadImage = new FormData();
+        uploadImage.append("image", image);
+
+        await api.patch(`/plates/image/${plate.id}`, uploadImage);
+      }
+    } catch (error) {
+      if (error.response) {
+        alert(error.response.data.message);
+      } else {
+        alert("Não foi possível atualizar.");
+      }
+    }
+  }
+
+  
+
   useEffect(() => {
     const user = localStorage.getItem("@foodexplorer:user");
 
@@ -65,11 +86,13 @@ function AuthProvider({ children }) {
         sessionLogin,
         logout,
         createPlate,
+        updatePlate,
         user: data.user,
       }}>
       {children}
     </AuthContext.Provider>
   );
+
 }
 
 function useAuth() {

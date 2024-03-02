@@ -8,10 +8,9 @@ export const Container = styled.div`
 
   display: flex;
   align-items: center;
-  height: 3rem;
   border-radius: 8px;
-  padding: 12px;
-  max-width: 12.9rem;
+  padding-right: 6px;
+  gap: 6px;
 
   @media (min-width: 425px) {
     max-width: 15rem;
@@ -21,16 +20,23 @@ export const Container = styled.div`
     background: none;
     border: none;
     display: flex;
+    
+    path{
+      color: ${({ theme }) => theme.COLORS.CAKE_200};
+    }
   }
 
   input {
     width: 100%;
-
+    height: 3rem;
     background: transparent;
     border: none;
+    font-size: 1.4rem;
+    padding-left: 6px;
+    text-align: center;
 
-    &::placeholder {
-      color: blue;
-    }
+    /* &::placeholder {
+      color
+    } */
   }
 `;

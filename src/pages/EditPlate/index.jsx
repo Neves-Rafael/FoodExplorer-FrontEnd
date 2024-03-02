@@ -1,52 +1,69 @@
-import {
-  Container,
-  Section,
-  Line1,
-  Line2,
-  Titles,
-  Ingredients,
-  UploadImage,
-  ButtonAction
-} from "./style";
-import { Header } from "../../components/Header";
-import { Input } from "../../components/Input";
-import { Button } from "../../components/Button";
-import { Select } from "../../components/Select";
-import { ButtonText } from "../../components/ButtonText";
-import { BsBoxArrowUp } from "react-icons/bs";
-import { IoChevronBack } from "react-icons/io5";
-import { TagItem } from "../../components/TagItem";
-import { useEffect, useState } from "react";
 import { useAuth } from "../../hooks/auth";
+import { useEffect, useState } from "react";
+import { BsBoxArrowUp } from "react-icons/bs";
+import { Input } from "../../components/Input";
+import { IoChevronBack } from "react-icons/io5";
+import { Select } from "../../components/Select";
+import { Button } from "../../components/Button";
+import { Header } from "../../components/Header";
+import { TagItem } from "../../components/TagItem";
+import { ButtonText } from "../../components/ButtonText";
+import { Container, Section, Line1, Line2, Titles, Ingredients, UploadImage, ButtonAction } from "./style";
+import { useNavigate, useParams } from "react-router-dom";
+import { api } from "../../service/api"
 
 export function EditPlate() {
-  const { createPlate } = useAuth();
+  const { updatePlate } = useAuth();
 
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
-  const [ingredients, setIngredients] = useState([]);
-  const [value, setValue] = useState(75);
+  const [value, setValue] = useState(0);
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
   const [isDisable, setIsDisable] = useState(true);
+  
+  const [ingredients, setIngredients] = useState([]);
+  const [newIngredient, setNewIngredient] = useState("")
+  const { id } = useParams();
+
+
+  const navigate = useNavigate();
 
   const handleCategoryInSelectComponent = (category) => {
     setCategory(category)
   }
 
+  function handleAddIngredient(){
+    if(newIngredient.length < 1){
+      return
+    }
+
+    setIngredients(prevState => [...prevState, newIngredient]);
+    setNewIngredient("");
+  }
+
+  function handleRemoveIngredient(deleted){
+    setIngredients(prevState => prevState.filter(ingredient => ingredient !== deleted));
+  }
 
   async function handleChangeImage(event) {
     const file = event.target.files[0];
     setImage(file);
   }
 
-  async function handleCreatePlate() {
+  async function handleUpdatePlate() {
     if(name && category && ingredients && value && description && image){
-      const plate = { name, category, ingredients, value, description };
-      await createPlate({ plate, image });
+      const plate = { name, category, ingredients, value, description, id };
+      await updatePlate({ plate, image });
+      console.log("atualizado")
     }
     return
   }
+
+  async function handleDeletePlate(){
+    await api.delete(`/plates/${id}`);
+  }
+
 
   useEffect(() =>{
     if(name && category && ingredients && value && description && image){
@@ -60,7 +77,7 @@ export function EditPlate() {
       <Header />
 
       <Titles>
-        <ButtonText title={"Voltar"} icon={IoChevronBack} />
+        <ButtonText title={"Voltar"} icon={IoChevronBack} onClick={() => navigate(-1)}/>
 
         <h2>Editar prato</h2>
       </Titles>
@@ -98,11 +115,18 @@ export function EditPlate() {
           <div>
             <p>Ingredients</p>
             <Ingredients>
+              {ingredients && ingredients.map((ingredient, index) => (
+                <TagItem value={ingredient}  key={index} onClick={() => handleRemoveIngredient(ingredient)}/>
+              ))}
+
               <TagItem
-                value={"Peixe frito"}
-                onChange={(e) => setIngredients(e.target.value)}
+                $isNew
+                placeholder={"Novo Ingrediente"}
+                value={newIngredient}
+                onChange={(e) => setNewIngredient(e.target.value)}
+                onClick={handleAddIngredient}
               />
-              <TagItem $isNew={true} />
+              
             </Ingredients>
           </div>
 
@@ -120,8 +144,8 @@ export function EditPlate() {
         </div>
 
         <ButtonAction >
-          <Button title={"Excluir prato"} onClick={handleCreatePlate}/> 
-          <Button title={"Salvar alterações"} onClick={handleCreatePlate} disabled={isDisable}/> 
+          <Button title={"Excluir prato"} onClick={handleDeletePlate}/> 
+          <Button title={"Salvar alterações"} onClick={handleUpdatePlate} disabled={isDisable}/> 
         </ButtonAction>
       </Section>
     </Container>

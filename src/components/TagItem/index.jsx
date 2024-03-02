@@ -7,7 +7,7 @@ export function TagItem({ $isNew, value, onClick, ...rest }) {
     <Container $isNew={$isNew}>
       <input type="text" value={value} readOnly={!$isNew} {...rest} />
       <button onClick={onClick} type="button">
-        {$isNew ? <IoMdClose /> : <FiPlus />}
+        {$isNew ? <FiPlus/> :  <IoMdClose />}
       </button>
     </Container>
   );

@@ -11,7 +11,7 @@ export function AdminRoutes() {
       <Route path="/" element={<Home />} />
       <Route path="/plateview/:id" element={<PlateView />} />
       <Route path="/newplate" element={<NewPlate />} />
-      <Route path="/editplate" element={<EditPlate />} />
+      <Route path="/editplate/:id" element={<EditPlate />} />
 
       {/* <Route path="*" element={<Navigate to="/" />} /> */}
     </Routes>

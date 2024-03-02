@@ -7,6 +7,7 @@ import { TbArrowBadgeRightFilled } from "react-icons/tb";
 import { FaRegEdit } from "react-icons/fa";
 import { USER_ROLE } from "../../utils/roles"
 import { useAuth } from "../../hooks/auth";
+import { useNavigate } from "react-router-dom";
 
 import { useContext } from "react";
 import { PlateContext } from "../../hooks/plateRequest";
@@ -14,6 +15,13 @@ import { PlateContext } from "../../hooks/plateRequest";
 export function Card({ onCountChange, plateImage, view, plate, ...rest }) {
   const [countValue, setCountValue] = useState(1);
   const { user } = useAuth();
+
+  const navigate = useNavigate();
+
+  function handleEditPlate(){
+    console.log(plate.id)
+    
+  }
 
   const verifyAdminRole = user.role === USER_ROLE.ADMIN;
 
@@ -41,7 +49,7 @@ export function Card({ onCountChange, plateImage, view, plate, ...rest }) {
   return (
     <Container {...rest}>
      { verifyAdminRole 
-     ? <FaRegEdit size={30} className="favorite-edit" /> 
+     ? <FaRegEdit size={30} className="favorite-edit" onClick={() => navigate(`/editplate/${plate.id}`)}/> 
      : <FaRegHeart className="favorite-edit" /> }
 
       <img src={plateImage && plateImage} alt="" onClick={view} />

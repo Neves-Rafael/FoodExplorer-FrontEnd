@@ -17,6 +17,7 @@ import { IoChevronBack } from "react-icons/io5";
 import { TagItem } from "../../components/TagItem";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../hooks/auth";
+import { useNavigate } from "react-router-dom";
 
 export function NewPlate() {
   const { createPlate } = useAuth();
@@ -28,6 +29,8 @@ export function NewPlate() {
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
   const [isDisable, setIsDisable] = useState(true);
+
+  const navigate = useNavigate();
 
   const handleCategoryInSelectComponent = (category) => {
     setCategory(category)
@@ -59,7 +62,7 @@ export function NewPlate() {
       <Header />
 
       <Titles>
-        <ButtonText title={"Voltar"} icon={IoChevronBack} />
+        <ButtonText title={"Voltar"} icon={IoChevronBack} onClick={() => navigate(-1)}/>
 
         <h2>Novo prato</h2>
       </Titles>
