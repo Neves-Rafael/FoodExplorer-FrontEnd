@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { Container, Options, Placeholder } from "./style";
 import { IoIosArrowDown } from "react-icons/io";
 
-export function Select({ itemOption, handleCategory }) {
+export function Select({ itemOption, handleCategory, value, ...rest }) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectValue, setSelectValue] = useState("Exemplo: Refeição");
   const selectRef = useRef(null);
@@ -33,7 +33,7 @@ export function Select({ itemOption, handleCategory }) {
     <Container ref={selectRef}>
       <Placeholder $isOpen={isOpen}>
         <div onClick={() => (isOpen ? setIsOpen(false) : setIsOpen(true))}>
-          <button>{selectValue}</button>
+          <button {...rest}>{value}</button>
           <span>
             <IoIosArrowDown size={28} />
           </span>

@@ -24,11 +24,13 @@ export function NewPlate() {
 
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
-  const [ingredients, setIngredients] = useState([]);
   const [value, setValue] = useState(75);
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
   const [isDisable, setIsDisable] = useState(true);
+  
+  const [ingredients, setIngredients] = useState([]);
+  const [newIngredient, setNewIngredient] = useState("")
 
   const navigate = useNavigate();
 
@@ -36,10 +38,18 @@ export function NewPlate() {
     setCategory(category)
   }
 
-
   async function handleChangeImage(event) {
     const file = event.target.files[0];
     setImage(file);
+  }
+
+  function handleAddIngredient(){
+    if(newIngredient.length < 1){
+      return
+    }
+
+    setIngredients(prevState => [...prevState, newIngredient]);
+    setNewIngredient("");
   }
 
   async function handleCreatePlate() {
@@ -100,11 +110,18 @@ export function NewPlate() {
           <div>
             <p>Ingredients</p>
             <Ingredients>
+              {ingredients && ingredients.map((ingredient, index) => (
+                <TagItem value={ingredient}  key={index} onClick={() => handleRemoveIngredient(ingredient)}/>
+              ))}
+
               <TagItem
-                value={"Peixe frito"}
-                onChange={(e) => setIngredients(e.target.value)}
+                $isNew
+                placeholder={"Novo Ingrediente"}
+                value={newIngredient}
+                onChange={(e) => setNewIngredient(e.target.value)}
+                onClick={handleAddIngredient}
               />
-              <TagItem $isNew={true} />
+              
             </Ingredients>
           </div>
 

@@ -26,7 +26,7 @@ export const Placeholder = styled.div`
 
   button {
     background: none;
-    opacity: 0.5;
+    opacity: 0.9;
   }
 `;
 

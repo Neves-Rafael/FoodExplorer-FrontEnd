@@ -68,8 +68,6 @@ function AuthProvider({ children }) {
     }
   }
 
-  
-
   useEffect(() => {
     const user = localStorage.getItem("@foodexplorer:user");
 

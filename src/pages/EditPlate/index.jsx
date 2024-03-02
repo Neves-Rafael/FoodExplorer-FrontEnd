@@ -21,6 +21,7 @@ export function EditPlate() {
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
   const [isDisable, setIsDisable] = useState(true);
+  const [plateToUpdate, setPlateToUpdate] = useState({})
   
   const [ingredients, setIngredients] = useState([]);
   const [newIngredient, setNewIngredient] = useState("")
@@ -64,13 +65,38 @@ export function EditPlate() {
     await api.delete(`/plates/${id}`);
   }
 
+  async function placeholderPlateToEdit(){
+    if(plateToUpdate.name){
+      console.log(plateToUpdate)
+      setName(plateToUpdate.name)
+      setDescription(plateToUpdate.description)
+      setIngredients(plateToUpdate.ingredients.map((ing) => (ing.name)))
+      setValue(Number(plateToUpdate.value))
+      setCategory(plateToUpdate.category)
+    }
+  }
+
 
   useEffect(() =>{
     if(name && category && ingredients && value && description && image){
       setIsDisable(false)
     }
 
-  }, [name, category, ingredients, value, description, image])
+  }, [name, category, ingredients, value, description, image]);
+
+  useEffect(() => {
+    async function searchPlate() {
+      const { data } = await api.get(`/plates/${id}`);
+        setPlateToUpdate(data);
+        return;
+    }
+    searchPlate();
+  }, []);
+
+  useEffect(() => {
+    // Esta função será chamada quando plateToUpdate for atualizado
+    placeholderPlateToEdit();
+  }, [plateToUpdate]);
 
   return (
     <Container>
@@ -96,14 +122,16 @@ export function EditPlate() {
           <div>
             <p>Nome</p>
             <Input
-              placeholder={"Ex: Salada Ceasar"}
+              value={name}
               onChange={(e) => setName(e.target.value)}
+              placeholder={"Ex: Salada Ceasar"}
             />
           </div>
 
           <div>
             <p>Categoria</p>
             <Select
+              value={category}
               itemOption={["Refeição", "Sobremesa", "Prato Principal"]}
               onChange={(e) => setCategory(e.target.value)}
               handleCategory={handleCategoryInSelectComponent}
@@ -132,13 +160,14 @@ export function EditPlate() {
 
           <div>
             <p>Preço</p>
-            <Input onChange={(e) => setValue(e.target.value)} />
+            <Input onChange={(e) => setValue(e.target.value)} value={value} />
           </div>
         </Line2>
 
         <div>
           <p>Descrição</p>
           <textarea 
+            value={description}
             onChange={(e) => setDescription(e.target.value)}
             placeholder="Fale brevemente sobre o prato, seus ingredients e composição"/>
         </div>
