@@ -24,7 +24,8 @@ export function Header({plates}) {
 
   const verifyAdminRole = user.role === USER_ROLE.ADMIN;
 
-  const messageToAdminAccess = verifyAdminRole ? "Novo Prato" : `Pedidos (${plateRequest.length})`;
+  console.log(plateRequest)
+  const messageToAdminAccess = verifyAdminRole ? "Novo Prato" : `Pedidos (${plateRequest.length || 0})`;
 
   useEffect(() => {
     updateRequest();

@@ -34,7 +34,7 @@ export function Card({ onCountChange, plateImage, view, plate, ...rest }) {
   function calculate() {
     updateRequest();
     // localStorage.removeItem("pedidos");
-    const price = value * countValue;
+    const price = plate.value * countValue;
     const allRequest = JSON.parse(localStorage.getItem("pedidos")) || [];
 
     const newRequest = {
