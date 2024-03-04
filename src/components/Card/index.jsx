@@ -15,35 +15,29 @@ import { PlateContext } from "../../hooks/plateRequest";
 export function Card({ onCountChange, plateImage, view, plate, ...rest }) {
   const [countValue, setCountValue] = useState(1);
   const { user } = useAuth();
-
   const navigate = useNavigate();
-
-  function handleEditPlate(){
-    console.log(plate.id)
-    
-  }
+  const { updateRequest } = useContext(PlateContext);
 
   const verifyAdminRole = user.role === USER_ROLE.ADMIN;
-
-  const { updateRequest } = useContext(PlateContext);
 
   const handleCountChange = (newValue) => {
     setCountValue(newValue);
   };
 
   function calculate() {
-    updateRequest();
     // localStorage.removeItem("pedidos");
-    const price = plate.value * countValue;
     const allRequest = JSON.parse(localStorage.getItem("pedidos")) || [];
-
+    const price = plate.value * countValue;
+    
     const newRequest = {
       plate,
       price,
     };
-
+    
     allRequest.push(newRequest);
     localStorage.setItem("pedidos", JSON.stringify(allRequest));
+
+    updateRequest();
   }
 
   return (

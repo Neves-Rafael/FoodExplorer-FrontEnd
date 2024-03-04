@@ -15,21 +15,26 @@ import { PlateContext } from "../../hooks/plateRequest";
 import { useState, useEffect, useContext } from "react";
 
 export function Header({plates}) {
-  const { logout, user } = useAuth();
-  const { plateRequest, updateRequest } = useContext(PlateContext);
-
   const navigate = useNavigate();
-
+  const { logout, user } = useAuth();
+  const { plateRequest } = useContext(PlateContext);
+  const [ teste, setTeste] = useState([]);
   const [ menuIsOpen, setMenuIsOpen ] = useState(false);
+  console.log(teste)
 
   const verifyAdminRole = user.role === USER_ROLE.ADMIN;
 
-  console.log(plateRequest)
-  const messageToAdminAccess = verifyAdminRole ? "Novo Prato" : `Pedidos (${plateRequest.length || 0})`;
+  const messageToAdminAccess = verifyAdminRole ? "Novo Prato" : `Pedidos (${teste ? teste.length : 0})`;
 
   useEffect(() => {
-    updateRequest();
-  }, []);
+    setTeste(plateRequest);
+  }, [plateRequest]);
+
+  useEffect(() => {
+    console.log("useee")
+
+    setTeste(JSON.parse(localStorage.getItem("pedidos")))
+  }, [])
 
   return (
     <Container>
@@ -58,7 +63,7 @@ export function Header({plates}) {
         {verifyAdminRole ? null :
           <>
             <PiReceipt size={32} />
-            <span>{plateRequest.length}</span>
+            {/* <span>{plateRequest.length}</span> */}
           </>
         } 
       </OrderCount>
