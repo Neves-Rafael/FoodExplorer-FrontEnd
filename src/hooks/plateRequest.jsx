@@ -4,7 +4,6 @@ export const PlateContext = createContext();
 
 export const PlateProvider = ({ children }) => {
   const [plateRequest, setPlateRequest] = useState(["0"]);
-  console.log(plateRequest)
   
   const updateRequest = () => {
     setPlateRequest(JSON.parse(localStorage.getItem("pedidos")));

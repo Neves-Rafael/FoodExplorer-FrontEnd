@@ -18,6 +18,7 @@ export function Card({ onCountChange, plateImage, view, plate, ...rest }) {
   const navigate = useNavigate();
   const { updateRequest } = useContext(PlateContext);
 
+
   const verifyAdminRole = user.role === USER_ROLE.ADMIN;
 
   const handleCountChange = (newValue) => {

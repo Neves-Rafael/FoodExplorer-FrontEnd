@@ -20,7 +20,6 @@ export function Header({plates}) {
   const { plateRequest } = useContext(PlateContext);
   const [ teste, setTeste] = useState([]);
   const [ menuIsOpen, setMenuIsOpen ] = useState(false);
-  console.log(teste)
 
   const verifyAdminRole = user.role === USER_ROLE.ADMIN;
 
@@ -31,10 +30,8 @@ export function Header({plates}) {
   }, [plateRequest]);
 
   useEffect(() => {
-    console.log("useee")
-
     setTeste(JSON.parse(localStorage.getItem("pedidos")))
-  }, [])
+  }, []);
 
   return (
     <Container>
@@ -42,7 +39,7 @@ export function Header({plates}) {
         <RxHamburgerMenu size={32} onClick={() => setMenuIsOpen(true)} />
       </MenuHamburger>
 
-      <Logo>
+      <Logo onClick={() => navigate("/")}>
         {verifyAdminRole ? <FoodExplorerAdmin/> : <FoodExplorer />}
       </Logo>
 
@@ -63,7 +60,7 @@ export function Header({plates}) {
         {verifyAdminRole ? null :
           <>
             <PiReceipt size={32} />
-            {/* <span>{plateRequest.length}</span> */}
+            <span>{teste ? teste.length : 0}</span>
           </>
         } 
       </OrderCount>

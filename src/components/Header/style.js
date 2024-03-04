@@ -27,6 +27,7 @@ export const MenuHamburger = styled.div`
 
 export const Logout = styled.div`
   display: none;
+  cursor: pointer;
 
   @media (min-width: ${({ theme }) => theme.MEDIA_QUERY.LARGE}) {
     display: block;
@@ -52,6 +53,8 @@ export const OrderCount = styled.div`
 `;
 
 export const Logo = styled.div`
+  cursor: pointer;
+  
   div p {
     font-size: 2.4rem;
   }

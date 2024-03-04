@@ -25,6 +25,7 @@ function AuthProvider({ children }) {
 
   function logout() {
     localStorage.removeItem("@foodexplorer:user");
+    localStorage.removeItem("pedidos");
 
     setData({});
   }
