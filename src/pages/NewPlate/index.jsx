@@ -99,7 +99,6 @@ export function NewPlate() {
           <div>
             <p>Categoria</p>
             <Select
-              itemOption={["Refeição", "Sobremesa", "Prato Principal"]}
               onChange={(e) => setCategory(e.target.value)}
               handleCategory={handleCategoryInSelectComponent}
             />
@@ -127,7 +126,7 @@ export function NewPlate() {
 
           <div>
             <p>Preço</p>
-            <Input onChange={(e) => setValue(e.target.value)} />
+            <Input onChange={(e) => setValue(e.target.value)} placeholder={"Exemplo: 99,00"}/>
           </div>
         </Line2>
 

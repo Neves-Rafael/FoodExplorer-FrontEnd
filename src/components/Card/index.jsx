@@ -20,6 +20,7 @@ export function Card({ onCountChange, plateImage, view, plate, ...rest }) {
 
 
   const verifyAdminRole = user.role === USER_ROLE.ADMIN;
+  const plateValue = plate.value.replace(".", ",")
 
   const handleCountChange = (newValue) => {
     setCountValue(newValue);
@@ -50,7 +51,7 @@ export function Card({ onCountChange, plateImage, view, plate, ...rest }) {
       <img src={plateImage && plateImage} alt="" onClick={view} />
       <p className="plate-name" onClick={view}>{plate.name} <TbArrowBadgeRightFilled size={18} /></p>
       <p className="plate-description">{plate.description}</p>
-      <p className="value">R$ {plate.value}</p>
+      <p className="value">R$ {plateValue}</p>
 
       {verifyAdminRole ? null : <div className="plate-count">
         <Count onCountChange={handleCountChange} />

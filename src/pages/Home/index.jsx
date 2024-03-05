@@ -16,7 +16,7 @@ export function Home() {
 
   const plateSections = ["Refeição", "Sobremesas", "Bebidas"];
 
-  const imageURL = `${api.defaults.baseURL}files/`;
+  const imageURL = `${api.defaults.baseURL}/files/`;
   console.log(imageURL)
 
   const testeCallback = () => {

@@ -17,7 +17,7 @@ export function EditPlate() {
 
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
   const [isDisable, setIsDisable] = useState(true);
@@ -131,8 +131,7 @@ export function EditPlate() {
           <div>
             <p>Categoria</p>
             <Select
-              value={category}
-              itemOption={["Refeição", "Sobremesa", "Prato Principal"]}
+              category={category}
               onChange={(e) => setCategory(e.target.value)}
               handleCategory={handleCategoryInSelectComponent}
             />
@@ -160,7 +159,7 @@ export function EditPlate() {
 
           <div>
             <p>Preço</p>
-            <Input onChange={(e) => setValue(e.target.value)} value={value} />
+            <Input onChange={(e) => setValue(e.target.value)} value={String(value)} />
           </div>
         </Line2>
 
