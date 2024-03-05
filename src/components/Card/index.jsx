@@ -29,11 +29,13 @@ export function Card({ onCountChange, plateImage, view, plate, ...rest }) {
   function calculate() {
     // localStorage.removeItem("pedidos");
     const allRequest = JSON.parse(localStorage.getItem("pedidos")) || [];
-    const price = plate.value * countValue;
+    const priceInReal = plate.value ? plate.value.replace(",", ".") : null;
+
+    const price = (priceInReal * countValue).toFixed(2).replace(".", ",");
     
     const newRequest = {
       plate,
-      price,
+      price: price.replace(",", "."),
     };
     
     allRequest.push(newRequest);

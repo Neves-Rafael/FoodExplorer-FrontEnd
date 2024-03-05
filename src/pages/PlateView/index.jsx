@@ -34,7 +34,10 @@ export function PlateView() {
   const verifyAdminRole = user.role === USER_ROLE.ADMIN;
 
   const [countValue, setCountValue] = useState(1);
-  const price = plate.value * countValue;
+
+  const priceInReal = plate.value ? plate.value.replace(",", ".") : null;
+
+  const price = (priceInReal * countValue).toFixed(2).replace(".", ",");
 
   const { updateRequest } = useContext(PlateContext);
 
@@ -43,18 +46,17 @@ export function PlateView() {
   };
 
   function calculate() {
-    updateRequest();
-    localStorage.removeItem("pedidos");
     const allRequest = JSON.parse(localStorage.getItem("pedidos")) || [];
-
+    
     const newRequest = {
       plate,
-      price,
+      price: price.replace(",", ".") ,
     };
-
+    
     allRequest.push(newRequest);
     localStorage.setItem("pedidos", JSON.stringify(allRequest));
     console.log("pedido feito com sucesso!");
+    updateRequest();
   }
 
   useEffect(() => {
