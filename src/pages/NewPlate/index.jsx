@@ -69,6 +69,7 @@ export function NewPlate() {
       setCategory("")
       setDescription("")
       setImage(null)
+      setIngredients([])
       setIsDisable(true)
       console.log("criado")
     }
@@ -106,6 +107,7 @@ export function NewPlate() {
           <div>
             <p>Nome</p>
             <Input
+            value={name}
               placeholder={"Ex: Salada Ceasar"}
               onChange={(e) => setName(e.target.value)}
             />
@@ -141,7 +143,7 @@ export function NewPlate() {
 
           <div>
             <p>Preço</p>
-            <Input onChange={(e) => setValue(e.target.value)} placeholder={"Exemplo: 99,00"}/>
+            <Input onChange={(e) => setValue(e.target.value)} placeholder={"Exemplo: 99,00"} value={value}/>
           </div>
         </Line2>
 
