@@ -21,18 +21,17 @@ import { useNavigate } from "react-router-dom";
 
 export function NewPlate() {
   const { createPlate } = useAuth();
+  const navigate = useNavigate();
 
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
-  const [value, setValue] = useState(75);
+  const [value, setValue] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
   const [isDisable, setIsDisable] = useState(true);
   
   const [ingredients, setIngredients] = useState([]);
   const [newIngredient, setNewIngredient] = useState("")
-
-  const navigate = useNavigate();
 
   const handleCategoryInSelectComponent = (category) => {
     setCategory(category)
@@ -53,9 +52,25 @@ export function NewPlate() {
   }
 
   async function handleCreatePlate() {
+    const transformeValueToNumber = Number(value.replace(",", "."))
+
+    if(isNaN(transformeValueToNumber)){
+      return;
+    }
+
+    
     if(name && category && ingredients && value && description && image){
+      console.log("criado")
       const plate = { name, category, ingredients, value, description };
       await createPlate({ plate, image });
+
+      setName("");
+      setValue("");
+      setCategory("")
+      setDescription("")
+      setImage(null)
+      setIsDisable(true)
+      console.log("criado")
     }
     return
   }
@@ -133,6 +148,7 @@ export function NewPlate() {
         <div>
           <p>Descrição</p>
           <textarea 
+            value={description}
             onChange={(e) => setDescription(e.target.value)}
             placeholder="Fale brevemente sobre o prato, seus ingredients e composição"/>
         </div>

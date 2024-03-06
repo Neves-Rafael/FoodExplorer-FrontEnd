@@ -17,7 +17,7 @@ export function EditPlate() {
 
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState(null);
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
   const [isDisable, setIsDisable] = useState(true);
@@ -57,12 +57,14 @@ export function EditPlate() {
       const plate = { name, category, ingredients, value, description, id };
       await updatePlate({ plate, image });
       console.log("atualizado")
+      navigate("/")
     }
     return
   }
 
   async function handleDeletePlate(){
     await api.delete(`/plates/${id}`);
+    navigate("/")
   }
 
   async function placeholderPlateToEdit(){
@@ -71,7 +73,7 @@ export function EditPlate() {
       setName(plateToUpdate.name)
       setDescription(plateToUpdate.description)
       setIngredients(plateToUpdate.ingredients.map((ing) => (ing.name)))
-      setValue(Number(plateToUpdate.value))
+      setValue(plateToUpdate.value)
       setCategory(plateToUpdate.category)
     }
   }
@@ -97,6 +99,8 @@ export function EditPlate() {
     // Esta função será chamada quando plateToUpdate for atualizado
     placeholderPlateToEdit();
   }, [plateToUpdate]);
+
+  console.log(value)
 
   return (
     <Container>
@@ -159,7 +163,7 @@ export function EditPlate() {
 
           <div>
             <p>Preço</p>
-            <Input onChange={(e) => setValue(e.target.value)} value={String(value)} />
+            <Input onChange={(e) => setValue(e.target.value)} value={value} />
           </div>
         </Line2>
 

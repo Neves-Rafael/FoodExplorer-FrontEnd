@@ -59,6 +59,15 @@ export function PlateView() {
     updateRequest();
   }
 
+  function handleSelectOption(){
+    if(verifyAdminRole){
+      navigate(`/editplate/${id}`)
+      return
+    }
+
+    calculate()
+  }
+
   useEffect(() => {
     async function searchPlate() {
       const { data } = await api.get(`/plates/${id}`);
@@ -96,7 +105,7 @@ export function PlateView() {
 
           <ConfirmOrder>
             {verifyAdminRole ? null: <Count onCountChange={handleCountChange} />}
-            <Button title={verifyAdminRole ? "Editar prato" : `Incluir R$ - ${price}`} onClick={calculate} />
+            <Button title={verifyAdminRole ? "Editar prato" : `Incluir R$ - ${price}`} onClick={handleSelectOption} />
           </ConfirmOrder>
         </div>
       </Main>
