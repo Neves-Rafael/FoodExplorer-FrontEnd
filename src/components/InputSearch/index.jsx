@@ -54,6 +54,7 @@ export function InputSearch({plates}){
   return (
     <Container onClick={allPlatesResult} ref={selectRef}>
       <Input
+          value={inputSearch}
           onChange={(e) => setInputSearch(e.target.value) }
           placeholder={"Busque por pratos ou ingredients"}
           icon={IoSearchOutline}

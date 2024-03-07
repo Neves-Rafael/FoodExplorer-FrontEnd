@@ -7,8 +7,12 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-around;
+
   gap: 1.2rem;
   padding: 2rem;
+
+  height: 100%;
 
   width: 21rem;
   position: relative;
@@ -28,12 +32,20 @@ export const Container = styled.div`
     gap: 1rem;
     align-items: center;
     cursor: pointer;
+    max-width: 99%;
+    overflow: hidden;
+
+    >svg{
+      min-width: 2rem;
+    }
   }
 
   .plate-description{
     display: none;
     font-size: 1.4rem;
     color: ${({theme}) => theme.COLORS.LIGHT_400};
+    word-wrap: break-word;
+    word-break: break-all;
   }
 
   button {

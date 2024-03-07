@@ -51,7 +51,7 @@ export function Card({ onCountChange, plateImage, view, plate, ...rest }) {
      : <FaRegHeart className="favorite-edit" /> }
 
       <img src={plateImage && plateImage} alt="" onClick={view} />
-      <p className="plate-name" onClick={view}>{plate.name} <TbArrowBadgeRightFilled size={18} /></p>
+      <p className="plate-name" onClick={view}>{plate.name} <TbArrowBadgeRightFilled size={18}/></p>
       <p className="plate-description">{plate.description}</p>
       <p className="value">R$ {plateValue}</p>
 
