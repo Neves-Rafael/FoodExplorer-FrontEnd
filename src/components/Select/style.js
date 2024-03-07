@@ -34,7 +34,6 @@ export const Options = styled.li`
   max-height: 50rem;
   display: ${({ $isOpen }) => ($isOpen ? "flex" : "none")};
   flex-direction: column;
-  overflow-y: auto;
 
   ul {
     padding: 1rem 2rem;

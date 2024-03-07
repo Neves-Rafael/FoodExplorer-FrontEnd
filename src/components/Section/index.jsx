@@ -1,4 +1,4 @@
-import { Container, Carrousel } from "./style";
+import { Container } from "./style";
 // import { RiArrowLeftSLine } from "react-icons/ri";
 // import { RiArrowRightSLine } from "react-icons/ri";
 import { Splide, SplideSlide } from '@splidejs/react-splide';

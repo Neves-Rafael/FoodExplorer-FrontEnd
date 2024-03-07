@@ -12,6 +12,19 @@ export const Container = styled.div`
     grid-area: content;
     overflow-y: scroll;
     scroll-behavior: smooth;
+
+    &::-webkit-scrollbar {
+    width: 12px; /* Largura da barra de rolagem inteira */
+    }
+
+    &::-webkit-scrollbar-track {
+      background: none; /* Cor da área de rastreamento */
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: ${({theme}) => theme.COLORS.LIGHT_600}; /* Cor do polegar de rolagem */
+      border-radius: 20px; /* Arredondamento do polegar de rolagem */
+    }
   }
 
 `;

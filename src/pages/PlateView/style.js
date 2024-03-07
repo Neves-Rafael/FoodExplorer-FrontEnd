@@ -18,7 +18,7 @@ export const Main = styled.main`
   grid-area: content;
   justify-content: center;
   position: relative;
-  padding: 8rem 0;
+  padding: 8rem 1rem;
   margin-bottom: 5rem;
 
   img {
@@ -31,19 +31,21 @@ export const Main = styled.main`
 
   @media (min-width: 1024px) {
     display: flex;
-    max-width: 1024px;
+    max-width: 1100px;
     align-items: center;
     gap: 5rem;
     width: 100%;
-    padding: 10rem;
+    padding: 10rem 4rem;
     height: calc(100dvh - 200px);
-
     margin: auto;
+  }
+
+  @media (min-width: 1160px) {
+    padding: 10rem 0;
   }
 `;
 
 export const PlateImage = styled.img`
-  background-color: aliceblue;
   display: flex;
   width: 25rem;
   height: 25rem;
@@ -62,7 +64,6 @@ export const PlateImage = styled.img`
 `;
 
 export const Tags = styled.div`
-  width: 30rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -112,11 +113,25 @@ export const BackButton = styled.div`
 `;
 
 export const InfoText = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @media (min-width: 425px) {
+      padding: 0 2rem;
+      max-width: 60rem;
+  }
+
+  @media (min-width: 1024px) {
+      padding: 0 0rem;
+      max-width: 100rem;
+  }
+
   h3 {
     font-size: 3rem;
     font-family: "Poppins";
     font-weight: 500;
-    margin: 0 0 2rem 0;
+    margin: 2rem 0 2rem 0;
     text-align: center;
 
     @media (min-width: 1024px) {
@@ -127,7 +142,7 @@ export const InfoText = styled.div`
 
   p {
     text-align: center;
-    width: 30rem;
+    /* max-width: 60rem; */
     font-family: "Poppins";
 
     @media (min-width: 1024px) {

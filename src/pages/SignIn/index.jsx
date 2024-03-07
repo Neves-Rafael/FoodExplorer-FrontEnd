@@ -32,6 +32,7 @@ export function SignIn() {
 
         <div className="loginForm">
           <Form
+            value={email}
             label={"Email"}
             placeholder="Exemplo: teste@exemplo.com"
             type="email"
@@ -42,6 +43,7 @@ export function SignIn() {
             label={"Senha"}
             placeholder="No mínimo 6 caracteres"
             type="password"
+            value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
         

@@ -18,7 +18,7 @@ export const Container = styled.div`
 `;
 
 export const SearchResult = styled.div`
-  z-index: 2;
+  z-index: 10;
   width: 100%;
   padding: 2rem;
   border-radius: 8px;
@@ -31,6 +31,10 @@ export const SearchResult = styled.div`
   display: ${({ $isOpen}) => $isOpen ? "flex" : "none"};
   flex-direction: column;
   gap: 2rem;
+
+  &::-webkit-scrollbar {
+    width: 0; //Largura da barra de rolagem inteira 
+  }
 
   p {
     cursor: pointer;

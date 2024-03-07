@@ -49,6 +49,7 @@ export function SignUp() {
             label={"Nome"}
             placeholder="Digite seu nome"
             type="text"
+            value={name}
             onChange={(e) => setName(e.target.value)}
           />
 
@@ -57,12 +58,14 @@ export function SignUp() {
             placeholder="Exemplo: teste@exemplo.com"
             type="email"
             onChange={(e) => setEmail(e.target.value)}
+            value={email}
           />
 
           <Form
             label={"Senha"}
             placeholder="Digite sua senha"
             type="password"
+            value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
           <Button title="Criar Conta" onClick={handleSignUp}/>
