@@ -18,6 +18,13 @@ export const Container = styled.div`
   position: relative;
   border-radius: 8px;
 
+  transition: all 200ms ease-in-out;
+
+  &:hover{
+    background-color: ${({theme}) => theme.COLORS.DARK_500};
+    filter: brightness(1.3);
+  }
+
   img {
     width: 9rem;
     height: 9rem;
@@ -64,6 +71,14 @@ export const Container = styled.div`
     right: 1.6rem;
     top: 1.6rem;
     font-size: 2.6rem;
+
+    transition: all 200ms ease-in-out;
+    
+    &:hover{
+       path {
+        color: ${({theme}) => theme.COLORS.CARROT_100};
+      }
+    }
   }
 
   .value {

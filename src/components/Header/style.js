@@ -8,7 +8,7 @@ export const Container = styled.header`
   justify-content: space-around;
   grid-area: header;
   padding-bottom: 2.4rem;
-  
+
   @media (min-width: ${({ theme }) => theme.MEDIA_QUERY.LARGE}) {
     justify-content: center;
     align-items: center;
@@ -26,11 +26,20 @@ export const MenuHamburger = styled.div`
 `;
 
 export const Logout = styled.div`
+
   display: none;
   cursor: pointer;
 
   @media (min-width: ${({ theme }) => theme.MEDIA_QUERY.LARGE}) {
     display: block;
+  }
+
+
+  &:hover{
+    path{
+      transition: all 300ms ease-in-out;
+      color: ${({theme}) => theme.COLORS.TOMATO_200}
+    }
   }
 `;
 
