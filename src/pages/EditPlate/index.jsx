@@ -11,6 +11,7 @@ import { ButtonText } from "../../components/ButtonText";
 import { Container, Section, Line1, Line2, Titles, Ingredients, UploadImage, ButtonAction } from "./style";
 import { useNavigate, useParams } from "react-router-dom";
 import { api } from "../../service/api"
+import { Footer } from "../../components/Footer";
 
 export function EditPlate() {
   const { updatePlate } = useAuth();
@@ -180,6 +181,7 @@ export function EditPlate() {
           <Button title={"Salvar alterações"} onClick={handleUpdatePlate} disabled={isDisable}/> 
         </ButtonAction>
       </Section>
+      <Footer/>
     </Container>
   );
 }

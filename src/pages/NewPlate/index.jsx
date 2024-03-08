@@ -18,6 +18,7 @@ import { TagItem } from "../../components/TagItem";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../hooks/auth";
 import { useNavigate } from "react-router-dom";
+import { Footer } from "../../components/Footer";
 
 export function NewPlate() {
   const { createPlate } = useAuth();
@@ -160,6 +161,7 @@ export function NewPlate() {
           onClick={handleCreatePlate}
           disabled={isDisable}/> 
       </Section>
+      <Footer/>
     </Container>
   );
 }

@@ -47,8 +47,8 @@ export function Card({ onCountChange, plateImage, view, plate, ...rest }) {
   return (
     <Container {...rest}>
      { verifyAdminRole 
-     ? <FaRegEdit size={30} className="favorite-edit" onClick={() => navigate(`/editplate/${plate.id}`)}/> 
-     : <FaRegHeart className="favorite-edit" /> }
+     ? <FaRegEdit size={30} className="edit-icon" onClick={() => navigate(`/editplate/${plate.id}`)}/> 
+     : <FaRegHeart className="favorite-icon" /> }
 
       <img src={plateImage && plateImage} alt="" onClick={view} />
       <p className="plate-name" onClick={view}>{plate.name} <TbArrowBadgeRightFilled size={18}/></p>

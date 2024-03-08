@@ -8,4 +8,14 @@ export const Container = styled.button`
   background: none;
   color: ${({ theme }) => theme.COLORS.LIGHT_100};
   font-size: 1.6rem;
+
+  &:hover{
+    transition: all 300ms ease-in-out;
+    color: ${({theme}) => theme.COLORS.TOMATO_200};
+    
+    path{
+      transition: all 300ms ease-in-out;
+      color: ${({theme}) => theme.COLORS.TOMATO_200};
+    }
+  }
 `;

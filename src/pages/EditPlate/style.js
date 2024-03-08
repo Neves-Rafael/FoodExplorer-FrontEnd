@@ -153,6 +153,11 @@ export const UploadImage = styled.label`
   justify-content: center;
   cursor: pointer;
   border-radius: 8px;
+  transition: all 300ms ease-in-out;
+
+  &:hover{
+    filter: brightness(1.5);
+  }
 
   input {
     display: none;

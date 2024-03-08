@@ -6,6 +6,18 @@ export const Container = styled.div`
   justify-content: center;
   gap: 2rem;
 
+  >svg{
+    cursor: pointer;
+    color: red;
+
+    &:hover{
+      line, circle{
+        transition: all 300ms ease-in-out;
+        color: ${({theme}) => theme.COLORS.CAKE_200};
+      }
+    }
+  }
+
   span {
     font-size: 2rem;
   }

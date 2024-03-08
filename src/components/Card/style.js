@@ -66,14 +66,24 @@ export const Container = styled.div`
     gap: 2.4rem;
   }
 
-  .favorite-edit {
+  .favorite-icon, .edit-icon {
     position: absolute;
     right: 1.6rem;
     top: 1.6rem;
     font-size: 2.6rem;
 
     transition: all 200ms ease-in-out;
-    
+  }
+
+  .favorite-icon{
+    &:hover{
+       path {
+        color: ${({theme}) => theme.COLORS.TOMATO_400};
+      }
+    }
+  }
+
+  .edit-icon{
     &:hover{
        path {
         color: ${({theme}) => theme.COLORS.CARROT_100};
