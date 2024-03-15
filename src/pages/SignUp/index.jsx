@@ -7,6 +7,7 @@ import { api } from "../../service/api";
 
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export function SignUp() {
   const [name, setName] = useState("");
@@ -17,18 +18,18 @@ export function SignUp() {
 
   function handleSignUp() {
     if (!name || !email || !password) {
-      return alert("Preencha todos os campos!");
+      return toast.dark("Preencha todos os campos!");
     }
 
     api.post("/users", { name, email, password })
       .then(() => {
-        alert("Usuário cadastrado com sucesso!");
+        toast.dark("Usuário cadastrado com sucesso!");
         navigate(-1);
       })
       .catch((error) => {
         if (error.response) {
-          alert(error.response.data.message);
-        } else alert("Não foi possível cadastrar!");
+          toast.dark(error.response.data.message);
+        } else toast("Não foi possível cadastrar!");
       }
     );
   }

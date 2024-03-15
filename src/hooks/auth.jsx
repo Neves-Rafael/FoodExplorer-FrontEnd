@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { api } from "../service/api";
+import { toast } from "react-toastify";
 
 export const AuthContext = createContext({});
 
@@ -16,9 +17,9 @@ function AuthProvider({ children }) {
       setData({ user });
     } catch (error) {
       if (error.response) {
-        alert(error.response.data.message);
+        toast.dark(error.response.data.message);
       } else {
-        alert("Não foi possível entrar.");
+        toast.dark("Não foi possível entrar.");
       }
     }
   }
@@ -43,9 +44,9 @@ function AuthProvider({ children }) {
       }
     } catch (error) {
       if (error.response) {
-        alert(error.response.data.message);
+        toast.dark(error.response.data.message);
       } else {
-        alert("Não foi possível entrar.");
+        toast.dark("Não foi possível entrar.");
       }
     }
   }
@@ -62,9 +63,9 @@ function AuthProvider({ children }) {
       }
     } catch (error) {
       if (error.response) {
-        alert(error.response.data.message);
+        toast.dark(error.response.data.message);
       } else {
-        alert("Não foi possível atualizar.");
+        toast.dark("Não foi possível atualizar.");
       }
     }
   }
