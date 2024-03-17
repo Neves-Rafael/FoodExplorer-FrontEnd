@@ -12,6 +12,7 @@ import { Container, Section, Line1, Line2, Titles, Ingredients, UploadImage, But
 import { useNavigate, useParams } from "react-router-dom";
 import { api } from "../../service/api"
 import { Footer } from "../../components/Footer";
+import { Modal } from "../../components/Modal";
 
 export function EditPlate() {
   const { updatePlate } = useAuth();
@@ -23,6 +24,7 @@ export function EditPlate() {
   const [image, setImage] = useState(null);
   const [isDisable, setIsDisable] = useState(true);
   const [plateToUpdate, setPlateToUpdate] = useState({})
+  const [modalIsOpen, setModalIsOpen] = useState(false)
   
   const [ingredients, setIngredients] = useState([]);
   const [newIngredient, setNewIngredient] = useState("")
@@ -48,6 +50,10 @@ export function EditPlate() {
     setIngredients(prevState => prevState.filter(ingredient => ingredient !== deleted));
   }
 
+  const handleModalIsOpen = (state) => {
+    setModalIsOpen(state)
+  }
+
   async function handleChangeImage(event) {
     const file = event.target.files[0];
     setImage(file);
@@ -70,7 +76,6 @@ export function EditPlate() {
 
   async function placeholderPlateToEdit(){
     if(plateToUpdate.name){
-      console.log(plateToUpdate)
       setName(plateToUpdate.name)
       setDescription(plateToUpdate.description)
       setIngredients(plateToUpdate.ingredients.map((ing) => (ing.name)))
@@ -100,8 +105,6 @@ export function EditPlate() {
     // Esta função será chamada quando plateToUpdate for atualizado
     placeholderPlateToEdit();
   }, [plateToUpdate]);
-
-  console.log(value)
 
   return (
     <Container>
@@ -177,11 +180,18 @@ export function EditPlate() {
         </div>
 
         <ButtonAction >
-          <Button title={"Excluir prato"} onClick={handleDeletePlate}/> 
+          <Button title={"Excluir prato"} onClick={()=> setModalIsOpen(true)}/> 
           <Button title={"Salvar alterações"} onClick={handleUpdatePlate} disabled={isDisable}/> 
         </ButtonAction>
       </Section>
       <Footer/>
+      { modalIsOpen ? 
+        <Modal 
+        onClick={handleDeletePlate} 
+        modalState={handleModalIsOpen} 
+        confirmMessage={`Realmente deseja excluir este prato ?`}
+        additionalInfo={plateToUpdate}/> 
+      : null}
     </Container>
   );
 }

@@ -19,7 +19,6 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../../hooks/auth";
 import { useNavigate } from "react-router-dom";
 import { Footer } from "../../components/Footer";
-import { Modal } from "../../components/Modal";
 
 export function NewPlate() {
   const { createPlate } = useAuth();
@@ -163,7 +162,6 @@ export function NewPlate() {
           disabled={isDisable}/> 
       </Section>
       <Footer/>
-      <Modal/>
     </Container>
   );
 }
