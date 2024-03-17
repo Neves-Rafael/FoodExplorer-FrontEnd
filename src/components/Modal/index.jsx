@@ -1,10 +1,17 @@
-import { Container, ButtonConfirm } from "./style";
+import { Container, Confirm } from "./style";
+import { Button } from "../Button";
 
-export function Modal(){
-
+export function Modal({confirmMessage}){
+  confirmMessage = "Mensagem de teste";
   return(
     <Container>
-      <ButtonConfirm/>
+      <Confirm>
+        <p>{confirmMessage}</p>
+        <div className="button-container">
+          <Button title={"Cancelar"}/>
+          <Button title={"Apagar"}/>
+        </div>
+      </Confirm>
     </Container>
   )
-}
+};
