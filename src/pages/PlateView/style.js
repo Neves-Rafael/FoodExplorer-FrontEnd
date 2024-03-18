@@ -118,13 +118,14 @@ export const InfoText = styled.div`
   align-items: center;
 
   @media (min-width: 425px) {
-      padding: 0 2rem;
-      max-width: 60rem;
+    padding: 0 2rem;
+    max-width: 60rem;
   }
 
   @media (min-width: 1024px) {
-      padding: 0 0rem;
-      max-width: 100rem;
+    padding: 0 0rem;
+    max-width: 100rem;
+    align-items: start;
   }
 
   h3 {

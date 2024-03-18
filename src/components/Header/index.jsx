@@ -48,7 +48,7 @@ export function Header({plates}) {
       <Requests>
         <Button 
           title={messageToAdminAccess} icon={verifyAdminRole ? null : PiReceipt} 
-          onClick={verifyAdminRole ? () => navigate("/newplate") : null }
+          onClick={verifyAdminRole ? () => navigate("/newplate") : () => navigate("/payment")}
         />
       </Requests>
 
