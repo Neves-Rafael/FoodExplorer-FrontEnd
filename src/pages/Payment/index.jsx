@@ -1,9 +1,12 @@
-import { Container, RequestList, StatusPayment } from "./style";
+import { Container, RequestList, StatusPayment, CreditPayment } from "./style";
 import { PlateContext } from "../../hooks/plateRequest";
 import { useContext, useState} from "react";
 import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
 import imageTeste from "../../assets/group-11.png"
+import { Form } from "../../components/Forms"
+import { Button } from "../../components/Button";
+import { PiReceipt } from "react-icons/pi";
 
 import { FaPix } from "react-icons/fa6";
 import { IoWalletOutline } from "react-icons/io5";
@@ -12,10 +15,7 @@ import { IoCopy } from "react-icons/io5";
 export function Payment(){
   const { plateRequest } = useContext(PlateContext);
   const [methodSelect, setMethodSelect] = useState("pix");
-  console.log(methodSelect)
 
-
-  console.log(plateRequest)
 
   return(
     <Container>
@@ -42,6 +42,7 @@ export function Payment(){
             </div>}
 
           <h3>Total: R$ 103,00</h3>
+          <Button title={"Avançar"}/>
         </RequestList>
 
         <StatusPayment>
@@ -60,8 +61,23 @@ export function Payment(){
                 {<IoWalletOutline size={32}/>} Crédito
               </button>
             </div>
-            <img src="https://images.unsplash.com/photo-1550482768-88b710a445fd?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
-            <p>Copiar Código {<IoCopy />}</p>
+
+            { methodSelect === "pix" ?
+             <>
+              <img src="https://images.unsplash.com/photo-1550482768-88b710a445fd?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
+
+              <p>Copiar Código {<IoCopy />}</p>
+             </>
+            :
+            <CreditPayment>
+              <Form label="Número do Cartão" onChange={(e) => e.target.value} placeholder={"0000 0000 0000 0000"}/>
+              <div>
+                <Form label="Validade" onChange={(e) => e.target.value} placeholder={"04/25"}/>
+                <Form label="CVC" onChange={(e) => e.target.value} placeholder={"000"}/>
+              </div>
+              <Button title="Finalizar pagamento" icon={PiReceipt} id="finish-payment"/>
+            </CreditPayment> }
+
           </div>
         </StatusPayment>
       </div>

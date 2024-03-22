@@ -3,13 +3,21 @@ import styled from "styled-components";
 export const Container = styled.div`
   width: 100%;
 
-
   .payment-container{
-    width: 110rem;
+    width: 100%;
     display: flex;
-    height: 100dvh;
+    flex-direction: column;
+    height: calc(100dvh - 194px); // 194px height header + footer
     margin: auto;
-    padding-top: 4rem;
+    padding: 4rem 2rem;
+    align-items: center;
+    gap: 10rem;
+
+    @media(min-width: 1024px){
+      flex-direction: row;
+      max-width: 110rem;
+      align-items: start;
+    }
 
     p, h2, h3{
     font-family: "Poppins";
@@ -28,11 +36,16 @@ export const Container = styled.div`
 `;
 
 export const RequestList = styled.div`
-  width: 50%;
+  width: auto;
   display: flex;
   flex-direction: column;
   gap: 5rem;
+  justify-content: center;
 
+  @media(min-width: 1024px){
+    width: 50%;
+    align-items: start;
+  }
 
   .plate-info{
     display: flex;
@@ -42,6 +55,7 @@ export const RequestList = styled.div`
 
     div{
       display: flex;
+      flex-wrap: wrap;
       align-items: center;
       gap: 1rem;
 
@@ -62,12 +76,22 @@ export const RequestList = styled.div`
     align-items: center;
   }
 
-  button{
+  button:nth-child(2){
     background: none;
     text-align: start;
     font-family: Roboto;
     font-size: 1.4rem;
     color: ${({theme}) => theme.COLORS.TOMATO_400}
+  }
+
+  button:nth-child(4){
+    width: 20rem;
+    align-self: flex-end;
+    margin-top: 10rem;
+
+    @media(min-width: 1024px){
+      display: none;
+    }
   }
 
   img{
@@ -80,7 +104,7 @@ export const StatusPayment = styled.div`
   display: flex;
   flex-direction: column;
   gap: 5rem;
-
+  display: none;
 
   .select-payment{
     width: 500px;
@@ -101,15 +125,28 @@ export const StatusPayment = styled.div`
       justify-content: center;
       border-bottom: 2px solid gray;
       transition: all 300ms ease-in-out;
-      
+       
       &:hover{
         background-color: rgba(255, 255, 255, 0.6);
         filter: brightness(1);
       }
     }
 
+    button:nth-child(1){
+      border-top-left-radius: 6px;
+    }
+
+    button:nth-child(2){
+      border-top-right-radius: 6px;
+    }
+
     button + button{
       border-left: 2px solid gray;
+    }
+
+    p{
+      text-align: center;
+      margin-bottom: 4rem;
     }
 
     .method-select{
@@ -123,5 +160,33 @@ export const StatusPayment = styled.div`
     object-fit: cover;
     display: flex;
     margin: 4rem auto;
+  }
+`;
+
+export const CreditPayment = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 6rem 8rem;
+  gap: 4rem;
+
+  >div{
+    width: 100%;
+  }
+
+  >div:nth-child(2){
+    display: flex;
+    gap: 2rem;
+  }
+
+  #finish-payment{
+    background-color: ${({ theme }) => theme.COLORS.TOMATO_100};
+    width: 100%;
+    border: none;
+    padding: 3rem 0;
+
+    &:hover{
+      filter: brightness(1.4);
+    }
   }
 `;
