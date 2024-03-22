@@ -11,13 +11,24 @@ export const Container = styled.div`
     margin: auto;
     padding: 4rem 2rem;
     align-items: center;
-    gap: 10rem;
+    margin-bottom: 10rem;
+
+    @media(min-width: 768px){
+      padding: 4rem 6rem;
+    }
 
     @media(min-width: 1024px){
       flex-direction: row;
       max-width: 110rem;
       align-items: start;
+      margin-bottom: 0rem;
     }
+
+    @media(min-width: 1200px){
+      padding: 4rem 0rem;
+    }
+
+
 
     p, h2, h3{
     font-family: "Poppins";
@@ -37,7 +48,7 @@ export const Container = styled.div`
 
 export const RequestList = styled.div`
   width: auto;
-  display: flex;
+  display: ${({ $isenable }) => $isenable === "enable" ? "none" : "flex"};
   flex-direction: column;
   gap: 5rem;
   justify-content: center;
@@ -45,6 +56,7 @@ export const RequestList = styled.div`
   @media(min-width: 1024px){
     width: 50%;
     align-items: start;
+    display: flex;
   }
 
   .plate-info{
@@ -100,14 +112,27 @@ export const RequestList = styled.div`
 `;
 
 export const StatusPayment = styled.div`
-  width: 50%;
-  display: flex;
+  width: 100%;
+  display: ${({ $isenable }) => $isenable === "enable" ? "flex" : "none"};
   flex-direction: column;
+  justify-content: center;
   gap: 5rem;
-  display: none;
+
+  @media(min-width: 550px){
+    width: 50rem;
+  }
+
+  @media(min-width: 1024px){
+    display: flex;
+    width: 55rem;
+
+    button {
+      display: none;
+    }
+  }
 
   .select-payment{
-    width: 500px;
+    max-width: 55rem;
     border: 2px solid gray;
     border-radius: 8px;
 
@@ -167,8 +192,12 @@ export const CreditPayment = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 6rem 8rem;
+  padding: 4rem 2rem;
   gap: 4rem;
+
+  @media(min-width: 550px){
+    padding: 6rem;
+  }
 
   >div{
     width: 100%;
@@ -177,6 +206,10 @@ export const CreditPayment = styled.div`
   >div:nth-child(2){
     display: flex;
     gap: 2rem;
+
+    div{
+      width: 100%;
+    }
   }
 
   #finish-payment{

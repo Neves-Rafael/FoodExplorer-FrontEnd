@@ -7,6 +7,8 @@ import imageTeste from "../../assets/group-11.png"
 import { Form } from "../../components/Forms"
 import { Button } from "../../components/Button";
 import { PiReceipt } from "react-icons/pi";
+import { ButtonText } from "../../components/ButtonText"
+import { RiArrowLeftSLine } from "react-icons/ri";
 
 import { FaPix } from "react-icons/fa6";
 import { IoWalletOutline } from "react-icons/io5";
@@ -15,6 +17,7 @@ import { IoCopy } from "react-icons/io5";
 export function Payment(){
   const { plateRequest } = useContext(PlateContext);
   const [methodSelect, setMethodSelect] = useState("pix");
+  const [availablePayment, setAvailablePayment] = useState("disable");
 
 
   return(
@@ -22,7 +25,7 @@ export function Payment(){
       <Header/>
 
       <div className="payment-container">
-        <RequestList>
+        <RequestList $isenable={availablePayment}>
           <h2>Meus Pedidos</h2>
 
           {plateRequest 
@@ -42,10 +45,11 @@ export function Payment(){
             </div>}
 
           <h3>Total: R$ 103,00</h3>
-          <Button title={"Avançar"}/>
+          <Button title={"Avançar"} onClick={() => setAvailablePayment("enable")}   />
         </RequestList>
 
-        <StatusPayment>
+        <StatusPayment $isenable={availablePayment}>
+          <ButtonText title={"Voltar"} onClick={() => setAvailablePayment("disable")} icon={RiArrowLeftSLine}/>
           <h2>Pagamento</h2>
           <div className="select-payment">
             <div>
