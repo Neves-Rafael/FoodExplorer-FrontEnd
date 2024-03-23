@@ -3,7 +3,7 @@ import { createContext, useState } from "react";
 export const PlateContext = createContext();
 
 export const PlateProvider = ({ children }) => {
-  const [plateRequest, setPlateRequest] = useState(["0"]);
+  const [plateRequest, setPlateRequest] = useState([]);
   
   const updateRequest = () => {
     setPlateRequest(JSON.parse(localStorage.getItem("pedidos")));

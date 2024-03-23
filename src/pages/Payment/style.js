@@ -108,6 +108,9 @@ export const RequestList = styled.div`
 
   img{
     width: 7rem;
+    height: 7rem;
+    object-fit: cover;
+    border-radius: 100%;
   }
 `;
 

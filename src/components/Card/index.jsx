@@ -35,7 +35,8 @@ export function Card({ onCountChange, plateImage, view, plate, ...rest }) {
     
     const newRequest = {
       plate,
-      price: price.replace(",", "."),
+      price, 
+      quantity: countValue,
     };
     
     allRequest.push(newRequest);

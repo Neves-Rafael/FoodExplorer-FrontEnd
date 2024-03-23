@@ -1,24 +1,38 @@
 import { Container, RequestList, StatusPayment, CreditPayment } from "./style";
-import { PlateContext } from "../../hooks/plateRequest";
-import { useContext, useState} from "react";
+import { useContext, useEffect, useState} from "react";
 import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
-import imageTeste from "../../assets/group-11.png"
 import { Form } from "../../components/Forms"
 import { Button } from "../../components/Button";
 import { PiReceipt } from "react-icons/pi";
 import { ButtonText } from "../../components/ButtonText"
 import { RiArrowLeftSLine } from "react-icons/ri";
+import { api } from "../../service/api";
+import { useNavigate } from "react-router-dom";
 
 import { FaPix } from "react-icons/fa6";
 import { IoWalletOutline } from "react-icons/io5";
 import { IoCopy } from "react-icons/io5";
 
 export function Payment(){
-  const { plateRequest } = useContext(PlateContext);
   const [methodSelect, setMethodSelect] = useState("pix");
   const [availablePayment, setAvailablePayment] = useState("disable");
+  const imageURL = `${api.defaults.baseURL}/files/`;
+  const [testSum, setTestSum] = useState(null);
+  const navigate = useNavigate();
 
+
+  const plateRequest = JSON.parse(localStorage.getItem("pedidos")) || null;
+  console.log(testSum)
+
+  useEffect(() => {
+    let somaTotal = 0;
+    for (const plate of plateRequest) {
+      console.log(plate)
+      somaTotal += Number(plate.price.replace(",", "."));
+    }
+    setTestSum(somaTotal)
+  }, [])
 
   return(
     <Container>
@@ -28,24 +42,25 @@ export function Payment(){
         <RequestList $isenable={availablePayment}>
           <h2>Meus Pedidos</h2>
 
-          {plateRequest 
-          ? <div className="plate-content">
-            <img src={imageTeste} alt="" />
+          {plateRequest && plateRequest ? plateRequest.map((item, index) => (
+          <div className="plate-content" key={index}>
+            <img src={`${imageURL}/${String(item.plate.image)}`} alt="" />
             <div className="plate-info">
                 <div>
-                  <p>1 x</p>
-                  <p>Salada Radish</p>
-                  <p>R$ 25,99</p>
+                  <p>{`${item.quantity} x`}</p>
+                  <p>{item.plate.name}</p>
+                  <p>{`R$ ${item.price}`}</p>
                 </div>
                 <button>Excluir</button>
               </div>
-            </div> 
+            </div> ))
           : <div className="plate-content">
               <p>Nenhum Pedido Registrado</p>
             </div>}
 
-          <h3>Total: R$ 103,00</h3>
-          <Button title={"Avançar"} onClick={() => setAvailablePayment("enable")}   />
+          <h3>{`Total R$ ${testSum || "00,00"}`}</h3>
+          <Button title={"Avançar"} onClick={() => setAvailablePayment("enable")} />
+          {/* <Button title={"Voltar ao Menu"} onClick={() => navigate("/")} /> */}
         </RequestList>
 
         <StatusPayment $isenable={availablePayment}>
