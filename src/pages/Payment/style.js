@@ -96,13 +96,14 @@ export const RequestList = styled.div`
     color: ${({theme}) => theme.COLORS.TOMATO_400}
   }
 
-  button:nth-child(4){
+  .mobile-payment{
     width: 20rem;
     align-self: flex-end;
     margin-top: 10rem;
 
     @media(min-width: 1024px){
       display: none;
+      background-color: blue;
     }
   }
 

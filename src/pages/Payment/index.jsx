@@ -19,19 +19,45 @@ export function Payment(){
   const [availablePayment, setAvailablePayment] = useState("disable");
   const imageURL = `${api.defaults.baseURL}/files/`;
   const [testSum, setTestSum] = useState(null);
+  const [plateRequest, setPlateRequest] = useState([]) 
   const navigate = useNavigate();
 
 
-  const plateRequest = JSON.parse(localStorage.getItem("pedidos")) || null;
-  console.log(testSum)
+  function totalSum(){
+    
+    setPlateRequest(JSON.parse(localStorage.getItem("pedidos")) || null);
 
-  useEffect(() => {
     let somaTotal = 0;
+
     for (const plate of plateRequest) {
-      console.log(plate)
       somaTotal += Number(plate.price.replace(",", "."));
     }
-    setTestSum(somaTotal)
+
+    setTestSum(somaTotal.toFixed(2).replace(".", ","))
+
+    console.log(testSum)
+  }
+
+
+
+  function removePlateList(item){
+    const filterPLate = plateRequest.filter((plate) => {
+      if(plate !== item){
+        return plate
+      }
+    })
+   
+    localStorage.setItem("pedidos", JSON.stringify(filterPLate));
+
+    totalSum();
+  }
+
+  useEffect(() => {
+    if(!plateRequest){
+      return
+    }
+
+    totalSum();
   }, [])
 
   return(
@@ -51,7 +77,7 @@ export function Payment(){
                   <p>{item.plate.name}</p>
                   <p>{`R$ ${item.price}`}</p>
                 </div>
-                <button>Excluir</button>
+                <button className="delete-plate-request" onClick={() => removePlateList(item)}>Excluir</button>
               </div>
             </div> ))
           : <div className="plate-content">
@@ -59,7 +85,7 @@ export function Payment(){
             </div>}
 
           <h3>{`Total R$ ${testSum || "00,00"}`}</h3>
-          <Button title={"Avançar"} onClick={() => setAvailablePayment("enable")} />
+          <Button title={"Avançar"} onClick={() => setAvailablePayment("enable")} className="mobile-payment" />
           {/* <Button title={"Voltar ao Menu"} onClick={() => navigate("/")} /> */}
         </RequestList>
 
