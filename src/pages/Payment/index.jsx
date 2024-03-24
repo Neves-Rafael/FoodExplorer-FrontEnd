@@ -18,26 +18,27 @@ export function Payment(){
   const [methodSelect, setMethodSelect] = useState("pix");
   const [availablePayment, setAvailablePayment] = useState("disable");
   const imageURL = `${api.defaults.baseURL}/files/`;
-  const [testSum, setTestSum] = useState(null);
+  const [plateSum, setPlateSum] = useState("");
   const [plateRequest, setPlateRequest] = useState([]) 
   const navigate = useNavigate();
 
-
-  function totalSum(){
-    
-    setPlateRequest(JSON.parse(localStorage.getItem("pedidos")) || null);
+  
+  
+  
+  async function totalSum(){
+    const dale = JSON.parse(localStorage.getItem("pedidos")) || null;
+    setPlateRequest(dale)
 
     let somaTotal = 0;
 
-    for (const plate of plateRequest) {
+    for (const plate of dale) {
       somaTotal += Number(plate.price.replace(",", "."));
     }
 
-    setTestSum(somaTotal.toFixed(2).replace(".", ","))
 
-    console.log(testSum)
+    setPlateSum(somaTotal.toFixed(2).replace(".", ","))
+    
   }
-
 
 
   function removePlateList(item){
@@ -53,10 +54,6 @@ export function Payment(){
   }
 
   useEffect(() => {
-    if(!plateRequest){
-      return
-    }
-
     totalSum();
   }, [])
 
@@ -68,7 +65,7 @@ export function Payment(){
         <RequestList $isenable={availablePayment}>
           <h2>Meus Pedidos</h2>
 
-          {plateRequest && plateRequest ? plateRequest.map((item, index) => (
+          {plateRequest.length > 0 && plateRequest ? plateRequest.map((item, index) => (
           <div className="plate-content" key={index}>
             <img src={`${imageURL}/${String(item.plate.image)}`} alt="" />
             <div className="plate-info">
@@ -84,7 +81,7 @@ export function Payment(){
               <p>Nenhum Pedido Registrado</p>
             </div>}
 
-          <h3>{`Total R$ ${testSum || "00,00"}`}</h3>
+          <h3>{`Total R$ ${plateSum || "00,00"}`}</h3>
           <Button title={"Avançar"} onClick={() => setAvailablePayment("enable")} className="mobile-payment" />
           {/* <Button title={"Voltar ao Menu"} onClick={() => navigate("/")} /> */}
         </RequestList>

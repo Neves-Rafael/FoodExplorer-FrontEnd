@@ -31,7 +31,6 @@ export function Header({plates}) {
 
   useEffect(() => {
     const requestStorage = JSON.parse(localStorage.getItem("pedidos"));
-    console.log(requestStorage)
 
     setCountPlate(requestStorage);
   }, []);
