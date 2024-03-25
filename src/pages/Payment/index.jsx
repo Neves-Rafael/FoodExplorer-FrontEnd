@@ -10,6 +10,11 @@ import { RiArrowLeftSLine } from "react-icons/ri";
 import { api } from "../../service/api";
 import { useNavigate } from "react-router-dom";
 
+import { IoCheckmarkCircleOutline } from "react-icons/io5";
+import { MdDeliveryDining } from "react-icons/md";
+import { PiForkKnifeBold } from "react-icons/pi";
+import { LuTimer } from "react-icons/lu";
+
 import { FaPix } from "react-icons/fa6";
 import { IoWalletOutline } from "react-icons/io5";
 import { IoCopy } from "react-icons/io5";
@@ -19,11 +24,12 @@ export function Payment(){
   const [availablePayment, setAvailablePayment] = useState("disable");
   const imageURL = `${api.defaults.baseURL}/files/`;
   const [plateSum, setPlateSum] = useState("");
-  const [plateRequest, setPlateRequest] = useState([]) 
-  const navigate = useNavigate();
+  const [plateRequest, setPlateRequest] = useState([]);
+  const [statusPayment, setStatusPayment] = useState("");
+  // const navigate = useNavigate();
 
-  
-  
+
+
   
   async function totalSum(){
     const dale = JSON.parse(localStorage.getItem("pedidos")) || null;
@@ -35,9 +41,7 @@ export function Payment(){
       somaTotal += Number(plate.price.replace(",", "."));
     }
 
-
     setPlateSum(somaTotal.toFixed(2).replace(".", ","))
-    
   }
 
 
@@ -53,8 +57,13 @@ export function Payment(){
     totalSum();
   }
 
+  function callQrCode(){
+    // setStatusPayment("pendente");
+  }
+
   useEffect(() => {
     totalSum();
+    callQrCode();
   }, [])
 
   return(
@@ -69,14 +78,14 @@ export function Payment(){
           <div className="plate-content" key={index}>
             <img src={`${imageURL}/${String(item.plate.image)}`} alt="" />
             <div className="plate-info">
-                <div>
-                  <p>{`${item.quantity} x`}</p>
-                  <p>{item.plate.name}</p>
-                  <p>{`R$ ${item.price}`}</p>
-                </div>
-                <button className="delete-plate-request" onClick={() => removePlateList(item)}>Excluir</button>
+              <div>
+                <p>{`${item.quantity} x`}</p>
+                <p>{item.plate.name}</p>
+                <p>{`R$ ${item.price}`}</p>
               </div>
-            </div> ))
+              <button className="delete-plate-request" onClick={() => removePlateList(item)}>Excluir</button>
+            </div>
+          </div> ))
           : <div className="plate-content">
               <p>Nenhum Pedido Registrado</p>
             </div>}
@@ -104,22 +113,33 @@ export function Payment(){
               </button>
             </div>
 
-            { methodSelect === "pix" ?
-             <>
-              <img src="https://images.unsplash.com/photo-1550482768-88b710a445fd?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
-
-              <p>Copiar Código {<IoCopy />}</p>
-             </>
+            {statusPayment ?
+              <>
+                <div className="status-container">
+                  <IoCheckmarkCircleOutline size={160}/>
+                  <p>Pagamento realizado</p>
+                </div>
+              </>
             :
-            <CreditPayment>
-              <Form label="Número do Cartão" onChange={(e) => e.target.value} placeholder={"0000 0000 0000 0000"}/>
-              <div>
-                <Form label="Validade" onChange={(e) => e.target.value} placeholder={"04/25"}/>
-                <Form label="CVC" onChange={(e) => e.target.value} placeholder={"000"}/>
-              </div>
-              <Button title="Finalizar pagamento" icon={PiReceipt} id="finish-payment"/>
-            </CreditPayment> }
+              <>
+                { methodSelect === "pix" ?
+                  <>
+                    <img src="https://images.unsplash.com/photo-1550482768-88b710a445fd?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
 
+                    <p>Copiar Código {<IoCopy />}</p>
+                  </>
+                  :
+                  <CreditPayment>
+                    <Form label="Número do Cartão" onChange={(e) => e.target.value} placeholder={"0000 0000 0000 0000"}/>
+                    <div>
+                      <Form label="Validade" onChange={(e) => e.target.value} placeholder={"04/25"}/>
+                      <Form label="CVC" onChange={(e) => e.target.value} placeholder={"000"}/>
+                    </div>
+                    <Button title="Finalizar pagamento" icon={PiReceipt} id="finish-payment"/>
+                  </CreditPayment> 
+                }
+              </>
+            }
           </div>
         </StatusPayment>
       </div>

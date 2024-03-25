@@ -190,6 +190,19 @@ export const StatusPayment = styled.div`
     display: flex;
     margin: 4rem auto;
   }
+
+  .status-container{
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    align-items: center;
+    margin: 6rem;
+    /* background-color: red; */
+
+    p{
+      margin-bottom: 0;
+    }
+  }
 `;
 
 export const CreditPayment = styled.div`
