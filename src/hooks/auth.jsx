@@ -70,6 +70,23 @@ function AuthProvider({ children }) {
     }
   }
 
+  async function createPayment({plateSum, requestPlate}){
+    try {
+      const insertPayment = await api.post("/payment", {
+        plate: JSON.stringify(requestPlate),
+        price: plateSum  
+      })
+      
+      return(insertPayment.data[0].id)
+    } catch (error) {
+      if (error.response) {
+        toast.dark(error.response.data.message);
+      } else {
+        toast.dark("Não foi possível fazer o pedido.");
+      }
+    }
+  }
+
   useEffect(() => {
     const user = localStorage.getItem("@foodexplorer:user");
 
@@ -87,6 +104,7 @@ function AuthProvider({ children }) {
         logout,
         createPlate,
         updatePlate,
+        createPayment,
         user: data.user,
       }}>
       {children}
