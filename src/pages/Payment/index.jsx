@@ -27,11 +27,9 @@ export function Payment(){
   const [plateRequest, setPlateRequest] = useState([]);
   const [statusPayment, setStatusPayment] = useState("");
   // const navigate = useNavigate();
-
-
-
   
-  async function totalSum(){
+
+  function totalSum(){
     const dale = JSON.parse(localStorage.getItem("pedidos")) || null;
     setPlateRequest(dale)
 

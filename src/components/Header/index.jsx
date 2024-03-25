@@ -47,10 +47,14 @@ export function Header({plates}) {
 
       <InputSearch plates={plates}/>
 
+      <div>
+        <p>L</p>
+      </div>
+
       <Requests>
         <Button 
           title={messageToAdminAccess} icon={verifyAdminRole ? null : PiReceipt} 
-          onClick={verifyAdminRole ? () => navigate("/newplate") : () => navigate("/payment")}
+          onClick={verifyAdminRole ? () => navigate("/newplate") : () => navigate("/cart")}
         />
       </Requests>
 
