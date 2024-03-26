@@ -7,7 +7,7 @@ export const Container = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
-    height: calc(100dvh - 194px); // 194px height header + footer
+    min-height: calc(100dvh - 194px); // 194px height header + footer
     margin: auto;
     padding: 4rem 2rem;
     align-items: center;
@@ -27,8 +27,6 @@ export const Container = styled.div`
     @media(min-width: 1200px){
       padding: 4rem 0rem;
     }
-
-
 
     p, h2, h3{
     font-family: "Poppins";
@@ -66,16 +64,18 @@ export const RequestList = styled.div`
     margin-left: 2rem;
 
     div{
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
+      display: block;
       gap: 1rem;
 
-      p:nth-child(3){
-        color: darkgray;
-        font-size: 1.6rem;
-        font-family: "Roboto";
+      @media(min-width: 425px){
+        display: flex;
       }
+    }
+
+    .price{
+      color: darkgray;
+      font-size: 1.6rem;
+      font-family: "Roboto";
     }
 
     p{
@@ -86,6 +86,9 @@ export const RequestList = styled.div`
   .plate-content{
     display: flex;
     align-items: center;
+    @media(min-width: 768px){
+      margin-right: 4rem;
+    }
   }
 
   button:nth-child(2){
@@ -99,7 +102,6 @@ export const RequestList = styled.div`
   .mobile-payment{
     width: 20rem;
     align-self: flex-end;
-    margin-top: 10rem;
 
     @media(min-width: 1024px){
       display: none;
@@ -112,6 +114,32 @@ export const RequestList = styled.div`
     height: 7rem;
     object-fit: cover;
     border-radius: 100%;
+  }
+
+  main{
+   display: flex;
+   flex-direction: column;
+   gap: 4rem;
+
+   @media(min-width: 1024px){
+    overflow-y: auto;
+    max-height: 45rem;
+   }
+   
+
+   &::-webkit-scrollbar {
+    width: 5px; 
+  }
+
+  &::-webkit-scrollbar-track {
+      background: none; 
+  }
+
+  &::-webkit-scrollbar-thumb {
+      background-color: ${({theme}) => theme.COLORS.DARK_1000}; 
+      border-radius: 20px; 
+  }
+
   }
 `;
 
@@ -130,7 +158,7 @@ export const StatusPayment = styled.div`
     display: flex;
     width: 55rem;
 
-    button {
+    >button:nth-child(1) {
       display: none;
     }
   }
@@ -201,6 +229,17 @@ export const StatusPayment = styled.div`
 
     p{
       margin-bottom: 0;
+    }
+  }
+
+  .testando{
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    button{
+      width: 16rem;
     }
   }
 `;

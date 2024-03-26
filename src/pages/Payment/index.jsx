@@ -1,5 +1,5 @@
 import { Container, RequestList, StatusPayment, CreditPayment } from "./style";
-import { useContext, useEffect, useState} from "react";
+import { useEffect, useState} from "react";
 import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
 import { Form } from "../../components/Forms"
@@ -8,7 +8,7 @@ import { PiReceipt } from "react-icons/pi";
 import { ButtonText } from "../../components/ButtonText"
 import { RiArrowLeftSLine } from "react-icons/ri";
 import { api } from "../../service/api";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { IoCheckmarkCircleOutline } from "react-icons/io5";
 import { MdDeliveryDining } from "react-icons/md";
@@ -23,45 +23,22 @@ export function Payment(){
   const [methodSelect, setMethodSelect] = useState("pix");
   const [availablePayment, setAvailablePayment] = useState("disable");
   const imageURL = `${api.defaults.baseURL}/files/`;
-  const [plateSum, setPlateSum] = useState("");
+  const [statusPayment, setStatusPayment] = useState({});
   const [plateRequest, setPlateRequest] = useState([]);
-  const [statusPayment, setStatusPayment] = useState("");
+  const [price, setPrice] = useState("");
+  const { id } = useParams();
   // const navigate = useNavigate();
   
 
-  function totalSum(){
-    const dale = JSON.parse(localStorage.getItem("pedidos")) || null;
-    setPlateRequest(dale)
-
-    let somaTotal = 0;
-
-    for (const plate of dale) {
-      somaTotal += Number(plate.price.replace(",", "."));
+  useEffect(() => {
+    async function searchPayment(){
+      const paymentResult = await api.get(`payment/${id}`);
+      setPlateRequest(JSON.parse(paymentResult.data.plates));
+      const totalPrice = paymentResult.data.price;
+      setPrice(totalPrice);
     }
 
-    setPlateSum(somaTotal.toFixed(2).replace(".", ","))
-  }
-
-
-  function removePlateList(item){
-    const filterPLate = plateRequest.filter((plate) => {
-      if(plate !== item){
-        return plate
-      }
-    })
-   
-    localStorage.setItem("pedidos", JSON.stringify(filterPLate));
-
-    totalSum();
-  }
-
-  function callQrCode(){
-    // setStatusPayment("pendente");
-  }
-
-  useEffect(() => {
-    totalSum();
-    callQrCode();
+    searchPayment();
   }, [])
 
   return(
@@ -72,25 +49,26 @@ export function Payment(){
         <RequestList $isenable={availablePayment}>
           <h2>Meus Pedidos</h2>
 
-          {plateRequest.length > 0 && plateRequest ? plateRequest.map((item, index) => (
-          <div className="plate-content" key={index}>
-            <img src={`${imageURL}/${String(item.plate.image)}`} alt="" />
-            <div className="plate-info">
-              <div>
-                <p>{`${item.quantity} x`}</p>
-                <p>{item.plate.name}</p>
-                <p>{`R$ ${item.price}`}</p>
+          <main>
+            {plateRequest.length > 0 && plateRequest ? plateRequest.map((item, index) => (
+            <div className="plate-content" key={index}>
+              <img src={`${imageURL}/${String(item.plate.image)}`} alt="" />
+              <div className="plate-info">
+                <div>
+                  <p>{`${item.quantity} x`}</p>
+                  <p>{item.plate.name}</p>
+                </div>
+                <p className="price">{`R$ ${item.price}`}</p>
               </div>
-              <button className="delete-plate-request" onClick={() => removePlateList(item)}>Excluir</button>
-            </div>
-          </div> ))
-          : <div className="plate-content">
+            </div> ))
+            : 
+            <div className="plate-content">
               <p>Nenhum Pedido Registrado</p>
             </div>}
+          </main>
 
-          <h3>{`Total R$ ${plateSum || "00,00"}`}</h3>
+          <h3>{`Total R$ ${price || "00,00"}`}</h3>
           <Button title={"Avançar"} onClick={() => setAvailablePayment("enable")} className="mobile-payment" />
-          {/* <Button title={"Voltar ao Menu"} onClick={() => navigate("/")} /> */}
         </RequestList>
 
         <StatusPayment $isenable={availablePayment}>
@@ -138,6 +116,11 @@ export function Payment(){
                 }
               </>
             }
+          </div>
+          <div className="testando">
+            <Button title={"Voltar"}/>
+            <Button title={"Novo Pedido"}/>
+            <Button title={"Ver histórico"}/>
           </div>
         </StatusPayment>
       </div>

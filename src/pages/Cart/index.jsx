@@ -56,8 +56,8 @@ export function Cart(){
 
     const idPayment = await createPayment({
       requestPlate,
-      plateSum: Number(plateSum.replace(",", "."))}
-    );
+      plateSum: plateSum
+  });
 
     navigate(`/payment/${idPayment}`);
   }
