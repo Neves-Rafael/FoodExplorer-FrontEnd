@@ -10,10 +10,10 @@ import { RiArrowLeftSLine } from "react-icons/ri";
 import { api } from "../../service/api";
 import { useNavigate, useParams, redirect } from "react-router-dom";
 
-import { IoCheckmarkCircleOutline } from "react-icons/io5";
-import { MdDeliveryDining } from "react-icons/md";
+import { AiOutlineStop } from "react-icons/ai";
 import { PiForkKnifeBold } from "react-icons/pi";
 import { LuTimer } from "react-icons/lu";
+import { PiCookingPot } from "react-icons/pi";
 
 import { FaPix } from "react-icons/fa6";
 import { IoWalletOutline } from "react-icons/io5";
@@ -35,45 +35,70 @@ export function Payment(){
     {
       status: "cancelado",
       message: "Pedido cancelado",
-      image: IoCheckmarkCircleOutline,
+      image: AiOutlineStop,
     },{
       status: "finalizado",
       message: "Pedido entregue",
       image: PiForkKnifeBold,
     },{
       status: "em andamento",
-      message: "Saiu para entrega",
+      message: "Processando o pedido",
       image: LuTimer,
     },{
-      status: "preparação",
+      status: "cozinha",
       message: "Seu pedido está sendo preparado",
-      image: MdDeliveryDining,
+      image: PiCookingPot,
     }
   ];
 
   function redirectToPayment(){
     window.open(`${"http://localhost:5173"}/payment/qrcode/${id}`, "_blank");
+    //atualizar para local de deploy do site
+
+    updateStatusPayment();
   }   
+
+  async function updateStatusPayment(){
+    let refreshTime = 0;
+
+    while(refreshTime < 4){
+      refreshTime++;
+
+    setTimeout( async()=> {
+      const paymentResult = await api.get(`payment/${id}`);
+
+      paymentStatus.map((status)=>{
+        if(status.status === paymentResult.data.status){
+          setResultStatus(status)
+          return
+        }
+        console.log(resultStatus)
+      })
+      },1000 * 10 * (refreshTime + 1))//5segundos + 5
+    }
+  }
 
   useEffect(() => {
     async function searchPayment(){
       const paymentResult = await api.get(`payment/${id}`);
       setPlateRequest(JSON.parse(paymentResult.data.plates));
       setPrice(paymentResult.data.price);
-      console.log()
 
       paymentStatus.map((status)=>{
         if(paymentResult.data.status === "pendente"){
-          setResultStatus("em andamento")
-          console.log("qrcode")
+          setResultStatus("")
+          return
         }
 
         if(status.status === paymentResult.data.status){
           setResultStatus(status)
-          console.log(status)
           return
         }
       })
+      
+      if(paymentResult.data.status !== "cancelado" && paymentResult.data.status !== "pendente"){
+        updateStatusPayment();
+      }
     }
 
     searchPayment();

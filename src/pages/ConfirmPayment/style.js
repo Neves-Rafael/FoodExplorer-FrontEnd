@@ -7,14 +7,10 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
 
-  
-
   p{
     font-family: "Poppins";
     font-size: 2.4rem;
     margin-top: 4rem;
-    transition: all 300ms ease-in ;
-    transform: scale();
   }
 `;
 
