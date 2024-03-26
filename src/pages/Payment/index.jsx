@@ -8,7 +8,7 @@ import { PiReceipt } from "react-icons/pi";
 import { ButtonText } from "../../components/ButtonText"
 import { RiArrowLeftSLine } from "react-icons/ri";
 import { api } from "../../service/api";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, redirect } from "react-router-dom";
 
 import { IoCheckmarkCircleOutline } from "react-icons/io5";
 import { MdDeliveryDining } from "react-icons/md";
@@ -23,19 +23,57 @@ export function Payment(){
   const [methodSelect, setMethodSelect] = useState("pix");
   const [availablePayment, setAvailablePayment] = useState("disable");
   const imageURL = `${api.defaults.baseURL}/files/`;
-  const [statusPayment, setStatusPayment] = useState({});
+  const [statusPayment, setStatusPayment] = useState("");
   const [plateRequest, setPlateRequest] = useState([]);
+  const [resultStatus, setResultStatus] = useState({});
   const [price, setPrice] = useState("");
   const { id } = useParams();
+
   // const navigate = useNavigate();
-  
+
+  const paymentStatus = [
+    {
+      status: "cancelado",
+      message: "Pedido cancelado",
+      image: IoCheckmarkCircleOutline,
+    },{
+      status: "finalizado",
+      message: "Pedido entregue",
+      image: PiForkKnifeBold,
+    },{
+      status: "em andamento",
+      message: "Saiu para entrega",
+      image: LuTimer,
+    },{
+      status: "preparação",
+      message: "Seu pedido está sendo preparado",
+      image: MdDeliveryDining,
+    }
+  ];
+
+  function redirectToPayment(){
+    window.open(`${"http://localhost:5173"}/payment/qrcode/${id}`, "_blank");
+  }   
 
   useEffect(() => {
     async function searchPayment(){
       const paymentResult = await api.get(`payment/${id}`);
       setPlateRequest(JSON.parse(paymentResult.data.plates));
-      const totalPrice = paymentResult.data.price;
-      setPrice(totalPrice);
+      setPrice(paymentResult.data.price);
+      console.log()
+
+      paymentStatus.map((status)=>{
+        if(paymentResult.data.status === "pendente"){
+          setResultStatus("em andamento")
+          console.log("qrcode")
+        }
+
+        if(status.status === paymentResult.data.status){
+          setResultStatus(status)
+          console.log(status)
+          return
+        }
+      })
     }
 
     searchPayment();
@@ -89,20 +127,20 @@ export function Payment(){
               </button>
             </div>
 
-            {statusPayment ?
+            {resultStatus.status ?
               <>
                 <div className="status-container">
-                  <IoCheckmarkCircleOutline size={160}/>
-                  <p>Pagamento realizado</p>
-                </div>
+                  <resultStatus.image size={160}/>
+                 <p>{resultStatus.message}</p>
+               </div>
               </>
             :
               <>
                 { methodSelect === "pix" ?
                   <>
-                    <img src="https://images.unsplash.com/photo-1550482768-88b710a445fd?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
+                    <img src={`https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${api.defaults.baseURL}/payment/qrcode/${id}` }alt="" />
 
-                    <p>Copiar Código {<IoCopy />}</p>
+                    <p onClick={redirectToPayment} >Acessar link {<IoCopy />}</p>
                   </>
                   :
                   <CreditPayment>

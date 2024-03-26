@@ -86,6 +86,7 @@ export const RequestList = styled.div`
   .plate-content{
     display: flex;
     align-items: center;
+    
     @media(min-width: 768px){
       margin-right: 4rem;
     }

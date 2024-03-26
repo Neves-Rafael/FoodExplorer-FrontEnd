@@ -87,6 +87,20 @@ function AuthProvider({ children }) {
     }
   }
 
+  async function updatePayment(id){
+    console.log(id)
+    try {
+      await api.put(`/payment/qrcode/${id}`);
+
+    } catch (error) {
+      if (error.response) {
+        toast.dark(error.response.data.message);
+      } else {
+        toast.dark("Não foi possível atualizar.");
+      }
+    }
+  }
+
   useEffect(() => {
     const user = localStorage.getItem("@foodexplorer:user");
 
@@ -105,6 +119,7 @@ function AuthProvider({ children }) {
         createPlate,
         updatePlate,
         createPayment,
+        updatePayment,
         user: data.user,
       }}>
       {children}
