@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { Container, Options, Placeholder } from "./style";
 import { IoIosArrowDown } from "react-icons/io";
 
-export function Select({ handleCategory, value, category, ...rest }) {
+export function Select({ handleCategory,placeholder, value, category, ...rest }) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectValue, setSelectValue] = useState("Exemplo: Refeição");
   const selectRef = useRef(null);

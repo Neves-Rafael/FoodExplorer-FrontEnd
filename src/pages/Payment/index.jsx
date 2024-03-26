@@ -72,7 +72,6 @@ export function Payment(){
           setResultStatus(status)
           return
         }
-        console.log(resultStatus)
       })
       },1000 * 10 * (refreshTime + 1))//5segundos + 5
     }

@@ -3,15 +3,26 @@ import { IoMdClose } from "react-icons/io";
 import { InputSearch } from "../InputSearch";
 import { Container, MenuHeader } from "./style";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "../../hooks/auth"
 import { USER_ROLE } from "../../utils/roles"
 import { useNavigate } from "react-router-dom";
+import { MdDarkMode } from "react-icons/md";
+import { MdLightMode } from "react-icons/md";
 
 export function SideMenu({ menuIsOpen, menuIsClose, plates }) {
   const { user, logout } = useAuth();
   const navigate = useNavigate()
   const verifyAdminRole = user.role === USER_ROLE.ADMIN;
+  const [ lightMode, setLightMode] = useState("dark");
+
+  function handleLightMode(mode){
+    if(mode === "light"){
+      setLightMode(mode)
+    }else{
+      setLightMode(mode)
+    }
+  }
 
   useEffect(() => {
     function handleResize() {
@@ -35,13 +46,19 @@ export function SideMenu({ menuIsOpen, menuIsClose, plates }) {
 
       <InputSearch plates={plates}/>
       
-      <p className="option" onClick={() => {logout(), navigate("/")}}>Sair</p>
+        {verifyAdminRole && 
+          <p className="option" onClick={() => navigate("/newplate")}>
+            Novo Prato
+          </p>
+        }
+      <p className="option" onClick={() => logout()}>Histórico de pedidos</p>
+      <p className="option" onClick={() => logout()}>Perfil</p>
+      <p className="option" onClick={() => logout()}>Sair</p>
+      <div className="option">
+        {lightMode === "light" ? <MdLightMode size={32} onClick={()=>handleLightMode("dark")}/>
+        : <MdDarkMode size={32} onClick={()=> handleLightMode("light")}/>}
+      </div>
 
-      {verifyAdminRole && 
-        <p className="option" onClick={() => navigate("/newplate")}>
-          Novo Prato
-        </p>
-      }
       <Footer />
     </Container>
   );
