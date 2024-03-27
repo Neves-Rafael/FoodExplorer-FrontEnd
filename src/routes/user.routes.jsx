@@ -5,6 +5,7 @@ import { PlateView } from "../pages/PlateView";
 import { Payment } from "../pages/Payment";
 import { Cart } from "../pages/Cart";
 import { ConfirmPayment } from "../pages/ConfirmPayment";
+import { OrderHistory } from "../pages/OrderHistory";
 
 export function UserRoutes() {
   return (
@@ -14,6 +15,7 @@ export function UserRoutes() {
       <Route path="/payment/:id" element={<Payment />} />
       <Route path="/payment/qrcode/:id" element={<ConfirmPayment/>} />
       <Route path="/cart" element={ <Cart/>}/>
+      <Route path="/order-history" element={<OrderHistory/>}/>
 
       <Route path="*" element={<Home />} />
     </Routes>

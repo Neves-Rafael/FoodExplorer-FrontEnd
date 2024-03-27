@@ -81,7 +81,7 @@ export function Header({plates}) {
         <IoIosOptions size={32} onClick={()=> setOptionsIsOpen(true)}/>
         <div className="options-header" ref={selectRef}>
           <p onClick={()=> navigate("/")}>Favoritos</p>
-          <p onClick={()=> navigate("/")}>Histórico de pedido</p>
+          <p onClick={()=> navigate("/order-history")}>Histórico de pedido</p>
           <p onClick={()=> navigate("/")}>Perfil</p>
           <div className="light-mode">
             {lightMode === "light" ? <MdLightMode size={32} onClick={()=>handleLightMode("dark")}/>
