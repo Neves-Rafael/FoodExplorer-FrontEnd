@@ -119,6 +119,8 @@ export function NewPlate() {
             <Select
               onChange={(e) => setCategory(e.target.value)}
               handleCategory={handleCategoryInSelectComponent}
+              itemOption={["Refeição", "Sobremesas", "Bebidas"]}
+              placeholder={"Exemplo: Refeição"}
             />
           </div>
         </Line1>

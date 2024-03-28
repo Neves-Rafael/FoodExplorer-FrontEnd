@@ -7,11 +7,16 @@ import { useNavigate } from "react-router-dom";
 import { ButtonText } from "../../components/ButtonText";
 import { FaArrowLeft } from "react-icons/fa6";
 import { FaCircle } from "react-icons/fa";
+import { useAuth } from "../../hooks/auth";
+import { USER_ROLE } from "../../utils/roles";
+import { Select} from "../../components/Select"
 
 
 export function OrderHistory(){
   const [historyOrder, setHistoryOrder] = useState([]);
   const navigate = useNavigate();
+  const { user } = useAuth();
+  const verifyAdminRole = user.role === USER_ROLE.ADMIN;
 
   function updateTimeToBrazil(timer){
     let setData = new Date(timer);
@@ -29,13 +34,41 @@ export function OrderHistory(){
     const minutes = addZero(setData.getMinutes());
 
     return `${day}/${month} às ${hours}h${minutes}`
+  }
 
+  const verifyStatusOrder = (status) => {
+    let colorStatus = "";
+    switch(status){
+    case 'cancelado':
+      colorStatus="red"
+      break;
+    case 'em andamento':
+      colorStatus="light-blue"
+      break;
+    case 'finalizado':
+      colorStatus="green"
+      break;
+    case 'pendente':
+      colorStatus="orange"
+      break;
+    case 'cozinha':
+      colorStatus="blue"
+      break;
+    }
+
+    return colorStatus;
   }
 
   useEffect(()=> {
     async function searchMyOrders(){
-      const myOrder = await api.get("/payment");
-      setHistoryOrder(myOrder.data);
+
+      if(verifyAdminRole){
+        const adminOrder = await api.get("/payment", verifyAdminRole );
+        setHistoryOrder(adminOrder.data);
+      }else{
+        const userOrder = await api.get("/payment");
+        setHistoryOrder(userOrder.data);
+      }
     }
 
     searchMyOrders();
@@ -49,17 +82,14 @@ export function OrderHistory(){
         <h2>Histórico de Pedidos</h2>
         <MobileContent>
           {historyOrder && historyOrder.map((order, index)=> (
-          <div className="request-content" key={index} onClick={() => navigate(`/payment/${order.id}`)}>
+          <div className="request-content" key={index} >
+            {/* onClick={() => navigate(`/payment/${order.id}`)} */}
             <div className="data-info">
               <p>Nº {order.id}</p>
-              <p className="color-status">
-                {order.status === "pendente" && <span className="orange"/>}
-                {order.status === "finalizado" && <span className="green"/>}
-                {order.status === "cozinha" && <span className="blue"/>}
-                {order.status === "em andamento" && <span className="light-blue"/>}
-                {order.status === "cancelado" && <span className="red"/>}
+              {!verifyAdminRole && <p className="color-status">
+                {<span className={verifyStatusOrder(order.status)}/>}
                 {order.status}
-              </p>
+              </p>}
               <p>{updateTimeToBrazil(order.updated_at)}</p>
             </div>
             <div className="plate-info">
@@ -68,6 +98,35 @@ export function OrderHistory(){
                   {`${plate.quantity} x`} {plate.plate.name}  
                 </p>
               ))}
+            </div>
+            <div>
+              <Select
+                itemOption={[
+                <>
+                  <span className={verifyStatusOrder(order.status)}/>
+                  {"cancelado"}
+                </>,
+                <>
+                  <span className={verifyStatusOrder(order.status)}/>
+                  {"pendente"}
+                </>,
+                <>
+                  <span className={verifyStatusOrder(order.status)}/>
+                  {"finalizado"}
+                </>,
+                <>
+                  <span className={verifyStatusOrder(order.status)}/>
+                  {"cozinha"}
+                </>,
+                <>
+                  <span className={verifyStatusOrder(order.status)}/>
+                  {"em andamento"}
+                </>]}
+                placeholder={<>
+                  <span className={verifyStatusOrder(order.status)}/>
+                  {order.status}
+                </>}
+              />
             </div>
           </div>))}
         </MobileContent>

@@ -7,7 +7,7 @@ export const Container = styled.div`
 export const Placeholder = styled.div`
   background-color: ${({ theme }) => theme.COLORS.DARK_900};
   border-radius: 8px;
-  position: absolute;
+  /* position: absolute; */
   width: 100%;
 
   > div {
@@ -35,9 +35,13 @@ export const Options = styled.li`
   display: ${({ $isOpen }) => ($isOpen ? "flex" : "none")};
   flex-direction: column;
 
-  ul {
+  div {
     padding: 1rem 2rem;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-transform: capitalize;
 
     &:hover {
       background-color: ${({ theme }) => theme.COLORS.DARK_700};

@@ -50,4 +50,31 @@ export default createGlobalStyle`
       transition: all 200ms ease-in-out;
       filter: brightness(1.5);
     }    
+
+
+    .red, .green, .blue, .orange, .light-blue{
+      height: .8rem;
+      width: .8rem;
+      border-radius: 100%;
+    }
+
+    .red{
+      background-color: red;
+    }
+
+    .green{
+      background-color: green;
+    }
+
+    .blue{
+      background-color: blueviolet;
+    }
+
+    .orange{
+      background-color: orange;
+    }
+
+    .light-blue{
+      background-color: lightseagreen;
+    }
 `;

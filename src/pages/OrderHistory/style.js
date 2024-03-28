@@ -13,7 +13,7 @@ export const Container = styled.div`
       margin: 2rem 2rem 4rem;
     }
 
-    button{
+    /* button:nth-child(2){
       font-family: "Poppins";
       font-weight: 500;
       font-size: 2rem;
@@ -22,7 +22,7 @@ export const Container = styled.div`
       display: flex;
       align-items: center;
       gap: 1rem
-    }
+    } */
   }
 `;
 
@@ -75,37 +75,32 @@ export const MobileContent =  styled.div`
     align-items: center;
     gap: .8rem;
     text-transform: capitalize;
-
-    span{
-      height: .8rem;
-      width: .8rem;
-      border-radius: 100%;
-    }
-    .red{
-      background-color: red;
-    }
-
-    .green{
-      background-color: green;
-    }
-
-    .blue{
-      background-color: blueviolet;
-    }
-
-    .orange{
-      background-color: orange;
-    }
-
-    .light-blue{
-      background-color: lightseagreen;
-    }
   }
+
+  button{
+      font-family: "Poppins";
+      font-weight: 500;
+      background: none;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      text-transform: capitalize;
+    }
 `;
 
 export const DesktopContent = styled.div`
   max-width: 120rem;
-  margin: auto;
+  margin: 4rem;
+  display: none;
+
+  @media(min-width: 768px){
+    display: block;
+  }
+
+  @media(min-width: 1300px){
+    margin: auto;
+  }
+
 
   .table-container {
     border: 2px solid ${({theme}) => theme.COLORS.DARK_1000};

@@ -10,7 +10,7 @@ import { FoodExplorerAdmin } from "../FoodExplorerAdmin";
 import { Container, MenuHamburger, Logout, MenuOptions, OrderCount, Logo, Requests } from "./style";
 
 import { useAuth } from "../../hooks/auth";
-import { USER_ROLE } from "../../utils/roles"
+import { USER_ROLE } from "../../utils/roles";
 import { PlateContext } from "../../hooks/plateRequest";
 import { useState, useEffect, useContext, useRef } from "react";
 import { IoIosOptions } from "react-icons/io";
