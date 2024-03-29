@@ -22,6 +22,33 @@ export function Select({ handleCategory, placeholder, value, category, itemOptio
     }
   }
 
+  function teste(item){
+    console.log(item)
+  }
+
+  const verifyStatusOrder = (status) => {
+    let colorStatus = "";
+    switch(status){
+    case 'cancelado':
+      colorStatus="red"
+      break;
+    case 'em andamento':
+      colorStatus="light-blue"
+      break;
+    case 'finalizado':
+      colorStatus="green"
+      break;
+    case 'pendente':
+      colorStatus="orange"
+      break;
+    case 'cozinha':
+      colorStatus="blue"
+      break;
+    }
+
+    return colorStatus;
+  }
+
   useEffect(() => {
     document.addEventListener("mousedown", handleOutsideClick);
 
@@ -34,7 +61,10 @@ export function Select({ handleCategory, placeholder, value, category, itemOptio
     <Container ref={selectRef}>
       <Placeholder $isOpen={isOpen}>
         <div onClick={() => (isOpen ? setIsOpen(false) : setIsOpen(true))}>
-          <button {...rest}>{category ? category : selectValue}</button>
+          <button {...rest}>
+            <span className={verifyStatusOrder(selectValue)}/>
+            {category ? category : selectValue}
+          </button>
           <span>
             <IoIosArrowDown size={28} />
           </span>
@@ -42,9 +72,14 @@ export function Select({ handleCategory, placeholder, value, category, itemOptio
         <Options $isOpen={isOpen} onClick={handleSelectOption}>
           {itemOption &&
             itemOption.length > 1 &&
-            itemOption.map((item) => (
-              <div key={item} data-value={item} onClick={(e) => handleCategory(e.target.dataset.value)}>
-                {item}
+            itemOption.map((item, index) => (
+              <div key={index} data-value={item} onClick={(e) => handleCategory(e.target.dataset.value)}>
+                <>
+                  <span className={verifyStatusOrder(item)}/>
+                  {item}
+                </>
+                
+                {/* {teste(item)} */}
               </div>
             ))}
         </Options>

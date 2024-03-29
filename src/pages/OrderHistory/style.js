@@ -78,14 +78,14 @@ export const MobileContent =  styled.div`
   }
 
   button{
-      font-family: "Poppins";
-      font-weight: 500;
-      background: none;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      text-transform: capitalize;
-    }
+    font-family: "Poppins";
+    font-weight: 500;
+    background: none;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-transform: capitalize;
+  }
 `;
 
 export const DesktopContent = styled.div`

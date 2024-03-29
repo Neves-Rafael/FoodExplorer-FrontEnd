@@ -17,6 +17,7 @@ export function OrderHistory(){
   const navigate = useNavigate();
   const { user } = useAuth();
   const verifyAdminRole = user.role === USER_ROLE.ADMIN;
+  const [updateStatusOrder, setUpdateStatusOrder] = useState("")
 
   function updateTimeToBrazil(timer){
     let setData = new Date(timer);
@@ -59,9 +60,16 @@ export function OrderHistory(){
     return colorStatus;
   }
 
-  function teste(aaa){
-    console.log(aaa)
+  const handleStatusOrder = (statusUpdate) => {
+    console.log(statusUpdate)
+    setUpdateStatusOrder(statusUpdate);
   }
+
+  useEffect(()=> {
+    if(updateStatusOrder && verifyAdminRole){
+      // console.log(updateStatusOrder)
+    }
+  },[updateStatusOrder]);
 
   useEffect(()=> {
     async function searchMyOrders(){
@@ -76,7 +84,7 @@ export function OrderHistory(){
     }
 
     searchMyOrders();
-  },[])
+  },[]);
 
   return(
     <Container>
@@ -105,8 +113,12 @@ export function OrderHistory(){
               </div>
               <div>
                 <Select
+                  handleCategory={handleStatusOrder}
                   itemOption={["cancelado","pendente", "finalizado", "cozinha", "em andamento"]}
-                  placeholder={order.status}
+                  placeholder={<>
+                  {<span className={verifyStatusOrder(order.status)}/>}
+                  {order.status}
+                  </>}
                 />
               </div>
             </div>))}
