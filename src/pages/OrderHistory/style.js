@@ -64,9 +64,9 @@ export const MobileContent =  styled.div`
   }
 
   .plate-info{
-    display: grid;
+    display: flex;
+    flex-wrap: wrap;
     gap: 1rem;
-    grid-template-columns: 1fr 1fr;
     text-transform: capitalize;
   }
 

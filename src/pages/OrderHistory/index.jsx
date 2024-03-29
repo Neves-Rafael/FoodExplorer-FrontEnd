@@ -59,11 +59,15 @@ export function OrderHistory(){
     return colorStatus;
   }
 
+  function teste(aaa){
+    console.log(aaa)
+  }
+
   useEffect(()=> {
     async function searchMyOrders(){
 
       if(verifyAdminRole){
-        const adminOrder = await api.get("/payment", verifyAdminRole );
+        const adminOrder = await api.get("/payment");
         setHistoryOrder(adminOrder.data);
       }else{
         const userOrder = await api.get("/payment");
@@ -81,56 +85,33 @@ export function OrderHistory(){
         {/* <button onClick={()=> navigate(-1)}>{<FaArrowLeft size={24}/>} Voltar</button> */}
         <h2>Histórico de Pedidos</h2>
         <MobileContent>
-          {historyOrder && historyOrder.map((order, index)=> (
-          <div className="request-content" key={index} >
-            {/* onClick={() => navigate(`/payment/${order.id}`)} */}
-            <div className="data-info">
-              <p>Nº {order.id}</p>
-              {!verifyAdminRole && <p className="color-status">
-                {<span className={verifyStatusOrder(order.status)}/>}
-                {order.status}
-              </p>}
-              <p>{updateTimeToBrazil(order.updated_at)}</p>
-            </div>
-            <div className="plate-info">
-              {JSON.parse(order.plates).map((plate, index)=>(
-                <p key={index}>
-                  {`${plate.quantity} x`} {plate.plate.name}  
-                </p>
-              ))}
-            </div>
-            <div>
-              <Select
-                itemOption={[
-                <>
-                  <span className={verifyStatusOrder(order.status)}/>
-                  {"cancelado"}
-                </>,
-                <>
-                  <span className={verifyStatusOrder(order.status)}/>
-                  {"pendente"}
-                </>,
-                <>
-                  <span className={verifyStatusOrder(order.status)}/>
-                  {"finalizado"}
-                </>,
-                <>
-                  <span className={verifyStatusOrder(order.status)}/>
-                  {"cozinha"}
-                </>,
-                <>
-                  <span className={verifyStatusOrder(order.status)}/>
-                  {"em andamento"}
-                </>]}
-                placeholder={<>
-                  <span className={verifyStatusOrder(order.status)}/>
+          {historyOrder.length > 0 && historyOrder.map((order, index)=> (
+            <div className="request-content" key={index} >
+              {/* onClick={() => navigate(`/payment/${order.id}`)} */}
+              <div className="data-info">
+                <p>Nº {order.id}</p>
+                {!verifyAdminRole && <p className="color-status">
+                  {<span className={verifyStatusOrder(order.status)}/>}
                   {order.status}
-                </>}
-              />
-            </div>
-          </div>))}
+                </p>}
+                <p>{updateTimeToBrazil(order.updated_at)}</p>
+              </div>
+              <div className="plate-info">
+                {order.plates.length > 0 && JSON.parse(order.plates).map((plate, index)=>(
+                  <p key={index}>
+                    {`${plate.quantity} x`} {plate.plate.name}  
+                  </p>
+                ))}
+              </div>
+              <div>
+                <Select
+                  itemOption={["cancelado","pendente", "finalizado", "cozinha", "em andamento"]}
+                  placeholder={order.status}
+                />
+              </div>
+            </div>))}
         </MobileContent>
-        <DesktopContent>
+        {/* <DesktopContent>
           <div className="table-container">
             <table>
               <tbody>
@@ -164,7 +145,7 @@ export function OrderHistory(){
               </tbody>
             </table>
           </div>
-        </DesktopContent>
+        </DesktopContent> */}
       </main>
       <Footer/>
     </Container>
