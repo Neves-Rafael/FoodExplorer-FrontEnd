@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ButtonText } from "../../components/ButtonText";
 import { FaArrowLeft } from "react-icons/fa6";
-import { FaCircle } from "react-icons/fa";
 import { useAuth } from "../../hooks/auth";
 import { USER_ROLE } from "../../utils/roles";
 import { Select} from "../../components/Select"
@@ -65,6 +64,10 @@ export function OrderHistory(){
     setUpdateStatusOrder(statusUpdate);
   }
 
+  function teste(item){
+    console.log(item)
+  }
+
   useEffect(()=> {
     if(updateStatusOrder && verifyAdminRole){
       // console.log(updateStatusOrder)
@@ -92,10 +95,10 @@ export function OrderHistory(){
       <main>
         {/* <button onClick={()=> navigate(-1)}>{<FaArrowLeft size={24}/>} Voltar</button> */}
         <h2>Histórico de Pedidos</h2>
-        <MobileContent>
+        {/* <MobileContent>
           {historyOrder.length > 0 && historyOrder.map((order, index)=> (
             <div className="request-content" key={index} >
-              {/* onClick={() => navigate(`/payment/${order.id}`)} */}
+              onClick={() => navigate(`/payment/${order.id}`)}
               <div className="data-info">
                 <p>Nº {order.id}</p>
                 {!verifyAdminRole && <p className="color-status">
@@ -122,8 +125,8 @@ export function OrderHistory(){
                 />
               </div>
             </div>))}
-        </MobileContent>
-        {/* <DesktopContent>
+        </MobileContent> */}
+        <DesktopContent>
           <div className="table-container">
             <table>
               <tbody>
@@ -134,14 +137,26 @@ export function OrderHistory(){
                 <th>Data e hora</th>
               </tr>
               {historyOrder && historyOrder.map((order, index)=> (
-                <tr className="each-payment" key={index} onClick={() => navigate(`/payment/${order.id}`)}>
+                <tr className="each-payment" key={index} onClick={() => /*navigate(`/payment/${order.id}`)*/"a"}>
                   <td className="status-payment">
-                    {order.status === "pendente" && <span className="orange"><FaCircle size={10}/></span>}
-                    {order.status === "finalizado" && <span className="green"><FaCircle size={10}/></span>}
-                    {order.status === "cozinha" && <span className="blue"><FaCircle size={10}/></span>}
-                    {order.status === "em andamento" && <span className="light-blue"><FaCircle size={10}/></span>}
-                    {order.status === "cancelado" && <span className="red"><FaCircle size={10}/></span>}
-                    {order.status}
+                    {!verifyAdminRole ? 
+                    <>
+                      <span className={verifyStatusOrder(order.status)}/>
+                      {order.status}
+                      {teste(order.status)}
+                    </>
+                    :
+                    <div>
+                      <Select
+                      handleCategory={handleStatusOrder}
+                      itemOption={["cancelado","pendente", "finalizado", "cozinha", "em andamento"]}
+                      placeholder={<>
+                      {<span className={verifyStatusOrder(order.status)}/>}
+                      {order.status}
+                      </>}
+                    />
+                    </div>
+                    }
                   </td>
                   <td>{order.id < 10 ? `0${order.id}` : order.id}</td>
                   <td className="all-plates">
@@ -157,7 +172,7 @@ export function OrderHistory(){
               </tbody>
             </table>
           </div>
-        </DesktopContent> */}
+        </DesktopContent>
       </main>
       <Footer/>
     </Container>

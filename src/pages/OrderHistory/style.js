@@ -173,28 +173,16 @@ export const DesktopContent = styled.div`
     }
   }
 
-  .status-payment{
-    span svg{
+  .status-payment{    
+    /* display: inline-block; */
+
+    span{
+      display: inline-block;
+    }
+
+    button span{
       margin-right: .8rem;
-    }
-
-    .red path{
-      color: red
-    }
-
-    .green path{
-      color: green;
-    }
-
-    .blue path{
-      color: blueviolet;
-    }
-
-    .orange path{
-      color: orange;
-    }
-
-    .light-blue path{color: lightseagreen;
+      background-color: red;
     }
   }
 `;
