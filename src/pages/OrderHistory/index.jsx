@@ -64,10 +64,6 @@ export function OrderHistory(){
     setUpdateStatusOrder(statusUpdate);
   }
 
-  function teste(item){
-    console.log(item)
-  }
-
   useEffect(()=> {
     if(updateStatusOrder && verifyAdminRole){
       // console.log(updateStatusOrder)
@@ -95,10 +91,9 @@ export function OrderHistory(){
       <main>
         {/* <button onClick={()=> navigate(-1)}>{<FaArrowLeft size={24}/>} Voltar</button> */}
         <h2>Histórico de Pedidos</h2>
-        {/* <MobileContent>
+        <MobileContent>
           {historyOrder.length > 0 && historyOrder.map((order, index)=> (
-            <div className="request-content" key={index} >
-              onClick={() => navigate(`/payment/${order.id}`)}
+            <div className="request-content" key={index} onClick={() => verifyAdminRole ? null : navigate(`/payment/${order.id}`)}>
               <div className="data-info">
                 <p>Nº {order.id}</p>
                 {!verifyAdminRole && <p className="color-status">
@@ -107,6 +102,7 @@ export function OrderHistory(){
                 </p>}
                 <p>{updateTimeToBrazil(order.updated_at)}</p>
               </div>
+
               <div className="plate-info">
                 {order.plates.length > 0 && JSON.parse(order.plates).map((plate, index)=>(
                   <p key={index}>
@@ -114,6 +110,8 @@ export function OrderHistory(){
                   </p>
                 ))}
               </div>
+
+              {verifyAdminRole &&
               <div>
                 <Select
                   handleCategory={handleStatusOrder}
@@ -123,9 +121,9 @@ export function OrderHistory(){
                   {order.status}
                   </>}
                 />
-              </div>
+              </div>}
             </div>))}
-        </MobileContent> */}
+        </MobileContent>
         <DesktopContent>
           <div className="table-container">
             <table>
@@ -137,13 +135,14 @@ export function OrderHistory(){
                 <th>Data e hora</th>
               </tr>
               {historyOrder && historyOrder.map((order, index)=> (
-                <tr className="each-payment" key={index} onClick={() => /*navigate(`/payment/${order.id}`)*/"a"}>
+                <tr className="each-payment" key={index} onClick={() => verifyAdminRole ? null : navigate(`/payment/${order.id}`)}>
                   <td className="status-payment">
                     {!verifyAdminRole ? 
                     <>
-                      <span className={verifyStatusOrder(order.status)}/>
-                      {order.status}
-                      {teste(order.status)}
+                      <p className="user-status">
+                        <span className={verifyStatusOrder(order.status)}/>
+                        {order.status}
+                      </p>
                     </>
                     :
                     <div>

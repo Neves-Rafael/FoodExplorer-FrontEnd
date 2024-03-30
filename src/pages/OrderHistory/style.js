@@ -129,7 +129,7 @@ export const DesktopContent = styled.div`
     }
 
     td {
-      padding: 1.6rem 2.4rem;
+      padding: 1.6rem 1.6rem;
       color: ${({theme}) => theme.COLORS.LIGHT_400};
     }
 
@@ -148,7 +148,7 @@ export const DesktopContent = styled.div`
     }
 
     th:nth-child(1){
-      width: 18rem;
+      width: 20rem;
     }
 
     th:nth-child(2){
@@ -176,13 +176,18 @@ export const DesktopContent = styled.div`
   .status-payment{    
     /* display: inline-block; */
 
+    .user-status{
+      display: flex;
+      gap: .8rem;
+      align-items: center;
+    }
+
     span{
       display: inline-block;
     }
 
     button span{
       margin-right: .8rem;
-      background-color: red;
     }
   }
 `;
