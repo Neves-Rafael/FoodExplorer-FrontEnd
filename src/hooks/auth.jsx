@@ -114,6 +114,37 @@ function AuthProvider({ children }) {
     }
   }
 
+  async function createAccount({name, email, password}){
+    if (!name || !email || !password) {
+      return toast.dark("Preencha todos os campos!");
+    }
+    
+    try {
+      await api.post("/users", { name, email, password })
+      .then(() => {
+        toast.dark("Usuário cadastrado com sucesso!");
+      })
+      return "Create"
+    } catch (error) {
+      if (error.response) {
+        toast.dark(error.response.data.message);
+      } else toast.dark("Não foi possível cadastrar!");
+    }
+  }
+
+  async function updateAccount({name, email, newPassword, oldPassword}){
+    
+    try {
+      await api.put("/users", { name, email, newPassword, oldPassword})
+      .then(() => {
+        toast.dark("Usuário atualizado com sucesso.");
+      })
+    } catch (error) {
+      if (error.response) {
+        toast.dark(error.response.data.message);
+      } else toast.dark("Não foi possível atualizar!");
+    }
+  }
 
   useEffect(() => {
     const user = localStorage.getItem("@foodexplorer:user");
@@ -135,6 +166,8 @@ function AuthProvider({ children }) {
         createPayment,
         updatePayment,
         createFavorite,
+        createAccount,
+        updateAccount,
         user: data.user,
       }}>
       {children}

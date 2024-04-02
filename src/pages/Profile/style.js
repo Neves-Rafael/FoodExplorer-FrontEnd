@@ -59,4 +59,13 @@ export const FormContainer = styled.div`
     gap: 2rem;
     width: 100%;
   }
+
+  .update-button{
+    opacity: ${({$isEnable, theme}) => $isEnable ? "1" : "0.5"};
+    cursor: ${({$isEnable}) => $isEnable ? "pointer" : "not-allowed"};
+
+    &:hover{
+      filter: ${({$isEnable}) => $isEnable ? "brightness(1.3)" : "brightness(1)"};
+    }
+  }
 `;

@@ -3,23 +3,40 @@ import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
 import { Button } from "../../components/Button";
 import { Form } from "../../components/Forms";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useAuth } from "../../hooks/auth";
 
 import Lottie2 from 'react-lottie';
 import animationData from "../../assets/person-animate.json";
 
 export function Profile(){
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [oldPassword, setOldPassword] = useState("");
+  const [isEnable, setIsEnable] = useState(false);
+  const { updateAccount } = useAuth();
 
   const defaultOptions = {
-    loop: true,
+    loop: false,
     autoplay: true,
     animationData: animationData,
     rendererSettings: {
       preserveAspectRatio: 'xMidYMid slice'
     }
   }
+
+  function handleUpdateProfile(){
+    updateAccount({name, email, newPassword, oldPassword});
+  }
+
+  useEffect(()=> {
+    if(name || email || newPassword || oldPassword){
+      setIsEnable(true)
+      return
+    }
+    setIsEnable(false)
+  },[name, email, newPassword, oldPassword])
 
   return(
     <Container>
@@ -35,39 +52,37 @@ export function Profile(){
             <p>Bem vindo Rafael</p>
           </div>
         </ProfileContent>
-        <FormContainer>
+        <FormContainer $isEnable={isEnable}>
           <Form
-            value={email}
             label={"Atualizar Nome"}
-            placeholder="Exemplo: teste@exemplo.com"
-            type="email"
-            onChange={(e) => setEmail(e.target.value)}
+            value={name}
+            placeholder="Adicione um nome válido"
+            type="text"
+            onChange={(e) => setName(e.target.value)}
           />
-
           <Form
             label={"Atualizar Email"}
-            placeholder="No mínimo 6 caracteres"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <Form
             value={email}
-            label={"Nova Senha"}
-            placeholder="Exemplo: teste@exemplo.com"
-            type="email"
+            placeholder="Adicione um e-mail válido"
+            type="e-mail"
             onChange={(e) => setEmail(e.target.value)}
           />
-
           <Form
-            label={"Confirmar Senha"}
+            label={"Senha Antiga"}
+            value={oldPassword}
+            placeholder="Confirme sua senha"
+            type="password"
+            onChange={(e) => setOldPassword(e.target.value)}
+          />
+          <Form
+            label={"Nova Senha"}
+            value={newPassword}
             placeholder="No mínimo 6 caracteres"
             type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => setNewPassword(e.target.value)}
           />
           <div className="button-container">
-            <Button title={"Atualizar"}/>
+            <Button className="update-button" title={"Atualizar"} onClick={handleUpdateProfile}/>
             <Button title={"Voltar"}/>
             <Button title={"Recuperar senha"}/>
           </div>

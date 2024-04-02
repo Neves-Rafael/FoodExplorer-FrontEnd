@@ -4,6 +4,7 @@ import { Button } from "../../components/Button";
 import { FoodExplorer } from "../../components/FoodExplorer";
 import login from "../../assets/Hamburger-rafiki.svg";
 import { api } from "../../service/api";
+import { useAuth } from "../../hooks/auth";
 
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -13,25 +14,13 @@ export function SignUp() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { createAccount } = useAuth();
 
   const navigate = useNavigate();
 
-  function handleSignUp() {
-    if (!name || !email || !password) {
-      return toast.dark("Preencha todos os campos!");
-    }
-
-    api.post("/users", { name, email, password })
-      .then(() => {
-        toast.dark("Usuário cadastrado com sucesso!");
-        navigate(-1);
-      })
-      .catch((error) => {
-        if (error.response) {
-          toast.dark(error.response.data.message);
-        } else toast("Não foi possível cadastrar!");
-      }
-    );
+  async function handleSignUp() {
+   const create = await createAccount({name, email, password});
+   if(create) navigate(-1)
   }
 
   return (
