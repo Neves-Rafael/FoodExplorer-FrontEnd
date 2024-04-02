@@ -114,20 +114,6 @@ function AuthProvider({ children }) {
     }
   }
 
-  async function updateFavorite({user_id, plate}){
-    try {
-      await api.put("/favorite", {
-        user_id: user_id,
-        plate  
-      })
-    } catch (error) {
-      if (error.response) {
-        toast.dark(error.response.data.message);
-      } else {
-        toast.dark("Não foi possível adicionar aos Favoritos.");
-      }
-    }
-  }
 
   useEffect(() => {
     const user = localStorage.getItem("@foodexplorer:user");
@@ -149,7 +135,6 @@ function AuthProvider({ children }) {
         createPayment,
         updatePayment,
         createFavorite,
-        updateFavorite,
         user: data.user,
       }}>
       {children}

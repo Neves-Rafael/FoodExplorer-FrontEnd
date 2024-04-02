@@ -1,19 +1,27 @@
 import { Container, Plate } from "./style";
 import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
-import imageFavorite from "../../assets/group-0.png";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { api } from "../../service/api";
+import { PlateContext } from "../../hooks/plateRequest";
 
 export function Favorite(){
-  const [allPlatesFavorite, setAllPlatesFavorite] = useState("")
+  const [allPlatesFavorite, setAllPlatesFavorite] = useState([]);
+  const { showAllPlates } = useContext(PlateContext);
+  const imageURL = `${api.defaults.baseURL}/files/`;
   
+  
+  // function filterFavoritePlates(){
+    
+  // }
+
   useEffect(() => {
     async function favoritePlate(){
       const searchFavorites = await api.get("/favorites");
-      setAllPlatesFavorite(searchFavorites)
+      setAllPlatesFavorite(searchFavorites.data);
     }
 
+    // filterFavoritePlates()
     favoritePlate()
   },[]);
 
@@ -24,13 +32,21 @@ export function Favorite(){
       <h2>Meus favoritos</h2>
       <div className="favorites-content">
         {allPlatesFavorite.length > 0 ?
-        <Plate>
-          <img src={imageFavorite} alt="" />
-          <div>
-            <h3>Salada Radish</h3>
-            <p>Remover dos favoritos</p>
-          </div>
-        </Plate>
+          allPlatesFavorite.map((plate) => (
+            showAllPlates.map((allPlate, index) => {
+              if(allPlate.id === plate.plate_id){
+                return (
+                  <Plate key={index}>
+                  <img src={`${imageURL}${allPlate.image}`} alt="" />
+                  <div>
+                    <h3>Salada Radish</h3>
+                    <p>Remover dos favoritos</p>
+                  </div>
+                </Plate>
+                )
+              }
+            })
+          ))
         :
         <div>
           <p>Nenhum prato adicionado aos favoritos</p>
