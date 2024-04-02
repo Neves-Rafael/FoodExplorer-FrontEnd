@@ -5,6 +5,7 @@ import { PlateView } from "../pages/PlateView";
 import { NewPlate } from "../pages/NewPlate";
 import { EditPlate } from "../pages/EditPlate";
 import { OrderHistory } from "../pages/OrderHistory";
+import { Profile } from "../pages/Profile";
 
 export function AdminRoutes() {
   return (
@@ -14,6 +15,7 @@ export function AdminRoutes() {
       <Route path="/newplate" element={<NewPlate />} />
       <Route path="/editplate/:id" element={<EditPlate />} />
       <Route path="/order-history" element={<OrderHistory/>}/>
+      <Route path="/profile" element={<Profile/>}/>
 
       {/* <Route path="*" element={<Navigate to="/" />} /> */}
     </Routes>

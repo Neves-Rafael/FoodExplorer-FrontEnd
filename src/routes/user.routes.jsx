@@ -7,6 +7,7 @@ import { Cart } from "../pages/Cart";
 import { ConfirmPayment } from "../pages/ConfirmPayment";
 import { OrderHistory } from "../pages/OrderHistory";
 import { Favorite } from "../pages/Favorite";
+import { Profile } from "../pages/Profile";
 
 export function UserRoutes() {
   return (
@@ -18,6 +19,7 @@ export function UserRoutes() {
       <Route path="/cart" element={ <Cart />}/>
       <Route path="/order-history" element={<OrderHistory />}/>
       <Route path="/favorites" element={<Favorite />}/>
+      <Route path="/profile" element={<Profile/>}/>
 
       <Route path="*" element={<Home />} />
     </Routes>

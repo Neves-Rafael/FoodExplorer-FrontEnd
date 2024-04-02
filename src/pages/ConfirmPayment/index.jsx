@@ -1,6 +1,5 @@
 import { Container } from "./style";
 import { useEffect } from "react";
-import { api } from "../../service/api";
 import { useAuth } from "../../hooks/auth";
 import { useParams } from "react-router-dom";
 
@@ -11,7 +10,6 @@ import animationData from "../../assets/check-animate.json";
 export function ConfirmPayment(){
   const { updatePayment } = useAuth();
   const { id } = useParams();
-  console.log(id)
   
     const defaultOptions = {
       loop: false,
