@@ -4,24 +4,26 @@ import { Footer } from "../../components/Footer";
 import { useState, useEffect, useContext } from "react";
 import { api } from "../../service/api";
 import { PlateContext } from "../../hooks/plateRequest";
+import { useAuth } from "../../hooks/auth";
 
 export function Favorite(){
   const [allPlatesFavorite, setAllPlatesFavorite] = useState([]);
   const { showAllPlates } = useContext(PlateContext);
   const imageURL = `${api.defaults.baseURL}/files/`;
-  
-  
-  // function filterFavoritePlates(){
-    
-  // }
+  const { createFavorite  } = useAuth();
+
+  async function handleRemoveFavorite(plate_id){
+    console.log(plate_id)
+    await createFavorite(plate_id);
+    favoritePlate();
+  }
+
+  async function favoritePlate(){
+    const searchFavorites = await api.get("/favorites");
+    setAllPlatesFavorite(searchFavorites.data);
+  }
 
   useEffect(() => {
-    async function favoritePlate(){
-      const searchFavorites = await api.get("/favorites");
-      setAllPlatesFavorite(searchFavorites.data);
-    }
-
-    // filterFavoritePlates()
     favoritePlate()
   },[]);
 
@@ -30,29 +32,29 @@ export function Favorite(){
       <Header/>
       <main>
       <h2>Meus favoritos</h2>
-      <div className="favorites-content">
-        {allPlatesFavorite.length > 0 ?
-          allPlatesFavorite.map((plate) => (
-            showAllPlates.map((allPlate, index) => {
-              if(allPlate.id === plate.plate_id){
+        <div className="favorites-content">
+          {allPlatesFavorite.length > 0 ? (
+            allPlatesFavorite.map((plate) => {
+              const favoritePlate = showAllPlates.find((allPlate) => allPlate.id === plate.plate_id);
+              if (favoritePlate) {
                 return (
-                  <Plate key={index}>
-                  <img src={`${imageURL}${allPlate.image}`} alt="" />
-                  <div>
-                    <h3>Salada Radish</h3>
-                    <p>Remover dos favoritos</p>
-                  </div>
-                </Plate>
-                )
+                  <Plate key={favoritePlate.id}>
+                    <img src={`${imageURL}${favoritePlate.image}`} alt="" />
+                    <div>
+                      <h3>{favoritePlate.name}</h3>
+                      <p onClick={()=>handleRemoveFavorite(favoritePlate.id)}>Remover dos favoritos</p>
+                    </div>
+                  </Plate>
+                );
               }
+              return null;
             })
-          ))
-        :
-        <div>
-          <p>Nenhum prato adicionado aos favoritos</p>
+          ) : (
+            <div>
+              <p>Nenhum prato adicionado aos favoritos</p>
+            </div>
+          )}
         </div>
-        }
-      </div>
       </main>
       <Footer/>
     </Container>

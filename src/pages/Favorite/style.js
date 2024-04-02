@@ -22,7 +22,7 @@ export const Container = styled.div`
     display: flex;
     flex-wrap: wrap;
     gap: 4rem;
-    justify-content: space-around;
+    justify-content: space-evenly;
   }
 `;
 
@@ -33,6 +33,9 @@ export const Plate = styled.div`
 
   img{
     width: 10rem;
+    height: 10rem;
+    border-radius: 100%;
+    object-fit: cover;
   }
 
   h3{
@@ -45,7 +48,13 @@ export const Plate = styled.div`
   p{
     font-size: 1.2rem;
     line-height: 160%;
-    color: ${({theme}) => theme.COLORS.TOMATO_400 }
+    color: ${({theme}) => theme.COLORS.TOMATO_400 };
+    cursor: pointer;
+    display: inline-block;
+
+    &:hover{
+      color: red;
+    }
   }
 
 `;

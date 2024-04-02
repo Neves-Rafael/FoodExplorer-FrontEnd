@@ -24,10 +24,8 @@ export function Home() {
   }
 
   async function handleVerifyFavoritePlate(){
-    console.log("busca no bd");
     const searchFavorites = await api.get("/favorites");
     setIsFavorite(searchFavorites.data);
-    console.log(searchFavorites.data);
     return searchFavorites.data;
   }
 
