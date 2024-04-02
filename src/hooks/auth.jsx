@@ -101,6 +101,34 @@ function AuthProvider({ children }) {
     }
   }
 
+  async function createFavorite(plate_id){
+    console.log(plate_id)
+    try {
+      await api.post("/favorites", {plate_id: plate_id})
+    } catch (error) {
+      if (error.response) {
+        toast.dark(error.response.data.message);
+      } else {
+        toast.dark("Não foi possível adicionar aos Favoritos.");
+      }
+    }
+  }
+
+  async function updateFavorite({user_id, plate}){
+    try {
+      await api.put("/favorite", {
+        user_id: user_id,
+        plate  
+      })
+    } catch (error) {
+      if (error.response) {
+        toast.dark(error.response.data.message);
+      } else {
+        toast.dark("Não foi possível adicionar aos Favoritos.");
+      }
+    }
+  }
+
   useEffect(() => {
     const user = localStorage.getItem("@foodexplorer:user");
 
@@ -120,6 +148,8 @@ function AuthProvider({ children }) {
         updatePlate,
         createPayment,
         updatePayment,
+        createFavorite,
+        updateFavorite,
         user: data.user,
       }}>
       {children}

@@ -80,7 +80,7 @@ export function Header({plates}) {
       <MenuOptions $isopen={optionsIsOpen} >
         <IoIosOptions size={32} onClick={()=> setOptionsIsOpen(true)}/>
         <div className="options-header" ref={selectRef}>
-          <p onClick={()=> navigate("/")}>Favoritos</p>
+          <p onClick={()=> navigate("/favorites")}>Favoritos</p>
           <p onClick={()=> navigate("/order-history")}>Histórico de pedido</p>
           <p onClick={()=> navigate("/")}>Perfil</p>
           <div className="light-mode">

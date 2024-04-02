@@ -13,14 +13,22 @@ export function Home() {
   const navigate = new useNavigate();
 
   const [platesPerCategory, setPlatesPerCategory] = useState("");
+  const [isFavorite, setIsFavorite] = useState([])
 
   const plateSections = ["Refeição", "Sobremesas", "Bebidas"];
 
   const imageURL = `${api.defaults.baseURL}/files/`;
-  console.log(imageURL)
 
   const testeCallback = () => {
     return platesPerCategory;
+  }
+
+  async function handleVerifyFavoritePlate(){
+    console.log("busca no bd");
+    const searchFavorites = await api.get("/favorites");
+    setIsFavorite(searchFavorites.data);
+    console.log(searchFavorites.data);
+    return searchFavorites.data;
   }
 
   useEffect(() => {
@@ -29,8 +37,10 @@ export function Home() {
       setPlatesPerCategory(response.data);
     }
 
+    handleVerifyFavoritePlate();
     fetchPlates();
   }, []);
+
 
   return (
     <Container>
@@ -56,6 +66,8 @@ export function Home() {
                 plate={plate}
                 view={() => navigate(`/plateview/${plate.id}`)}
                 plateImage={`${imageURL}/${String(plate.image)}`}
+                isFavorite={isFavorite}
+                verifyFavorite={handleVerifyFavoritePlate}
               />
             ))}
           </Section>
