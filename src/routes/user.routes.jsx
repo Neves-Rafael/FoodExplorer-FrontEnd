@@ -8,6 +8,7 @@ import { ConfirmPayment } from "../pages/ConfirmPayment";
 import { OrderHistory } from "../pages/OrderHistory";
 import { Favorite } from "../pages/Favorite";
 import { Profile } from "../pages/Profile";
+import { About } from "../pages/About";
 
 export function UserRoutes() {
   return (
@@ -20,6 +21,7 @@ export function UserRoutes() {
       <Route path="/order-history" element={<OrderHistory />}/>
       <Route path="/favorites" element={<Favorite />}/>
       <Route path="/profile" element={<Profile/>}/>
+      <Route path="/about" element={<About/>}/>
 
       <Route path="*" element={<Home />} />
     </Routes>

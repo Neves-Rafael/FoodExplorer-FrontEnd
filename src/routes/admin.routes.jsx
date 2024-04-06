@@ -6,6 +6,7 @@ import { NewPlate } from "../pages/NewPlate";
 import { EditPlate } from "../pages/EditPlate";
 import { OrderHistory } from "../pages/OrderHistory";
 import { Profile } from "../pages/Profile";
+import { About } from "../pages/About";
 
 export function AdminRoutes() {
   return (
@@ -16,6 +17,7 @@ export function AdminRoutes() {
       <Route path="/editplate/:id" element={<EditPlate />} />
       <Route path="/order-history" element={<OrderHistory/>}/>
       <Route path="/profile" element={<Profile/>}/>
+      <Route path="/about" element={<About/>}/>
 
       {/* <Route path="*" element={<Navigate to="/" />} /> */}
     </Routes>

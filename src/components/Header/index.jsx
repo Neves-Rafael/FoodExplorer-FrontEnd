@@ -83,6 +83,7 @@ export function Header({plates}) {
           <p onClick={()=> navigate("/favorites")}>Favoritos</p>
           <p onClick={()=> navigate("/order-history")}>Histórico de pedido</p>
           <p onClick={()=> navigate("/profile")}>Perfil</p>
+          <p onClick={()=> navigate("/about")}>Quem somos</p>
           <div className="light-mode">
             {lightMode === "light" ? <MdLightMode size={32} onClick={()=>handleLightMode("dark")}/>
             : <MdDarkMode size={32} onClick={()=> handleLightMode("light")}/>}
