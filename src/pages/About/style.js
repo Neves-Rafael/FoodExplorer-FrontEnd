@@ -4,6 +4,12 @@ export const Container = styled.div`
   main{
     min-height: calc(100dvh - 200px);
     padding: 4rem 2rem;
+    max-width: 80rem;
+    margin: auto;
+
+    @media(min-width: 768px){
+      padding: 8rem 2rem;
+    }
   }
 `;
 
@@ -45,11 +51,16 @@ export const AboutUs = styled.div`
     height: 25rem;
     object-fit: cover;
     margin-bottom: 6rem;
+
+    @media(min-width: 768px){
+      height: 40rem;
+    }
   }
 
 `;
 
 export const OpenHour = styled.div`
+  text-align: center;
   h3, p{
     font-family: "Poppins";
   }
@@ -74,6 +85,8 @@ export const OpenHour = styled.div`
   .open-hour div{
     display: flex;
     justify-content: space-between;
+    margin: auto;
+    max-width: 44rem;
   }
 
 `;
@@ -81,7 +94,52 @@ export const OpenHour = styled.div`
 export const SocialMedia = styled.div`
   background-color: ${({theme}) => theme.COLORS.DARK_1000};
   border-radius: 8px;
-  width: 100%;
-  padding: 1rem;
-  margin: 4rem 0;
+  max-width: 44rem;
+  padding: 2rem;
+  margin: 6rem auto;
+  text-align: center;
+
+  h3{
+    font-weight: 500;
+    font-family: "Poppins";
+  }
+  
+  .social{
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 2rem;
+
+    svg path{
+      transition: all ease-in-out 300ms;
+    }
+
+    svg:nth-child(1):hover{
+      cursor: pointer;
+      path{
+        color: steelblue;
+      }
+    }
+
+    svg:nth-child(2):hover{
+      cursor: pointer;
+      path{
+        color: blueviolet;
+      }
+    }
+
+    svg:nth-child(3):hover{
+      cursor: pointer;
+      path{
+        color: burlywood;
+      }
+    }
+
+    svg:nth-child(4):hover{
+      cursor: pointer;
+      path{
+        color: chartreuse;
+      }
+    }
+  }
 `;

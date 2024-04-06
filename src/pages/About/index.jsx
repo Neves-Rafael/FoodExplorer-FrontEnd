@@ -1,6 +1,8 @@
 import { Container, AboutUs, OpenHour, SocialMedia } from "./style";
 import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
+import { FaInstagramSquare, FaFacebook, FaWhatsapp } from "react-icons/fa";
+import { FaSquareXTwitter } from "react-icons/fa6";
 
 export function About(){
   return(
@@ -55,7 +57,13 @@ export function About(){
           </div>
         </OpenHour>
         <SocialMedia>
-          <h3>Nos acompanhe também pelas redes sociais</h3>
+          <h3>Nos acompanhe também pelas redes sociais.</h3>
+          <div className="social">
+            <FaFacebook size={30}/>
+            <FaInstagramSquare size={30}/>
+            <FaSquareXTwitter size={30}/>
+            <FaWhatsapp size={30}/>
+          </div>
         </SocialMedia>
       </main>
     <Footer/>
