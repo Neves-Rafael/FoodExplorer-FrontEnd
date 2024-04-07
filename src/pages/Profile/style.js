@@ -1,13 +1,25 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+  width: 100%;
+
   main{
     min-height: calc(100dvh - 200px);
     max-width: 120rem;
-    margin: auto;
+    padding: 4rem 2rem;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 4rem;
+    
+    @media(min-width: 768px){
+      align-items: center;
+      gap: 4rem;
+    }
+
+    @media(min-width: 1024px){
+      flex-direction: row;
+      margin: auto;
+    }
   }
 `;
 
@@ -21,6 +33,11 @@ export const ProfileContent = styled.div`
   padding: 4rem;
   max-width: 30rem;
   height: 40rem;
+  margin-bottom: 4rem;
+  
+  @media(min-width: 768px){
+    margin-bottom: 0;
+  }
 
   .user-info{
     text-align: center;
@@ -36,9 +53,13 @@ export const ProfileContent = styled.div`
   }
 
   .avatar-animate{
-    width: 40rem;
-    margin-top: -8rem;
-    margin-bottom: -4rem;
+    width: 30rem;
+
+    @media(min-width: 768px){
+      width: 40rem;
+      margin-top: -8rem;
+      margin-bottom: -4rem;
+    }
   }
 
   p{
@@ -50,13 +71,21 @@ export const ProfileContent = styled.div`
 
 export const FormContainer = styled.div`
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 2rem;
   background-color: ${({theme}) => theme.COLORS.DARK_1000};
   border-radius: 2rem;
-  padding: 4rem;
   width: 100%;
-  height: 40rem;
+  padding: 2rem;
+  max-width: 30rem;
+  
+  @media(min-width: 768px){
+    height: 40rem;
+    padding: 4rem;
+    flex-wrap: wrap;
+    flex-direction: row;
+    max-width: 100%;
+  }
 
   div input {
     background-color: ${({theme}) => theme.COLORS.DARK_500};
@@ -69,8 +98,15 @@ export const FormContainer = styled.div`
 
   .button-container{
     display: flex;
+    margin-top: 2rem;
+    flex-direction: column;
     gap: 2rem;
     width: 100%;
+    
+    @media(min-width: 768px){
+      margin-top: 0;
+      flex-direction: row;
+    }
   }
 
   .update-button{
