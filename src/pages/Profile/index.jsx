@@ -15,7 +15,7 @@ export function Profile(){
   const [newPassword, setNewPassword] = useState("");
   const [oldPassword, setOldPassword] = useState("");
   const [isEnable, setIsEnable] = useState(false);
-  const { updateAccount } = useAuth();
+  const { updateAccount, user } = useAuth();
 
   const defaultOptions = {
     loop: false,
@@ -46,10 +46,9 @@ export function Profile(){
           <div className="avatar-animate">
             <Lottie2 options={defaultOptions}/>
           </div>
-          <div>
-            <p>Bem vindo Rafael</p>
-            <p>Bem vindo Rafael</p>
-            <p>Bem vindo Rafael</p>
+          <div className="user-info">
+            <p>{user.name}</p>
+            <p>{user.email}</p>
           </div>
         </ProfileContent>
         <FormContainer $isEnable={isEnable}>
@@ -82,9 +81,9 @@ export function Profile(){
             onChange={(e) => setNewPassword(e.target.value)}
           />
           <div className="button-container">
-            <Button className="update-button" title={"Atualizar"} onClick={handleUpdateProfile}/>
             <Button title={"Voltar"}/>
             <Button title={"Recuperar senha"}/>
+            <Button className="update-button" title={"Atualizar"} onClick={handleUpdateProfile}/>
           </div>
         </FormContainer>
       </main>

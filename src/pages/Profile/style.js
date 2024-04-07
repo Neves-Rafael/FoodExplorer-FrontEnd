@@ -20,7 +20,20 @@ export const ProfileContent = styled.div`
   border-radius: 2rem;
   padding: 4rem;
   max-width: 30rem;
-  height: 46rem;
+  height: 40rem;
+
+  .user-info{
+    text-align: center;
+
+    p:nth-child(1){
+      color: ${({theme}) => theme.COLORS.LIGHT_300 };
+    }
+
+    p:nth-child(2){
+      color: ${({theme}) => theme.COLORS.LIGHT_500 };
+      font-size: 1.6rem;
+    }
+  }
 
   .avatar-animate{
     width: 40rem;
@@ -43,7 +56,7 @@ export const FormContainer = styled.div`
   border-radius: 2rem;
   padding: 4rem;
   width: 100%;
-  height: 46rem;
+  height: 40rem;
 
   div input {
     background-color: ${({theme}) => theme.COLORS.DARK_500};
