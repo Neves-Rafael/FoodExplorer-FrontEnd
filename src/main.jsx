@@ -1,7 +1,7 @@
 import ReactDOM from "react-dom/client";
 import React from "react";
 import { ThemeProvider } from "styled-components";
-import Theme from "./style/theme";
+import { theme } from "./style/theme";
 import GlobalStyles from "./style/global";
 
 import { Routes } from "./routes";
@@ -14,8 +14,8 @@ import 'react-toastify/dist/ReactToastify.css';
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <ThemeProvider theme={Theme}>
-      <GlobalStyles />
+    <ThemeProvider theme={theme}>
+    <GlobalStyles />
       <AuthProvider>
         <PlateProvider>
           <Routes />

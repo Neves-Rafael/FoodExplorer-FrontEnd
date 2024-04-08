@@ -85,6 +85,14 @@ export const Requests = styled.div`
 export const MenuOptions = styled.div`
   position: relative;
   display: none;
+  
+  svg:hover{
+    cursor: pointer;
+    path{
+      color: ${({theme}) => theme.COLORS.CARROT_100};
+      transition: all ease-in-out 200ms;
+    }
+  }
 
   @media(min-width:1024px ){
       display: flex;
@@ -109,7 +117,9 @@ export const MenuOptions = styled.div`
       font-family: "Poppins";
       cursor: pointer;
       transition: all ease-in-out 200ms;
-
+      text-align: center;
+      width: 70%;
+      
       &:hover{
         color: ${({theme}) => theme.COLORS.CARROT_100}
       }
@@ -121,20 +131,15 @@ export const MenuOptions = styled.div`
       transition: all ease-in 200ms;
     }
 
-    p + p, .light-mode{
-      width: 100%;
-      text-align: center;
-      padding: 0 4rem;
-
-      &:before{
+    p + p:before{
         content: "";
         display: block;
-        width: 100%;
+        margin: auto;
+        width: 20rem;
         height: 2px;
         background-color: darkgray;
         opacity: .3;
         margin-bottom: 1rem;
       }
     }
-  }
 `;

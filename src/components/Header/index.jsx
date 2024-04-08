@@ -15,10 +15,6 @@ import { PlateContext } from "../../hooks/plateRequest";
 import { useState, useEffect, useContext, useRef } from "react";
 import { IoIosOptions } from "react-icons/io";
 
-import { MdDarkMode } from "react-icons/md";
-import { MdLightMode } from "react-icons/md";
-
-
 export function Header({plates}) {
   const navigate = useNavigate();
   const { logout, user } = useAuth();
@@ -27,7 +23,6 @@ export function Header({plates}) {
   const [ menuIsOpen, setMenuIsOpen ] = useState(false);
   const [ optionsIsOpen, setOptionsIsOpen] = useState(false);
   const selectRef = useRef(null);
-  const [ lightMode, setLightMode] = useState("dark");
 
   const verifyAdminRole = user.role === USER_ROLE.ADMIN;
 
@@ -35,16 +30,14 @@ export function Header({plates}) {
 
   function handleOutsideClick(event) {
     if (selectRef.current && !selectRef.current.contains(event.target)) {
+      console.log("Fechou")
       setOptionsIsOpen(false);
     }
   }
-
-  function handleLightMode(mode){
-    if(mode === "light"){
-      setLightMode(mode)
-    }else{
-      setLightMode(mode)
-    }
+  
+  function handlerOpenOptions(){
+    console.log("dale")
+    setOptionsIsOpen(prevState => prevState === true ? false : true)
   }
 
   useEffect(() => {
@@ -77,17 +70,13 @@ export function Header({plates}) {
 
       <InputSearch plates={plates}/>
 
-      <MenuOptions $isopen={optionsIsOpen} >
-        <IoIosOptions size={32} onClick={()=> setOptionsIsOpen(true)}/>
-        <div className="options-header" ref={selectRef}>
+      <MenuOptions $isopen={optionsIsOpen} ref={selectRef}>
+        <IoIosOptions size={32} onClick={handlerOpenOptions} />
+        <div className="options-header" >
           <p onClick={()=> navigate("/favorites")}>Favoritos</p>
           <p onClick={()=> navigate("/order-history")}>Histórico de pedido</p>
           <p onClick={()=> navigate("/profile")}>Perfil</p>
           <p onClick={()=> navigate("/about")}>Quem somos</p>
-          <div className="light-mode">
-            {lightMode === "light" ? <MdLightMode size={32} onClick={()=>handleLightMode("dark")}/>
-            : <MdDarkMode size={32} onClick={()=> handleLightMode("light")}/>}
-          </div>
         </div>
       </MenuOptions>
 
