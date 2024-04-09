@@ -2,7 +2,6 @@ import { Container, Confirm } from "./style";
 import { Button } from "../Button";
 
 export function Modal({confirmMessage, onClick, modalState, additionalInfo}){
-console.log(additionalInfo)
   
   return(
     <Container>

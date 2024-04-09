@@ -55,7 +55,6 @@ export function PlateView() {
     
     allRequest.push(newRequest);
     localStorage.setItem("pedidos", JSON.stringify(allRequest));
-    console.log("pedido feito com sucesso!");
     updateRequest();
   }
 

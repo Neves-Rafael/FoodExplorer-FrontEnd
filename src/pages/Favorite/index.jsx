@@ -16,7 +16,6 @@ export function Favorite(){
   const navigate = useNavigate();
 
   async function handleRemoveFavorite(plate_id){
-    console.log(plate_id)
     await createFavorite(plate_id);
     favoritePlate();
   }

@@ -33,6 +33,11 @@ export function Header({plates}) {
       setOptionsIsOpen(false);
     }
   }
+
+  function handleLogout(){
+    logout();
+    navigate("/")
+  }
   
   function handlerOpenOptions(){
     setOptionsIsOpen(prevState => prevState === true ? false : true)
@@ -85,7 +90,7 @@ export function Header({plates}) {
         />
       </Requests>
 
-      <Logout onClick={logout}>
+      <Logout onClick={handleLogout}>
         <RxExit size={32} />
       </Logout>
 

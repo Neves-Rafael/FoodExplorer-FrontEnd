@@ -17,17 +17,17 @@ export function Cart(){
   const navigate = useNavigate();
 
   function totalSum(){
-    const dale = JSON.parse(localStorage.getItem("pedidos")) || null;
+    const orders = JSON.parse(localStorage.getItem("pedidos")) || null;
 
-    if(!dale){
+    if(!orders){
       return
     }
     
-    setPlateRequest(dale);
+    setPlateRequest(orders);
     
     let somaTotal = 0;
 
-    for (const plate of dale) {
+    for (const plate of orders) {
       somaTotal += Number(plate.price.replace(",", "."));
     }
 

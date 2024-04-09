@@ -22,10 +22,6 @@ export function Select({ handleCategory, placeholder, value, category, itemOptio
     }
   }
 
-  function teste(item){
-    console.log(item)
-  }
-
   const verifyStatusOrder = (status) => {
     let colorStatus = "";
     switch(status){
@@ -77,9 +73,7 @@ export function Select({ handleCategory, placeholder, value, category, itemOptio
                 <>
                   <span className={verifyStatusOrder(item)}/>
                   {item}
-                </>
-                
-                {/* {teste(item)} */}
+                </>                
               </div>
             ))}
         </Options>

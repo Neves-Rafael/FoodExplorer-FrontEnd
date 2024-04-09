@@ -44,11 +44,10 @@ export function InputSearch({plates}){
       })
     })
 
-    const teste = [...filteredPlatesBySearch, ...filteredPlatesByIngredients]
-    const teste2 = [...new Set(teste)];
-    console.log(teste2)
+    const allFilteredSearch = [...filteredPlatesBySearch, ...filteredPlatesByIngredients]
+    const uniqueFilteredSearch = [...new Set(allFilteredSearch)];
 
-    setPlateAndIngredients(teste2)
+    setPlateAndIngredients(uniqueFilteredSearch)
   }, [inputSearch])
 
   return (

@@ -59,9 +59,7 @@ export function NewPlate() {
       return;
     }
 
-    
     if(name && category && ingredients && value && description && image){
-      console.log("criado")
       const plate = { name, category, ingredients, value, description };
       await createPlate({ plate, image });
 
@@ -72,7 +70,6 @@ export function NewPlate() {
       setImage(null)
       setIngredients([])
       setIsDisable(true)
-      console.log("criado")
     }
     return
   }

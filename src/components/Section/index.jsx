@@ -29,13 +29,11 @@ export function Section({ title, children }) {
     }
   };
 
-  const teste = children;
-
   return (
     <Container>
       <p>{title}</p>
-        <Splide options={splideOptions} id="teste">
-          {teste.length > 0 && teste.map((item) => (
+        <Splide options={splideOptions} id="children">
+          {children.length > 0 && children.map((item) => (
             <SplideSlide key={item.key}>
               {item}
             </SplideSlide>

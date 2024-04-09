@@ -17,7 +17,6 @@ export const PlateProvider = ({ children }) => {
     async function searchPlates(){
       const response = await api.get("/plates",);
       setShowAllPlates(response.data);
-      console.log("Busca no banco com plateRequest")
     }
 
     searchPlates();

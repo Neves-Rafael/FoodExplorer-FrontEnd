@@ -63,7 +63,6 @@ export function EditPlate() {
     if(name && category && ingredients && value && description && image){
       const plate = { name, category, ingredients, value, description, id };
       await updatePlate({ plate, image });
-      console.log("atualizado")
       navigate("/")
     }
     return

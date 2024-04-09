@@ -88,7 +88,6 @@ function AuthProvider({ children }) {
   }
 
   async function updatePayment(id){
-    console.log(id)
     try {
       await api.put(`/payment/qrcode/${id}`);
 
@@ -102,7 +101,6 @@ function AuthProvider({ children }) {
   }
 
   async function createFavorite(plate_id){
-    console.log(plate_id)
     try {
       await api.post("/favorites", {plate_id: plate_id})
     } catch (error) {

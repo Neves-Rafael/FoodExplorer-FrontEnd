@@ -19,7 +19,7 @@ export function Home() {
 
   const imageURL = `${api.defaults.baseURL}/files/`;
 
-  const testeCallback = () => {
+  const selectPlates = () => {
     return platesPerCategory;
   }
 
@@ -42,7 +42,7 @@ export function Home() {
 
   return (
     <Container>
-      <Header plates={testeCallback}/>
+      <Header plates={selectPlates}/>
 
       <main>
         <Banner>
