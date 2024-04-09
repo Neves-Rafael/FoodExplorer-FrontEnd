@@ -5,12 +5,15 @@ import { useState, useEffect, useContext } from "react";
 import { api } from "../../service/api";
 import { PlateContext } from "../../hooks/plateRequest";
 import { useAuth } from "../../hooks/auth";
+import { FaArrowLeft } from "react-icons/fa6";
+import { useNavigate } from "react-router-dom"
 
 export function Favorite(){
   const [allPlatesFavorite, setAllPlatesFavorite] = useState([]);
   const { showAllPlates } = useContext(PlateContext);
   const imageURL = `${api.defaults.baseURL}/files/`;
   const { createFavorite  } = useAuth();
+  const navigate = useNavigate();
 
   async function handleRemoveFavorite(plate_id){
     console.log(plate_id)
@@ -31,7 +34,10 @@ export function Favorite(){
     <Container>
       <Header/>
       <main>
-      <h2>Meus favoritos</h2>
+        <div className="text-content">
+          <button className="back-button" onClick={()=> navigate(-1)}>{<FaArrowLeft size={20}/>} Voltar</button>
+          <h2>Pratos favoritos</h2>
+        </div>
         <div className="favorites-content">
           {allPlatesFavorite.length > 0 ? (
             allPlatesFavorite.map((plate) => {

@@ -10,19 +10,23 @@ export const Container = styled.div`
       font-family: "Poppins";
       font-weight: 500;
       font-size: 3.2rem;
-      margin: 2rem 2rem 4rem;
     }
 
-    /* button:nth-child(2){
-      font-family: "Poppins";
-      font-weight: 500;
-      font-size: 2rem;
-      margin: 6rem 2rem;
+    .back-button{
       background: none;
       display: flex;
-      align-items: center;
-      gap: 1rem
-    } */
+      gap: 1rem;
+      margin:2rem 0 4rem 0;
+    }
+
+    .text-content{
+      margin: 2rem;
+
+      @media(min-width: 1024px){
+        max-width: 1200px;
+        margin: 6rem auto 2rem;
+      }
+    }
   }
 `;
 

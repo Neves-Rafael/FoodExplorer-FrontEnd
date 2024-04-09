@@ -30,13 +30,11 @@ export function Header({plates}) {
 
   function handleOutsideClick(event) {
     if (selectRef.current && !selectRef.current.contains(event.target)) {
-      console.log("Fechou")
       setOptionsIsOpen(false);
     }
   }
   
   function handlerOpenOptions(){
-    console.log("dale")
     setOptionsIsOpen(prevState => prevState === true ? false : true)
   }
 

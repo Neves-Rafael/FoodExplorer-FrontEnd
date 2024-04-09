@@ -4,7 +4,6 @@ import { Footer } from "../../components/Footer";
 import { api } from "../../service/api";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ButtonText } from "../../components/ButtonText";
 import { FaArrowLeft } from "react-icons/fa6";
 import { useAuth } from "../../hooks/auth";
 import { USER_ROLE } from "../../utils/roles";
@@ -16,23 +15,34 @@ export function OrderHistory(){
   const navigate = useNavigate();
   const { user } = useAuth();
   const verifyAdminRole = user.role === USER_ROLE.ADMIN;
-  const [updateStatusOrder, setUpdateStatusOrder] = useState("")
+  // const [updateStatusOrder, setUpdateStatusOrder] = useState("")
 
   function updateTimeToBrazil(timer){
     let setData = new Date(timer);
-
-    function addZero(data){
-      if(data < 10){
-        data = "0" + data;
-      }
-      return data
-    }
     
-    const day = addZero(setData.getDate());
-    const month = addZero(setData.getDate());
-    const hours = addZero(setData.getHours());
-    const minutes = addZero(setData.getMinutes());
+    let day = setData.getDate();
+    let month = setData.getDate();
+    let hours = (setData.getHours() - 3); //GMT-3 Brasília;
+    let minutes = setData.getMinutes();
 
+    function verifyFormat(){
+      if(hours < 0){
+        hours += 24;
+        day --;
+      }
+
+      if(hours > 24){
+        hours -= 24;
+        day ++;
+      }
+
+      hours < 10 ? hours = "0" + hours : hours;
+      minutes < 10 ? minutes = "0" + minutes : minutes;
+      day < 10 ? day = "0" + day : day;
+      month < 10 ? month = "0" + month : month;
+    }
+    verifyFormat()
+    
     return `${day}/${month} às ${hours}h${minutes}`
   }
 
@@ -59,16 +69,14 @@ export function OrderHistory(){
     return colorStatus;
   }
 
-  const handleStatusOrder = (statusUpdate) => {
-    console.log(statusUpdate)
-    setUpdateStatusOrder(statusUpdate);
-  }
+  // const handleStatusOrder = (statusUpdate) => {
+  //   setUpdateStatusOrder(statusUpdate);
+  // }
 
-  useEffect(()=> {
-    if(updateStatusOrder && verifyAdminRole){
-      // console.log(updateStatusOrder)
-    }
-  },[updateStatusOrder]);
+  // useEffect(()=> {
+  //   if(updateStatusOrder && verifyAdminRole){
+  //   }
+  // },[updateStatusOrder]);
 
   useEffect(()=> {
     async function searchMyOrders(){
@@ -89,8 +97,10 @@ export function OrderHistory(){
     <Container>
       <Header/>
       <main>
-        {/* <button onClick={()=> navigate(-1)}>{<FaArrowLeft size={24}/>} Voltar</button> */}
-        <h2>Histórico de Pedidos</h2>
+        <div className="text-content">
+          <button className="back-button" onClick={()=> navigate(-1)}>{<FaArrowLeft size={20}/>} Voltar</button>
+          <h2>Histórico de Pedidos</h2>
+        </div>
         <MobileContent>
           {historyOrder.length > 0 && historyOrder.map((order, index)=> (
             <div className="request-content" key={index} onClick={() => verifyAdminRole ? null : navigate(`/payment/${order.id}`)}>
