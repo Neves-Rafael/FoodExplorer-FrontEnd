@@ -40,11 +40,14 @@ export function InputSearch(){
       return
     }
 
-    const filteredPlatesBySearch = allPlates.filter(plate => plate.name.includes(inputSearch))
+    const filteredPlatesBySearch = allPlates.filter(plate => {
+      console.log(plate.name, inputSearch)
+      return plate.name.toLowerCase().includes(inputSearch.toLowerCase())
+    })
 
     const filteredPlatesByIngredients = allPlates.filter(plate => {
         return plate.ingredients.some(ingredient => {
-          return ingredient.name.includes(inputSearch)
+          return ingredient.name.toLowerCase().includes(inputSearch.toLowerCase())
       })
     })
 

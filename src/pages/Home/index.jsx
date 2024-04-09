@@ -17,7 +17,7 @@ export function Home() {
   
   const { showAllPlates } = useContext(PlateContext);
 
-  const [isFavorite, setIsFavorite] = useState([])
+  const [isFavorite, setIsFavorite] = useState([]);
 
   const plateSections = ["Refeição", "Sobremesas", "Bebidas"];
 
