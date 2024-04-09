@@ -26,7 +26,6 @@ export function Card({ onCountChange, plateImage, view, plate, verifyFavorite, i
   };
 
   function calculate() {
-    // localStorage.removeItem("pedidos");
     const allRequest = JSON.parse(localStorage.getItem("pedidos")) || [];
     const priceInReal = plate.value ? plate.value.replace(",", ".") : null;
 
@@ -54,6 +53,16 @@ export function Card({ onCountChange, plateImage, view, plate, verifyFavorite, i
     return isFavorite.some(object => object.plate_id === plate.id );
   }
 
+  const verifyPlateValue = () =>{
+    const verifyCents = plateValue.includes(",")
+    
+    if(verifyCents === false){
+      return `${plateValue},00`
+    }else{
+      return plateValue
+    }
+  }
+
   useEffect(()=> {
     verifyStatusFavorite();
   },[])
@@ -64,19 +73,21 @@ export function Card({ onCountChange, plateImage, view, plate, verifyFavorite, i
      ? <FaRegEdit size={30} className="edit-icon" onClick={() => navigate(`/editplate/${plate.id}`)}/> 
      : 
       <>
-        {verifyStatusFavorite() ?
+        { verifyStatusFavorite() ?
           <FaHeart  className="favorite-icon" onClick={()=> handleFavoritePlate(plate.id)}/>
           :
           <FaRegHeart  className="favorite-icon" onClick={()=> handleFavoritePlate(plate.id)} /> 
-          }      
+        }      
       </>
       }
+
       <img src={plateImage && plateImage} alt="" onClick={view} />
       <p className="plate-name" onClick={view}>{plate.name} <TbArrowBadgeRightFilled size={18}/></p>
       <p className="plate-description">{plate.description}</p>
-      <p className="value">R$ {plateValue}</p>
+      <p className="value">R$ {verifyPlateValue()}</p>
 
-      {verifyAdminRole ? null : <div className="plate-count">
+      {verifyAdminRole ? null : 
+      <div className="plate-count">
         <Count onCountChange={handleCountChange} />
         <Button title={"Incluir"} onClick={calculate} />
       </div>}

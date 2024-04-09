@@ -9,10 +9,14 @@ import { api } from "../../service/api";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { useContext } from "react";
+import { PlateContext } from "../../hooks/plateRequest";
+
 export function Home() {
   const navigate = new useNavigate();
+  
+  const { showAllPlates } = useContext(PlateContext);
 
-  const [platesPerCategory, setPlatesPerCategory] = useState("");
   const [isFavorite, setIsFavorite] = useState([])
 
   const plateSections = ["Refeição", "Sobremesas", "Bebidas"];
@@ -20,7 +24,7 @@ export function Home() {
   const imageURL = `${api.defaults.baseURL}/files/`;
 
   const selectPlates = () => {
-    return platesPerCategory;
+    return showAllPlates;
   }
 
   async function handleVerifyFavoritePlate(){
@@ -29,16 +33,9 @@ export function Home() {
     return searchFavorites.data;
   }
 
-  useEffect(() => {
-    async function fetchPlates() {
-      const response = await api.get("/plates",);
-      setPlatesPerCategory(response.data);
-    }
-
+  useEffect(() => { 
     handleVerifyFavoritePlate();
-    fetchPlates();
   }, []);
-
 
   return (
     <Container>
@@ -57,7 +54,7 @@ export function Home() {
         {plateSections && plateSections.map((section) => (
           <Section title={section} key={section}>
 
-            {platesPerCategory && platesPerCategory.filter((plate) => plate.category === section)
+            {showAllPlates && showAllPlates.filter((plate) => plate.category === section)
             .map((plate) => (
               <Card
                 key={String(plate.id)}

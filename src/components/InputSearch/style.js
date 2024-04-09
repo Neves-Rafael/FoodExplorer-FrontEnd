@@ -1,11 +1,9 @@
 import styled  from "styled-components";
 
 export const Container = styled.div`
-
   display: none;
   position: relative;
 
-  
   div input::placeholder {
     text-align: center;
   }

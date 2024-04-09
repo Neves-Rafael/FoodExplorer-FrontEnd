@@ -3,10 +3,14 @@ import { Container, SearchResult } from "./style";
 import { IoSearchOutline } from "react-icons/io5";
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { PlateContext } from "../../hooks/plateRequest";
 
-export function InputSearch({plates}){
+export function InputSearch(){
   const selectRef = useRef(null);
   const navigate = useNavigate();
+
+  const {showAllPlates} = useContext(PlateContext);
 
   const [ isOpen, setIsOpen ] = useState(false);
   const [ allPlates, setAllPlates ] = useState([]);
@@ -14,7 +18,7 @@ export function InputSearch({plates}){
   const [ platesAndIngredients, setPlateAndIngredients ] = useState([]);
 
   function allPlatesResult(){
-    setAllPlates(plates())
+    setAllPlates(showAllPlates)
     setIsOpen(true)
   }
 

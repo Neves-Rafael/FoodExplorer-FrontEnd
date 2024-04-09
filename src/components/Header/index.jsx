@@ -15,7 +15,7 @@ import { PlateContext } from "../../hooks/plateRequest";
 import { useState, useEffect, useContext, useRef } from "react";
 import { IoIosOptions } from "react-icons/io";
 
-export function Header({plates}) {
+export function Header() {
   const navigate = useNavigate();
   const { logout, user } = useAuth();
   const { plateRequest } = useContext(PlateContext);
@@ -71,7 +71,7 @@ export function Header({plates}) {
         {verifyAdminRole ? <FoodExplorerAdmin/> : <FoodExplorer />}
       </Logo>
 
-      <InputSearch plates={plates}/>
+      <InputSearch/>
 
       <MenuOptions $isopen={optionsIsOpen} ref={selectRef}>
         <IoIosOptions size={32} onClick={handlerOpenOptions} />
@@ -103,7 +103,7 @@ export function Header({plates}) {
         } 
       </OrderCount>
 
-      <SideMenu menuIsOpen={menuIsOpen} menuIsClose={() => setMenuIsOpen(false)} plates={plates}/>
+      <SideMenu menuIsOpen={menuIsOpen} menuIsClose={() => setMenuIsOpen(false)}/>
     </Container>
   );
 }
