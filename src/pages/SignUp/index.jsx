@@ -3,12 +3,13 @@ import { Form } from "../../components/Forms";
 import { Button } from "../../components/Button";
 import { FoodExplorer } from "../../components/FoodExplorer";
 import login from "../../assets/Hamburger-rafiki.svg";
-import { api } from "../../service/api";
 import { useAuth } from "../../hooks/auth";
 
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+
+import Lottie3 from 'react-lottie';
+import animationData from "../../assets/food-animate.json";
 
 export function SignUp() {
   const [name, setName] = useState("");
@@ -17,6 +18,15 @@ export function SignUp() {
   const { createAccount } = useAuth();
 
   const navigate = useNavigate();
+
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: animationData,
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid slice'
+    }
+  }
 
   async function handleSignUp() {
    const create = await createAccount({name, email, password});
@@ -27,7 +37,7 @@ export function SignUp() {
     <Container>
       <Logo>
         <FoodExplorer />
-        <img src={login} alt="Uma mulher alegre comendo donuts com cobertura e recheio" />
+        <Lottie3 options={defaultOptions}/>
       </Logo>
 
       <Section>

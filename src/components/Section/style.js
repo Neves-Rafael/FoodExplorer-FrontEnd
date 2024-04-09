@@ -45,6 +45,10 @@ export const Container = styled.section`
     margin-bottom: 2.4rem;
     position: relative;
     z-index: 3;
+    
+    @media(min-width: 1024px){
+      font-size: 3.2rem;
+    }
   }
 
   #children {

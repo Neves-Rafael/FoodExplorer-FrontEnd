@@ -83,7 +83,7 @@ export const Logo = styled.div`
   @media (min-width: ${({ theme }) => theme.MEDIA_QUERY.LARGE}){
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 4rem;
     width: 30rem;
   }
 `;

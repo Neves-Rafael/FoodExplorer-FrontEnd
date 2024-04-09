@@ -6,7 +6,9 @@ import { Container, Logo, Section, MakeLogin, MakeAccount } from "./style";
 import { useState } from "react";
 import { useAuth } from "../../hooks/auth";
 import { useNavigate } from "react-router-dom";
-import login from "../../assets/Hamburger-rafiki.svg";
+
+import Lottie3 from 'react-lottie';
+import animationData from "../../assets/food-animate.json";
 
 export function SignIn() {
   const [email, setEmail] = useState("");
@@ -14,6 +16,15 @@ export function SignIn() {
 
   const navigate = useNavigate();
   const { sessionLogin } = useAuth();
+
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: animationData,
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid slice'
+    }
+  }
 
   function handleSessionLogin() {
     sessionLogin({ email, password });
@@ -23,7 +34,7 @@ export function SignIn() {
     <Container>
       <Logo>
         <FoodExplorer />
-        <img src={login} alt="Uma mulher alegre comendo donuts com cobertura e recheio" />
+        <Lottie3 options={defaultOptions}/>
       </Logo>
 
       <Section>
