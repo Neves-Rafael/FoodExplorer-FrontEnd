@@ -7,9 +7,12 @@ import { Button } from "../../components/Button";
 import { Tag } from "../../components/Tag";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/auth";
+import { Modal } from "../../components/Modal";
+import { toast } from "react-toastify"
 
 export function Cart(){
   const [plateRequest, setPlateRequest] = useState([]);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const imageURL = `${api.defaults.baseURL}/files/`;
   const [plateSum, setPlateSum] = useState("");
   const { createPayment } = useAuth()
@@ -46,13 +49,25 @@ export function Cart(){
     totalSum();
   }
 
+  const handleModalIsOpen = (state) => {
+    setModalIsOpen(state)
+  }
+
   function handleClearRequest(){
     localStorage.setItem("pedidos", JSON.stringify([]));
+    // setPlateRequest([]);
     totalSum();
+    localStorage.removeItem("pedidos");
   }
 
   async function handleRequestPayment(){
+    setModalIsOpen(false)
     const requestPlate = JSON.parse(localStorage.getItem("pedidos"));
+
+    if(!requestPlate){
+      toast.dark("Nenhum pedido Registrado, verifique seu carrinho e tente novamente!")
+      return
+    }
 
     const idPayment = await createPayment({
       requestPlate,
@@ -60,6 +75,7 @@ export function Cart(){
   });
 
     navigate(`/payment/${idPayment}`);
+    localStorage.removeItem("pedidos")
   }
 
   useEffect(() => {
@@ -99,12 +115,16 @@ export function Cart(){
         <h3>{`Total R$ ${plateSum || "00,00"}`}</h3>
 
         <Options>
-          <Button title={"Voltar ao cardápio"} onClick={()=> navigate(-1)}/>
+          <Button title={"Voltar ao cardápio"} onClick={()=> navigate("/")}/>
           <Button title={"Excluir pedidos"} onClick={handleClearRequest}/>
-          <Button title={"Pagamento"} onClick={handleRequestPayment}/>
+          <Button title={"Pagamento"} onClick={()=> setModalIsOpen(true)}/>
         </Options>
       </main>
       <Footer/>
+      {modalIsOpen && <Modal 
+        message={"Deseja confirmar pedido e seguir para Pagamento?"}
+        modalState={handleModalIsOpen}
+        onClick={handleRequestPayment}/>}
     </Container>
   )
 }

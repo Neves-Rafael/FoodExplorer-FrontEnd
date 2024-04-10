@@ -22,6 +22,9 @@ export function Profile(){
 
   const navigate = useNavigate();
 
+  const resultUpdate = JSON.parse(localStorage.getItem("@foodexplorer:profile"));
+
+
   const defaultOptions = {
     loop: true,
     autoplay: true,
@@ -36,8 +39,13 @@ export function Profile(){
       toast.dark("Senha inválida")
       return
     }
-    const resultUpdate = await updateAccount({name, email, newPassword, oldPassword});
-    setProfileInfo(resultUpdate)
+    await updateAccount({name, email, newPassword, oldPassword});
+    setProfileInfo(JSON.parse(localStorage.getItem("@foodexplorer:profile")))
+
+    setEmail("")
+    setNewPassword("")
+    setName("")
+    setOldPassword("")
   }
 
   useEffect(()=> {
@@ -49,6 +57,10 @@ export function Profile(){
   },[name, email, newPassword, oldPassword])
 
   useEffect(()=> {
+    console.log(resultUpdate)
+    if(resultUpdate){
+      return setProfileInfo(resultUpdate)
+    }
     setProfileInfo(user)
   },[])
 

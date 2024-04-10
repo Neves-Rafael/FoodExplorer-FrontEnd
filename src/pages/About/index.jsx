@@ -12,6 +12,7 @@ export function About(){
         <AboutUs>
           <div className="info-container">
             <h3>Quem Somos</h3>
+            <p className="text-info">Texto Gerado por IA</p>
             <p className="title-text">Bem-vindo ao <span>Food explorer</span>, onde cada refeição é uma jornada de descoberta gastronômica.</p>
             <p className="description-text"> Somos mais do que apenas um restaurante - somos uma comunidade apaixonada por explorar novos sabores e experiências culinárias únicas. Desde a nossa fundação, em 2018, temos nos dedicado a oferecer não apenas comida excepcional, mas também uma atmosfera acolhedora e serviço de excelência.</p>
           </div>
@@ -65,6 +66,7 @@ export function About(){
             <FaWhatsapp size={30}/>
           </div>
         </SocialMedia>
+
       </main>
     <Footer/>
     </Container>

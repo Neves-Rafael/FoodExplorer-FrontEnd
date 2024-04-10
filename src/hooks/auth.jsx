@@ -27,6 +27,7 @@ function AuthProvider({ children }) {
   function logout() {
     localStorage.removeItem("@foodexplorer:user");
     localStorage.removeItem("pedidos");
+    localStorage.removeItem("@foodexplorer:profile")
 
     setData({});
   }
@@ -134,7 +135,7 @@ function AuthProvider({ children }) {
     try {
       const attAccount = await api.put("/users", { name, email, newPassword, oldPassword});
       toast.dark("Usuário atualizado com sucesso.");
-      return (attAccount.data)
+      localStorage.setItem("@foodexplorer:profile", JSON.stringify(attAccount.data))
     } catch (error) {
       console.log(error)
       if (error.response) {

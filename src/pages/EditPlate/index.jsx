@@ -23,8 +23,8 @@ export function EditPlate() {
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
   const [isDisable, setIsDisable] = useState(true);
-  const [plateToUpdate, setPlateToUpdate] = useState({})
-  const [modalIsOpen, setModalIsOpen] = useState(false)
+  const [plateToUpdate, setPlateToUpdate] = useState({});
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   
   const [ingredients, setIngredients] = useState([]);
   const [newIngredient, setNewIngredient] = useState("")

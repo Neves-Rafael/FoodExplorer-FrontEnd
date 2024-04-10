@@ -1,6 +1,15 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+  width: 100%;
+
+  .text-info{
+    font-size: 1.2rem;
+    text-align: end;
+    font-family: "Poppins";
+    color: gray;
+  }
+
   main{
     min-height: calc(100dvh - 200px);
     padding: 4rem 2rem;
