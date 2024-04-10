@@ -83,7 +83,6 @@ export function EditPlate() {
     }
   }
 
-
   useEffect(() =>{
     if(name && category && ingredients && value && description && image){
       setIsDisable(false)
@@ -101,7 +100,6 @@ export function EditPlate() {
   }, []);
 
   useEffect(() => {
-    // Esta função será chamada quando plateToUpdate for atualizado
     placeholderPlateToEdit();
   }, [plateToUpdate]);
 

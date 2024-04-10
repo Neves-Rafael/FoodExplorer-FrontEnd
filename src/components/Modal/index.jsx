@@ -9,7 +9,7 @@ export function Modal({message, onClick, modalState}){
         <p>{message}</p>
         <div className="button-container">
           <Button title={"Cancelar"} onClick={() => modalState(false)}/>
-          <Button title={"Apagar"} onClick={onClick}/>
+          <Button title={"Continuar"} onClick={onClick}/>
         </div>
       </Confirm>
     </Container>

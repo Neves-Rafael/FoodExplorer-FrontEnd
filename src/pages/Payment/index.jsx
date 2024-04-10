@@ -8,7 +8,8 @@ import { PiReceipt } from "react-icons/pi";
 import { ButtonText } from "../../components/ButtonText"
 import { RiArrowLeftSLine } from "react-icons/ri";
 import { api } from "../../service/api";
-import { useNavigate, useParams, redirect } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify"
 
 import { AiOutlineStop } from "react-icons/ai";
 import { PiForkKnifeBold } from "react-icons/pi";
@@ -23,13 +24,16 @@ export function Payment(){
   const [methodSelect, setMethodSelect] = useState("pix");
   const [availablePayment, setAvailablePayment] = useState("disable");
   const imageURL = `${api.defaults.baseURL}/files/`;
-  const [statusPayment, setStatusPayment] = useState("");
+  // const [statusPayment, setStatusPayment] = useState("");
   const [plateRequest, setPlateRequest] = useState([]);
   const [resultStatus, setResultStatus] = useState({});
+  const [cardNumber, setCardNumber] = useState("");
+  const [cardValidate, setCardValidate] = useState("");
+  const [cvc, setCvc] = useState("");
   const [price, setPrice] = useState("");
   const { id } = useParams();
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const paymentStatus = [
     {
@@ -64,17 +68,28 @@ export function Payment(){
     while(refreshTime < 4){
       refreshTime++;
 
-    setTimeout( async()=> {
-      const paymentResult = await api.get(`payment/${id}`);
+      setTimeout( async()=> {
+        const paymentResult = await api.get(`payment/${id}`);
 
-      paymentStatus.map((status)=>{
-        if(status.status === paymentResult.data.status){
-          setResultStatus(status)
-          return
-        }
-      })
-      },1000 * 10 * (refreshTime + 1))//5segundos + 5
+        paymentStatus.map((status)=>{
+          if(status.status === paymentResult.data.status){
+            setResultStatus(status)
+            return
+          }
+        })
+      },1000 * 10 * (refreshTime + 1))//10 segundos
     }
+  }
+
+  function handleCardPayment(){
+    if(cardNumber.length < 12 || cardValidate.length < 4 || cvc.length < 3){
+      toast.dark("Dados do cartão inválido.")
+      return
+    }
+    redirectToPayment();
+    setCardNumber("")
+    setCardValidate("")
+    setCvc("")
   }
 
   useEffect(() => {
@@ -162,27 +177,46 @@ export function Payment(){
               <>
                 { methodSelect === "pix" ?
                   <>
-                    <img src={`https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${api.defaults.baseURL}/payment/qrcode/${id}` }alt="" />
+                    <img src={`https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${api.defaults.baseURL}/payment/qrcode/${id}`}/>
 
                     <p onClick={redirectToPayment} >Acessar link {<IoCopy />}</p>
                   </>
                   :
                   <CreditPayment>
-                    <Form label="Número do Cartão" onChange={(e) => e.target.value} placeholder={"0000 0000 0000 0000"}/>
+                    <Form 
+                      label="Número do Cartão"
+                      value={cardNumber}
+                      onChange={(e) => setCardNumber(e.target.value)} 
+                      placeholder={"0000 0000 0000 0000"}
+                    />
                     <div>
-                      <Form label="Validade" onChange={(e) => e.target.value} placeholder={"04/25"}/>
-                      <Form label="CVC" onChange={(e) => e.target.value} placeholder={"000"}/>
+                      <Form 
+                        value={cardValidate}
+                        label="Validade" 
+                        onChange={(e) => setCardValidate(e.target.value)}
+                        placeholder={"04/25"}
+                      />
+                      <Form 
+                        value={cvc}
+                        label="CVC" 
+                        onChange={(e) => setCvc(e.target.value)} 
+                        placeholder={"000"}
+                      />
                     </div>
-                    <Button title="Finalizar pagamento" icon={PiReceipt} id="finish-payment"/>
+                    <Button 
+                      title="Finalizar pagamento" 
+                      icon={PiReceipt} id="finish-payment"
+                      onClick={handleCardPayment}
+                    />
                   </CreditPayment> 
                 }
               </>
             }
           </div>
           <div className="testando">
-            <Button title={"Voltar"}/>
-            <Button title={"Novo Pedido"}/>
-            <Button title={"Ver histórico"}/>
+            <Button title={"Voltar"} onClick={()=> navigate(-1)}/>
+            <Button title={"Novo Pedido"} onClick={()=> navigate("/")}/>
+            <Button title={"Ver histórico"} onClick={()=> navigate("/order-history")}/>
           </div>
         </StatusPayment>
       </div>

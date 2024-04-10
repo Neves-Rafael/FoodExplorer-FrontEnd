@@ -41,7 +41,6 @@ export function InputSearch(){
     }
 
     const filteredPlatesBySearch = allPlates.filter(plate => {
-      console.log(plate.name, inputSearch)
       return plate.name.toLowerCase().includes(inputSearch.toLowerCase())
     })
 
