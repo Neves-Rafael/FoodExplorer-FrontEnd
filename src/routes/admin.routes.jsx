@@ -19,7 +19,7 @@ export function AdminRoutes() {
       <Route path="/profile" element={<Profile/>}/>
       <Route path="/about" element={<About/>}/>
 
-      {/* <Route path="*" element={<Navigate to="/" />} /> */}
+      <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );
 }

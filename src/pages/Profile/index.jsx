@@ -5,9 +5,11 @@ import { Button } from "../../components/Button";
 import { Form } from "../../components/Forms";
 import { useState, useEffect } from "react";
 import { useAuth } from "../../hooks/auth";
+import { useNavigate } from "react-router-dom";
 
 import Lottie2 from 'react-lottie';
 import animationData from "../../assets/person-animate.json";
+import { toast } from "react-toastify"
 
 export function Profile(){
   const [name, setName] = useState("");
@@ -15,10 +17,13 @@ export function Profile(){
   const [newPassword, setNewPassword] = useState("");
   const [oldPassword, setOldPassword] = useState("");
   const [isEnable, setIsEnable] = useState(false);
+  const [ profileInfo, setProfileInfo] = useState("")
   const { updateAccount, user } = useAuth();
 
+  const navigate = useNavigate();
+
   const defaultOptions = {
-    loop: false,
+    loop: true,
     autoplay: true,
     animationData: animationData,
     rendererSettings: {
@@ -26,8 +31,13 @@ export function Profile(){
     }
   }
 
-  function handleUpdateProfile(){
-    updateAccount({name, email, newPassword, oldPassword});
+  async function handleUpdateProfile (){
+    if(newPassword && newPassword.length < 6 || oldPassword && oldPassword.length < 6){
+      toast.dark("Senha inválida")
+      return
+    }
+    const resultUpdate = await updateAccount({name, email, newPassword, oldPassword});
+    setProfileInfo(resultUpdate)
   }
 
   useEffect(()=> {
@@ -38,6 +48,10 @@ export function Profile(){
     setIsEnable(false)
   },[name, email, newPassword, oldPassword])
 
+  useEffect(()=> {
+    setProfileInfo(user)
+  },[])
+
   return(
     <Container>
       <Header/>
@@ -47,8 +61,8 @@ export function Profile(){
             <Lottie2 options={defaultOptions}/>
           </div>
           <div className="user-info">
-            <p>{user.name}</p>
-            <p>{user.email}</p>
+            <p>{profileInfo.name}</p>
+            <p>{profileInfo.email}</p>
           </div>
         </ProfileContent>
         <FormContainer $isEnable={isEnable}>
@@ -81,8 +95,10 @@ export function Profile(){
             onChange={(e) => setNewPassword(e.target.value)}
           />
           <div className="button-container">
-            <Button title={"Voltar"}/>
-            <Button title={"Recuperar senha"}/>
+            <Button title={"Voltar"} onClick={()=> navigate(-1)}/>
+            <Button title={"Falar com suporte"} 
+              onClick={()=> window.location.href = "mailto:nevesrafael.dev@gmail.com"}
+            />
             <Button className="update-button" title={"Atualizar"} onClick={handleUpdateProfile}/>
           </div>
         </FormContainer>

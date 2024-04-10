@@ -131,13 +131,12 @@ function AuthProvider({ children }) {
   }
 
   async function updateAccount({name, email, newPassword, oldPassword}){
-    
     try {
-      await api.put("/users", { name, email, newPassword, oldPassword})
-      .then(() => {
-        toast.dark("Usuário atualizado com sucesso.");
-      })
+      const attAccount = await api.put("/users", { name, email, newPassword, oldPassword});
+      toast.dark("Usuário atualizado com sucesso.");
+      return (attAccount.data)
     } catch (error) {
+      console.log(error)
       if (error.response) {
         toast.dark(error.response.data.message);
       } else toast.dark("Não foi possível atualizar!");
