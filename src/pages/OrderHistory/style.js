@@ -152,7 +152,7 @@ export const DesktopContent = styled.div`
     }
 
     th:nth-child(1){
-      width: 20rem;
+      width: 22rem;
     }
 
     th:nth-child(2){

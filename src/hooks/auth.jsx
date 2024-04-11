@@ -43,6 +43,7 @@ function AuthProvider({ children }) {
 
         await api.patch(`/plates/image/${plateId}`, uploadImage);
       }
+      toast.dark("Prato adicionado com sucesso.")
     } catch (error) {
       if (error.response) {
         toast.dark(error.response.data.message);
@@ -62,11 +63,26 @@ function AuthProvider({ children }) {
 
         await api.patch(`/plates/image/${plate.id}`, uploadImage);
       }
+      toast.dark("Prato atualizado!")
     } catch (error) {
       if (error.response) {
         toast.dark(error.response.data.message);
       } else {
         toast.dark("Não foi possível atualizar.");
+      }
+    }
+  }
+
+  async function deletePlate(id){
+    try {
+      await api.delete(`/plates/${id}`);
+
+      toast.dark("Prato deletado!")
+    } catch (error) {
+      if (error.response) {
+        toast.dark(error.response.data.message);
+      } else {
+        toast.dark("Não foi possível deletar.");
       }
     }
   }
@@ -144,6 +160,17 @@ function AuthProvider({ children }) {
     }
   }
 
+  async function updateOrderHistory({id, newStatus}){
+    try {
+      await api.patch(`/payment/${id}`, {newStatus});
+    } catch (error) {
+      console.log(error)
+      if (error.response) {
+        toast.dark(error.response.data.message);
+      } else toast.dark("Não foi possível atualizar!");
+    }
+  }
+
   useEffect(() => {
     const user = localStorage.getItem("@foodexplorer:user");
 
@@ -161,8 +188,10 @@ function AuthProvider({ children }) {
         logout,
         createPlate,
         updatePlate,
+        deletePlate,
         createPayment,
         updatePayment,
+        updateOrderHistory,
         createFavorite,
         createAccount,
         updateAccount,

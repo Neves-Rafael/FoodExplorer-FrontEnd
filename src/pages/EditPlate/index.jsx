@@ -15,7 +15,7 @@ import { Footer } from "../../components/Footer";
 import { Modal } from "../../components/Modal";
 
 export function EditPlate() {
-  const { updatePlate } = useAuth();
+  const { updatePlate, deletePlate } = useAuth();
 
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
@@ -29,7 +29,6 @@ export function EditPlate() {
   const [ingredients, setIngredients] = useState([]);
   const [newIngredient, setNewIngredient] = useState("")
   const { id } = useParams();
-
 
   const navigate = useNavigate();
 
@@ -60,7 +59,7 @@ export function EditPlate() {
   }
 
   async function handleUpdatePlate() {
-    if(name && category && ingredients && value && description && image){
+    if(name && category && ingredients && value && description){
       const plate = { name, category, ingredients, value, description, id };
       await updatePlate({ plate, image });
       navigate("/")
@@ -69,7 +68,7 @@ export function EditPlate() {
   }
 
   async function handleDeletePlate(){
-    await api.delete(`/plates/${id}`);
+    deletePlate(id)
     navigate("/")
   }
 
@@ -84,7 +83,7 @@ export function EditPlate() {
   }
 
   useEffect(() =>{
-    if(name && category && ingredients && value && description && image){
+    if(name && category && ingredients && value && description){
       setIsDisable(false)
     }
 
@@ -136,9 +135,10 @@ export function EditPlate() {
           <div>
             <p>Categoria</p>
             <Select
-              category={category}
+              itemOption={["Refeição", "Sobremesas", "Bebidas"]}
               onChange={(e) => setCategory(e.target.value)}
               handleCategory={handleCategoryInSelectComponent}
+              category={plateToUpdate.category}
             />
           </div>
         </Line1>
@@ -182,13 +182,13 @@ export function EditPlate() {
         </ButtonAction>
       </Section>
       <Footer/>
-      { modalIsOpen ? 
+      { modalIsOpen && 
         <Modal 
         onClick={handleDeletePlate} 
         modalState={handleModalIsOpen} 
-        confirmMessage={`Realmente deseja excluir este prato ?`}
+        message={`Realmente deseja excluir este prato ?`}
         additionalInfo={plateToUpdate}/> 
-      : null}
+      }
     </Container>
   );
 }

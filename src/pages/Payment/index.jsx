@@ -45,7 +45,7 @@ export function Payment(){
       message: "Pedido entregue",
       image: PiForkKnifeBold,
     },{
-      status: "em andamento",
+      status: "processando",
       message: "Processando o pedido",
       image: LuTimer,
     },{

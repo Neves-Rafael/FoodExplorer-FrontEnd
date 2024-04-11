@@ -7,15 +7,17 @@ import { useNavigate } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa6";
 import { useAuth } from "../../hooks/auth";
 import { USER_ROLE } from "../../utils/roles";
-import { Select} from "../../components/Select"
+import { Select} from "../../components/Select";
+import { toast } from "react-toastify"
 
 
 export function OrderHistory(){
   const [historyOrder, setHistoryOrder] = useState([]);
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { user, updateOrderHistory } = useAuth();
   const verifyAdminRole = user.role === USER_ROLE.ADMIN;
-  // const [updateStatusOrder, setUpdateStatusOrder] = useState("")
+  const [updateStatusOrder, setUpdateStatusOrder] = useState("");
+  const [idOrderToUpdate, setIdOderToUpdate] = useState(0);
 
   function updateTimeToBrazil(timer){
     let setData = new Date(timer);
@@ -52,7 +54,7 @@ export function OrderHistory(){
     case 'cancelado':
       colorStatus="red"
       break;
-    case 'em andamento':
+    case 'processando':
       colorStatus="light-blue"
       break;
     case 'finalizado':
@@ -69,14 +71,16 @@ export function OrderHistory(){
     return colorStatus;
   }
 
-  // const handleStatusOrder = (statusUpdate) => {
-  //   setUpdateStatusOrder(statusUpdate);
-  // }
+  const handleStatusOrder = async (statusUpdate) => {
+    toast.dark("Pedido atualizado.")
+    setUpdateStatusOrder(statusUpdate);
+    await updateOrderHistory({id: idOrderToUpdate, newStatus: statusUpdate});
+  }
 
-  // useEffect(()=> {
-  //   if(updateStatusOrder && verifyAdminRole){
-  //   }
-  // },[updateStatusOrder]);
+  useEffect(()=> {
+    if(updateStatusOrder && verifyAdminRole){
+    }
+  },[updateStatusOrder]);
 
   useEffect(()=> {
     async function searchMyOrders(){
@@ -122,10 +126,10 @@ export function OrderHistory(){
               </div>
 
               {verifyAdminRole &&
-              <div>
+              <div onClick={()=> setIdOderToUpdate(order.id)}>
                 <Select
                   handleCategory={handleStatusOrder}
-                  itemOption={["cancelado","pendente", "finalizado", "cozinha", "em andamento"]}
+                  itemOption={["cancelado","pendente", "finalizado", "cozinha", "processando"]}
                   placeholder={<>
                   {<span className={verifyStatusOrder(order.status)}/>}
                   {order.status}
@@ -155,10 +159,10 @@ export function OrderHistory(){
                       </p>
                     </>
                     :
-                    <div>
+                    <div onClick={()=> setIdOderToUpdate(order.id)}>
                       <Select
                       handleCategory={handleStatusOrder}
-                      itemOption={["cancelado","pendente", "finalizado", "cozinha", "em andamento"]}
+                      itemOption={["cancelado","pendente", "finalizado", "cozinha", "processando"]}
                       placeholder={<>
                       {<span className={verifyStatusOrder(order.status)}/>}
                       {order.status}
