@@ -15,7 +15,7 @@ export const Container = styled.div`
     display: block;
   }
 
-  input{
+  input {
     padding-right: 2rem;
   }
 
@@ -28,7 +28,7 @@ export const Container = styled.div`
       font-size: 1.2rem;
       font-family: "Poppins";
 
-      @media(min-width: ${({ theme }) => theme.MEDIA_QUERY.SMALL_G}){
+      @media (min-width: ${({ theme }) => theme.MEDIA_QUERY.SMALL_G}) {
         width: auto;
       }
     }
@@ -39,14 +39,14 @@ export const Container = styled.div`
 
     div:nth-child(2) {
       display: none;
-    } 
+    }
 
     div:nth-child(1):has(:focus) + div:nth-child(2),
     div:nth-child(2):has(:hover) {
       margin-top: 0;
-      display: flex; 
+      display: flex;
     }
-    
+
     width: calc(100% - 6rem);
     margin: 3rem 0 0 3rem;
   }
@@ -81,6 +81,6 @@ export const MenuHeader = styled.div`
     gap: 1rem;
     align-items: center;
     font-size: 2.2rem;
-    padding: 0 0 2rem 2rem ;
+    padding: 0 0 2rem 2rem;
   }
 `;

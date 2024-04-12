@@ -1,76 +1,79 @@
-import { Container, ProfileContent, FormContainer } from "./style";
+import { useAuth } from "../../hooks/auth";
+import { useState, useEffect } from "react";
+import { Form } from "../../components/Forms";
+import { useNavigate } from "react-router-dom";
 import { Header } from "../../components/Header";
 import { Footer } from "../../components/Footer";
 import { Button } from "../../components/Button";
-import { Form } from "../../components/Forms";
-import { useState, useEffect } from "react";
-import { useAuth } from "../../hooks/auth";
-import { useNavigate } from "react-router-dom";
+import { Container, ProfileContent, FormContainer } from "./style";
 
-import Lottie2 from 'react-lottie';
+import Lottie2 from "react-lottie";
+import { toast } from "react-toastify";
 import animationData from "../../assets/person-animate.json";
-import { toast } from "react-toastify"
 
-export function Profile(){
+export function Profile() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [oldPassword, setOldPassword] = useState("");
   const [isEnable, setIsEnable] = useState(false);
-  const [ profileInfo, setProfileInfo] = useState("")
+  const [profileInfo, setProfileInfo] = useState("");
   const { updateAccount, user } = useAuth();
 
   const navigate = useNavigate();
 
-  const resultUpdate = JSON.parse(localStorage.getItem("@foodexplorer:profile"));
-
+  const resultUpdate = JSON.parse(
+    localStorage.getItem("@foodexplorer:profile")
+  );
 
   const defaultOptions = {
     loop: true,
     autoplay: true,
     animationData: animationData,
     rendererSettings: {
-      preserveAspectRatio: 'xMidYMid slice'
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
+
+  async function handleUpdateProfile() {
+    if (
+      (newPassword && newPassword.length < 6) ||
+      (oldPassword && oldPassword.length < 6)
+    ) {
+      toast.dark("Senha inválida");
+      return;
     }
+    await updateAccount({ name, email, newPassword, oldPassword });
+    setProfileInfo(JSON.parse(localStorage.getItem("@foodexplorer:profile")));
+
+    setEmail("");
+    setNewPassword("");
+    setName("");
+    setOldPassword("");
   }
 
-  async function handleUpdateProfile (){
-    if(newPassword && newPassword.length < 6 || oldPassword && oldPassword.length < 6){
-      toast.dark("Senha inválida")
-      return
+  useEffect(() => {
+    if (name || email || newPassword || oldPassword) {
+      setIsEnable(true);
+      return;
     }
-    await updateAccount({name, email, newPassword, oldPassword});
-    setProfileInfo(JSON.parse(localStorage.getItem("@foodexplorer:profile")))
+    setIsEnable(false);
+  }, [name, email, newPassword, oldPassword]);
 
-    setEmail("")
-    setNewPassword("")
-    setName("")
-    setOldPassword("")
-  }
-
-  useEffect(()=> {
-    if(name || email || newPassword || oldPassword){
-      setIsEnable(true)
-      return
+  useEffect(() => {
+    if (resultUpdate) {
+      return setProfileInfo(resultUpdate);
     }
-    setIsEnable(false)
-  },[name, email, newPassword, oldPassword])
+    setProfileInfo(user);
+  }, []);
 
-  useEffect(()=> {
-    console.log(resultUpdate)
-    if(resultUpdate){
-      return setProfileInfo(resultUpdate)
-    }
-    setProfileInfo(user)
-  },[])
-
-  return(
+  return (
     <Container>
-      <Header/>
+      <Header />
       <main>
         <ProfileContent>
           <div className="avatar-animate">
-            <Lottie2 options={defaultOptions}/>
+            <Lottie2 options={defaultOptions} />
           </div>
           <div className="user-info">
             <p>{profileInfo.name}</p>
@@ -107,15 +110,22 @@ export function Profile(){
             onChange={(e) => setNewPassword(e.target.value)}
           />
           <div className="button-container">
-            <Button title={"Voltar"} onClick={()=> navigate(-1)}/>
-            <Button title={"Falar com suporte"} 
-              onClick={()=> window.location.href = "mailto:nevesrafael.dev@gmail.com"}
+            <Button title={"Voltar"} onClick={() => navigate(-1)} />
+            <Button
+              title={"Falar com suporte"}
+              onClick={() =>
+                (window.location.href = "mailto:nevesrafael.dev@gmail.com")
+              }
             />
-            <Button className="update-button" title={"Atualizar"} onClick={handleUpdateProfile}/>
+            <Button
+              className="update-button"
+              title={"Atualizar"}
+              onClick={handleUpdateProfile}
+            />
           </div>
         </FormContainer>
       </main>
-      <Footer/>
+      <Footer />
     </Container>
-  )
+  );
 }

@@ -1,130 +1,140 @@
-import { Container, RequestList , Options } from "./style";
-import { Header } from "../../components/Header"
-import { Footer } from "../../components/Footer";
-import { useState, useEffect } from "react";
+import { toast } from "react-toastify";
 import { api } from "../../service/api";
-import { Button } from "../../components/Button";
 import { Tag } from "../../components/Tag";
-import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/auth";
+import { useState, useEffect } from "react";
 import { Modal } from "../../components/Modal";
-import { toast } from "react-toastify"
+import { useNavigate } from "react-router-dom";
+import { Header } from "../../components/Header";
+import { Footer } from "../../components/Footer";
+import { Button } from "../../components/Button";
+import { Container, RequestList, Options } from "./style";
 
-export function Cart(){
+export function Cart() {
   const [plateRequest, setPlateRequest] = useState([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const imageURL = `${api.defaults.baseURL}/files/`;
   const [plateSum, setPlateSum] = useState("");
-  const { createPayment } = useAuth()
+  const { createPayment } = useAuth();
 
   const navigate = useNavigate();
 
-  function totalSum(){
+  function totalSum() {
     const orders = JSON.parse(localStorage.getItem("pedidos")) || null;
 
-    if(!orders){
-      return
+    if (!orders) {
+      return;
     }
-    
+
     setPlateRequest(orders);
-    
+
     let somaTotal = 0;
 
     for (const plate of orders) {
       somaTotal += Number(plate.price.replace(",", "."));
     }
 
-    setPlateSum(somaTotal.toFixed(2).replace(".", ","))
+    setPlateSum(somaTotal.toFixed(2).replace(".", ","));
   }
 
-  function removePlateList(item){
+  function removePlateList(item) {
     const filterPLate = plateRequest.filter((plate) => {
-      if(plate !== item){
-        return plate
+      if (plate !== item) {
+        return plate;
       }
-    })
-   
+    });
+
     localStorage.setItem("pedidos", JSON.stringify(filterPLate));
 
     totalSum();
   }
 
   const handleModalIsOpen = (state) => {
-    setModalIsOpen(state)
-  }
+    setModalIsOpen(state);
+  };
 
-  function handleClearRequest(){
+  function handleClearRequest() {
     localStorage.setItem("pedidos", JSON.stringify([]));
-    // setPlateRequest([]);
     totalSum();
     localStorage.removeItem("pedidos");
   }
 
-  async function handleRequestPayment(){
-    setModalIsOpen(false)
+  async function handleRequestPayment() {
+    setModalIsOpen(false);
     const requestPlate = JSON.parse(localStorage.getItem("pedidos"));
 
-    if(!requestPlate){
-      toast.dark("Nenhum pedido Registrado, verifique seu carrinho e tente novamente!")
-      return
+    if (!requestPlate) {
+      toast.dark(
+        "Nenhum pedido Registrado, verifique seu carrinho e tente novamente!"
+      );
+      return;
     }
 
     const idPayment = await createPayment({
       requestPlate,
-      plateSum: plateSum
-  });
+      plateSum: plateSum,
+    });
 
     navigate(`/payment/${idPayment}`);
-    localStorage.removeItem("pedidos")
+    localStorage.removeItem("pedidos");
   }
 
   useEffect(() => {
     totalSum();
-  }, [])
+  }, []);
 
-  return(
+  return (
     <Container>
-      <Header/>
+      <Header />
       <main>
         <h2>Meus Pedidos</h2>
 
         <RequestList>
-          {plateRequest.length > 0 && plateRequest ? plateRequest.map((item, index) => (
-            <div className="plate-content" key={index}>
-              <img src={`${imageURL}/${String(item.plate.image)}`} alt="" />
-              <div className="plate-info">
-                <div>
-                  <p>{`${item.quantity} x ${item.plate.name}`}</p>
-                  <div className="tags-plate">
-                    {item.plate.ingredients.map((ingredient, index) => (
-                      <Tag title={ingredient.name} key={index}/>
-                    ))}
+          {plateRequest.length > 0 && plateRequest ? (
+            plateRequest.map((item, index) => (
+              <div className="plate-content" key={index}>
+                <img src={`${imageURL}/${String(item.plate.image)}`} alt="" />
+                <div className="plate-info">
+                  <div>
+                    <p>{`${item.quantity} x ${item.plate.name}`}</p>
+                    <div className="tags-plate">
+                      {item.plate.ingredients.map((ingredient, index) => (
+                        <Tag title={ingredient.name} key={index} />
+                      ))}
+                    </div>
+                    <p>{`R$ ${item.price}`}</p>
                   </div>
-                  <p>{`R$ ${item.price}`}</p>
+                  <button
+                    className="delete-plate-request"
+                    onClick={() => removePlateList(item)}>
+                    Excluir
+                  </button>
                 </div>
-                  <button className="delete-plate-request" onClick={() => removePlateList(item)}>Excluir</button>
               </div>
-            </div> ))
-            :
+            ))
+          ) : (
             <div className="plate-content">
               <p>Nenhum Pedido Registrado</p>
-            </div>}
-
+            </div>
+          )}
         </RequestList>
 
         <h3>{`Total R$ ${plateSum || "00,00"}`}</h3>
 
         <Options>
-          <Button title={"Voltar ao cardápio"} onClick={()=> navigate("/")}/>
-          <Button title={"Excluir pedidos"} onClick={handleClearRequest}/>
-          <Button title={"Pagamento"} onClick={()=> setModalIsOpen(true)}/>
+          <Button title={"Voltar ao cardápio"} onClick={() => navigate("/")} />
+          <Button title={"Excluir pedidos"} onClick={handleClearRequest} />
+          <Button title={"Pagamento"} onClick={() => setModalIsOpen(true)} />
         </Options>
       </main>
-      <Footer/>
-      {modalIsOpen && <Modal 
-        message={"Deseja confirmar pedido e seguir para Pagamento?"}
-        modalState={handleModalIsOpen}
-        onClick={handleRequestPayment}/>}
+      <Footer />
+      {modalIsOpen && (
+        <Modal
+          message={"Deseja confirmar pedido e seguir para Pagamento?"}
+          modalState={handleModalIsOpen}
+          onClick={handleRequestPayment}
+        />
+      )}
     </Container>
-  )
+  );
 }

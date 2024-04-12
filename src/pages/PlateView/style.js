@@ -2,15 +2,14 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   width: 100%;
-  height: 100dvh;
+  min-height: calc(100dvh - 20rem);
   position: relative;
 
   display: grid;
   grid-template-areas:
     "header"
     "content";
-  grid-template-rows: 120px auto;
-
+  grid-template-rows: 12rem auto;
 `;
 
 export const Main = styled.main`
@@ -25,18 +24,18 @@ export const Main = styled.main`
     margin: auto;
   }
 
-  @media (min-width: 425px) {
+  @media (min-width: ${({ theme }) => theme.MEDIA_QUERY.SMALL_G}) {
     padding: 6rem 0;
   }
 
-  @media (min-width: 1024px) {
+  @media (min-width: ${({ theme }) => theme.MEDIA_QUERY.LARGE}) {
     display: flex;
     max-width: 1100px;
     align-items: center;
     gap: 5rem;
     width: 100%;
     padding: 10rem 4rem;
-    height: calc(100dvh - 200px);
+    min-height: calc(100dvh - 20rem);
     margin: auto;
   }
 
@@ -52,12 +51,12 @@ export const PlateImage = styled.img`
   object-fit: cover;
   border-radius: 50%;
 
-  @media (min-width: 425px) {
+  @media (min-width: ${({ theme }) => theme.MEDIA_QUERY.SMALL_G}) {
     width: 30rem;
     height: 30rem;
   }
 
-  @media (min-width: 1024px) {
+  @media (min-width: ${({ theme }) => theme.MEDIA_QUERY.LARGE}) {
     width: 39rem;
     height: 39rem;
   }
@@ -71,7 +70,7 @@ export const Tags = styled.div`
   gap: 2rem;
   margin: 2.4rem 0 4rem;
 
-  @media (min-width: 1024px) {
+  @media (min-width: ${({ theme }) => theme.MEDIA_QUERY.LARGE}) {
     width: auto;
     justify-content: flex-start;
   }
@@ -85,11 +84,11 @@ export const ConfirmOrder = styled.div`
   gap: 3rem;
   margin: auto;
 
-  button{
+  button {
     max-width: 20rem;
   }
 
-  @media (min-width: 1024px) {
+  @media (min-width: ${({ theme }) => theme.MEDIA_QUERY.LARGE}) {
     justify-content: flex-start;
     margin: 0;
   }
@@ -103,7 +102,7 @@ export const BackButton = styled.div`
   text-align: start;
   width: 100%;
 
-  button{
+  button {
     font-family: "Poppins";
     font-size: 24px;
     font-style: normal;
@@ -117,12 +116,12 @@ export const InfoText = styled.div`
   flex-direction: column;
   align-items: center;
 
-  @media (min-width: 425px) {
+  @media (min-width: ${({ theme }) => theme.MEDIA_QUERY.SMALL_G}) {
     padding: 0 2rem;
     max-width: 60rem;
   }
 
-  @media (min-width: 1024px) {
+  @media (min-width: ${({ theme }) => theme.MEDIA_QUERY.LARGE}) {
     padding: 0 0rem;
     max-width: 100rem;
     align-items: start;
@@ -134,8 +133,9 @@ export const InfoText = styled.div`
     font-weight: 500;
     margin: 2rem 0 2rem 0;
     text-align: center;
+    text-transform: capitalize;
 
-    @media (min-width: 1024px) {
+    @media (min-width: ${({ theme }) => theme.MEDIA_QUERY.LARGE}) {
       text-align: start;
       font-size: 4rem;
     }
@@ -143,10 +143,9 @@ export const InfoText = styled.div`
 
   p {
     text-align: center;
-    /* max-width: 60rem; */
     font-family: "Poppins";
 
-    @media (min-width: 1024px) {
+    @media (min-width: ${({ theme }) => theme.MEDIA_QUERY.LARGE}) {
       width: 100%;
       font-size: 2.2rem;
       text-align: start;

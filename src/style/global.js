@@ -18,23 +18,22 @@ export default createGlobalStyle`
       background-color: ${({ theme }) => theme.COLORS.DARK_400};
 
       &::-webkit-scrollbar {
-        width: 12px; /* Largura da barra de rolagem inteira */
+        width: 12px;
       }
 
       &::-webkit-scrollbar-track {
-        background: none; /* Cor da área de rastreamento */
+        background: none; 
       }
 
       &::-webkit-scrollbar-thumb {
-        background-color: ${({theme}) => theme.COLORS.LIGHT_600}; /* Cor do polegar de rolagem */
-        border-radius: 20px; /* Arredondamento do polegar de rolagem */
+        background-color: ${({ theme }) => theme.COLORS.LIGHT_600};
+        border-radius: 20px; 
       }
     }
 
     a {
       text-decoration: none;
     }
-
 
     button, a {
       cursor: pointer;

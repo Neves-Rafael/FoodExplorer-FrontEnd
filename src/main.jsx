@@ -1,25 +1,22 @@
-import ReactDOM from "react-dom/client";
 import React from "react";
-import { ThemeProvider } from "styled-components";
-import { theme } from "./style/theme";
-import GlobalStyles from "./style/global";
-
 import { Routes } from "./routes";
+import { theme } from "./style/theme";
+import ReactDOM from "react-dom/client";
+import GlobalStyles from "./style/global";
 import { AuthProvider } from "./hooks/auth";
-
-import { PlateProvider } from "./hooks/plateRequest";
-
+import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import { ThemeProvider } from "styled-components";
+import { PlateProvider } from "./hooks/plateRequest";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-    <GlobalStyles />
+      <GlobalStyles />
       <AuthProvider>
         <PlateProvider>
           <Routes />
-          <ToastContainer/>
+          <ToastContainer />
         </PlateProvider>
       </AuthProvider>
     </ThemeProvider>

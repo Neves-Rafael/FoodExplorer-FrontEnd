@@ -7,7 +7,6 @@ export const Container = styled.div`
 export const Placeholder = styled.div`
   background-color: ${({ theme }) => theme.COLORS.DARK_900};
   border-radius: 8px;
-  /* position: absolute; */
   width: 100%;
 
   > div {

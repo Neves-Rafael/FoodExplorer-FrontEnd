@@ -11,7 +11,7 @@ export const Container = styled.div`
 `;
 
 export const Confirm = styled.div`
-  background-color: ${({theme}) => theme.COLORS.DARK_600};
+  background-color: ${({ theme }) => theme.COLORS.DARK_600};
   position: absolute;
   width: 280px;
   border-radius: 4px;
@@ -21,11 +21,11 @@ export const Confirm = styled.div`
   justify-content: space-between;
   gap: 2rem;
 
-  @media(min-width: 768px){
+  @media (min-width: ${({ theme }) => theme.MEDIA_QUERY.MEDIUM}) {
     width: 420px;
   }
 
-  .button-container{
+  .button-container {
     display: flex;
     gap: 2rem;
     margin-top: 2rem;

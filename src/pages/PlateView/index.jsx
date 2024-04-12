@@ -1,3 +1,18 @@
+import { useContext } from "react";
+import { api } from "../../service/api";
+import { Tag } from "../../components/Tag";
+import { useAuth } from "../../hooks/auth";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { USER_ROLE } from "../../utils/roles";
+import { Count } from "../../components/Count";
+import { useNavigate } from "react-router-dom";
+import { Header } from "../../components/Header";
+import { Footer } from "../../components/Footer";
+import { Button } from "../../components/Button";
+import { RiArrowLeftSLine } from "react-icons/ri";
+import { PlateContext } from "../../hooks/plateRequest";
+import { ButtonText } from "../../components/ButtonText";
 import {
   Container,
   PlateImage,
@@ -7,27 +22,12 @@ import {
   Main,
   InfoText,
 } from "./style";
-import { Header } from "../../components/Header";
-import { Footer } from "../../components/Footer";
-import { Count } from "../../components/Count";
-import { Button } from "../../components/Button";
-import { Tag } from "../../components/Tag";
-import { api } from "../../service/api";
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { ButtonText } from "../../components/ButtonText";
-import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
-import { PlateContext } from "../../hooks/plateRequest";
-import { RiArrowLeftSLine } from "react-icons/ri";
-import { USER_ROLE } from "../../utils/roles"
-import { useAuth } from "../../hooks/auth";
 
 export function PlateView() {
   const { user } = useAuth();
   const { id } = useParams();
   const navigate = useNavigate();
-  const [ plate, setPlate ] = useState({});
+  const [plate, setPlate] = useState({});
 
   const imageURL = `${api.defaults.baseURL}/files/`;
 
@@ -47,24 +47,23 @@ export function PlateView() {
 
   function calculate() {
     const allRequest = JSON.parse(localStorage.getItem("pedidos")) || [];
-    
+
     const newRequest = {
       plate,
-      price: price.replace(",", ".") ,
+      price: price.replace(",", "."),
     };
-    
+
     allRequest.push(newRequest);
     localStorage.setItem("pedidos", JSON.stringify(allRequest));
     updateRequest();
   }
 
-  function handleSelectOption(){
-    if(verifyAdminRole){
-      navigate(`/editplate/${id}`)
-      return
+  function handleSelectOption() {
+    if (verifyAdminRole) {
+      navigate(`/editplate/${id}`);
+      return;
     }
-
-    calculate()
+    calculate();
   }
 
   useEffect(() => {
@@ -82,7 +81,11 @@ export function PlateView() {
 
       <Main>
         <BackButton>
-          <ButtonText title={"Voltar"} icon={RiArrowLeftSLine} onClick={() => navigate(-1)} />
+          <ButtonText
+            title={"Voltar"}
+            icon={RiArrowLeftSLine}
+            onClick={() => navigate(-1)}
+          />
         </BackButton>
 
         <div>
@@ -103,12 +106,17 @@ export function PlateView() {
           </Tags>
 
           <ConfirmOrder>
-            {verifyAdminRole ? null: <Count onCountChange={handleCountChange} />}
-            <Button title={verifyAdminRole ? "Editar prato" : `Incluir R$ - ${price}`} onClick={handleSelectOption} />
+            {verifyAdminRole ? null : (
+              <Count onCountChange={handleCountChange} />
+            )}
+            <Button
+              title={verifyAdminRole ? "Editar prato" : `Incluir R$ - ${price}`}
+              onClick={handleSelectOption}
+            />
           </ConfirmOrder>
         </div>
       </Main>
-      <Footer/>
+      <Footer />
     </Container>
   );
 }

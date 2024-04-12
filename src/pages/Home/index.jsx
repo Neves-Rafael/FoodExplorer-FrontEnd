@@ -14,7 +14,7 @@ import { PlateContext } from "../../hooks/plateRequest";
 
 export function Home() {
   const navigate = new useNavigate();
-  
+
   const { showAllPlates } = useContext(PlateContext);
 
   const [isFavorite, setIsFavorite] = useState([]);
@@ -25,21 +25,21 @@ export function Home() {
 
   const selectPlates = () => {
     return showAllPlates;
-  }
+  };
 
-  async function handleVerifyFavoritePlate(){
+  async function handleVerifyFavoritePlate() {
     const searchFavorites = await api.get("/favorites");
     setIsFavorite(searchFavorites.data);
     return searchFavorites.data;
   }
 
-  useEffect(() => { 
+  useEffect(() => {
     handleVerifyFavoritePlate();
   }, []);
 
   return (
     <Container>
-      <Header plates={selectPlates}/>
+      <Header plates={selectPlates} />
 
       <main>
         <Banner>
@@ -51,21 +51,23 @@ export function Home() {
           </BannerText>
         </Banner>
 
-        {plateSections && plateSections.map((section) => (
-          <Section title={section} key={section}>
-
-            {showAllPlates && showAllPlates.filter((plate) => plate.category === section)
-            .map((plate) => (
-              <Card
-                key={String(plate.id)}
-                plate={plate}
-                view={() => navigate(`/plateview/${plate.id}`)}
-                plateImage={`${imageURL}/${String(plate.image)}`}
-                isFavorite={isFavorite}
-                verifyFavorite={handleVerifyFavoritePlate}
-              />
-            ))}
-          </Section>
+        {plateSections &&
+          plateSections.map((section) => (
+            <Section title={section} key={section}>
+              {showAllPlates &&
+                showAllPlates
+                  .filter((plate) => plate.category === section)
+                  .map((plate) => (
+                    <Card
+                      key={String(plate.id)}
+                      plate={plate}
+                      view={() => navigate(`/plateview/${plate.id}`)}
+                      plateImage={`${imageURL}/${String(plate.image)}`}
+                      isFavorite={isFavorite}
+                      verifyFavorite={handleVerifyFavoritePlate}
+                    />
+                  ))}
+            </Section>
           ))}
         <Footer />
       </main>

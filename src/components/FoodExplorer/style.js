@@ -12,8 +12,8 @@ export const Container = styled.div`
     font-weight: 700;
     transition: all 300ms ease-in-out;
 
-    &:hover{
-      color: ${({theme}) => theme.COLORS.CAKE_200};
+    &:hover {
+      color: ${({ theme }) => theme.COLORS.CAKE_200};
     }
   }
 `;

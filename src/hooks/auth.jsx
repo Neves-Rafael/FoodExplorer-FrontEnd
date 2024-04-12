@@ -1,6 +1,6 @@
-import { createContext, useContext, useState, useEffect } from "react";
 import { api } from "../service/api";
 import { toast } from "react-toastify";
+import { createContext, useContext, useState, useEffect } from "react";
 
 export const AuthContext = createContext({});
 
@@ -9,7 +9,11 @@ function AuthProvider({ children }) {
 
   async function sessionLogin({ email, password }) {
     try {
-      const response = await api.post("/sessions", { email, password },{  withCredentials: true });
+      const response = await api.post(
+        "/sessions",
+        { email, password },
+        { withCredentials: true }
+      );
       const { user } = response.data;
 
       localStorage.setItem("@foodexplorer:user", JSON.stringify(user));
@@ -27,7 +31,7 @@ function AuthProvider({ children }) {
   function logout() {
     localStorage.removeItem("@foodexplorer:user");
     localStorage.removeItem("pedidos");
-    localStorage.removeItem("@foodexplorer:profile")
+    localStorage.removeItem("@foodexplorer:profile");
 
     setData({});
   }
@@ -43,7 +47,7 @@ function AuthProvider({ children }) {
 
         await api.patch(`/plates/image/${plateId}`, uploadImage);
       }
-      toast.dark("Prato adicionado com sucesso.")
+      toast.dark("Prato adicionado com sucesso.");
     } catch (error) {
       if (error.response) {
         toast.dark(error.response.data.message);
@@ -53,7 +57,7 @@ function AuthProvider({ children }) {
     }
   }
 
-  async function updatePlate({ plate, image}){
+  async function updatePlate({ plate, image }) {
     try {
       await api.put(`/plates/${plate.id}`, plate);
 
@@ -63,7 +67,7 @@ function AuthProvider({ children }) {
 
         await api.patch(`/plates/image/${plate.id}`, uploadImage);
       }
-      toast.dark("Prato atualizado!")
+      toast.dark("Prato atualizado!");
     } catch (error) {
       if (error.response) {
         toast.dark(error.response.data.message);
@@ -73,11 +77,11 @@ function AuthProvider({ children }) {
     }
   }
 
-  async function deletePlate(id){
+  async function deletePlate(id) {
     try {
       await api.delete(`/plates/${id}`);
 
-      toast.dark("Prato deletado!")
+      toast.dark("Prato deletado!");
     } catch (error) {
       if (error.response) {
         toast.dark(error.response.data.message);
@@ -87,14 +91,14 @@ function AuthProvider({ children }) {
     }
   }
 
-  async function createPayment({plateSum, requestPlate}){
+  async function createPayment({ plateSum, requestPlate }) {
     try {
       const insertPayment = await api.post("/payment", {
         plate: JSON.stringify(requestPlate),
-        price: plateSum  
-      })
-      
-      return(insertPayment.data[0].id)
+        price: plateSum,
+      });
+
+      return insertPayment.data[0].id;
     } catch (error) {
       if (error.response) {
         toast.dark(error.response.data.message);
@@ -104,10 +108,9 @@ function AuthProvider({ children }) {
     }
   }
 
-  async function updatePayment(id){
+  async function updatePayment(id) {
     try {
       await api.put(`/payment/qrcode/${id}`);
-
     } catch (error) {
       if (error.response) {
         toast.dark(error.response.data.message);
@@ -117,9 +120,9 @@ function AuthProvider({ children }) {
     }
   }
 
-  async function createFavorite(plate_id){
+  async function createFavorite(plate_id) {
     try {
-      await api.post("/favorites", {plate_id: plate_id})
+      await api.post("/favorites", { plate_id: plate_id });
     } catch (error) {
       if (error.response) {
         toast.dark(error.response.data.message);
@@ -129,17 +132,16 @@ function AuthProvider({ children }) {
     }
   }
 
-  async function createAccount({name, email, password}){
+  async function createAccount({ name, email, password }) {
     if (!name || !email || !password) {
       return toast.dark("Preencha todos os campos!");
     }
-    
+
     try {
-      await api.post("/users", { name, email, password })
-      .then(() => {
+      await api.post("/users", { name, email, password }).then(() => {
         toast.dark("Usuário cadastrado com sucesso!");
-      })
-      return "Create"
+      });
+      return "Create";
     } catch (error) {
       if (error.response) {
         toast.dark(error.response.data.message);
@@ -147,24 +149,30 @@ function AuthProvider({ children }) {
     }
   }
 
-  async function updateAccount({name, email, newPassword, oldPassword}){
+  async function updateAccount({ name, email, newPassword, oldPassword }) {
     try {
-      const attAccount = await api.put("/users", { name, email, newPassword, oldPassword});
+      const attAccount = await api.put("/users", {
+        name,
+        email,
+        newPassword,
+        oldPassword,
+      });
       toast.dark("Usuário atualizado com sucesso.");
-      localStorage.setItem("@foodexplorer:profile", JSON.stringify(attAccount.data))
+      localStorage.setItem(
+        "@foodexplorer:profile",
+        JSON.stringify(attAccount.data)
+      );
     } catch (error) {
-      console.log(error)
       if (error.response) {
         toast.dark(error.response.data.message);
       } else toast.dark("Não foi possível atualizar!");
     }
   }
 
-  async function updateOrderHistory({id, newStatus}){
+  async function updateOrderHistory({ id, newStatus }) {
     try {
-      await api.patch(`/payment/${id}`, {newStatus});
+      await api.patch(`/payment/${id}`, { newStatus });
     } catch (error) {
-      console.log(error)
       if (error.response) {
         toast.dark(error.response.data.message);
       } else toast.dark("Não foi possível atualizar!");
@@ -175,7 +183,7 @@ function AuthProvider({ children }) {
     const user = localStorage.getItem("@foodexplorer:user");
 
     if (user) {
-      setData({ user: JSON.parse(user)});
+      setData({ user: JSON.parse(user) });
     } else {
       return;
     }
@@ -200,7 +208,6 @@ function AuthProvider({ children }) {
       {children}
     </AuthContext.Provider>
   );
-
 }
 
 function useAuth() {

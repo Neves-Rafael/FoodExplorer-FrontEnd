@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   width: 100%;
-  height: 100dvh;
+  min-height: calc(100dvh - 20rem);
 `;
 
 export const Section = styled.section`
@@ -32,11 +32,10 @@ export const Section = styled.section`
     align-self: end;
     margin-top: 2.4rem;
 
-    @media(min-width: ${({ theme }) => theme.MEDIA_QUERY.SMALL_G}){
-      width: 20rem; 
+    @media (min-width: ${({ theme }) => theme.MEDIA_QUERY.SMALL_G}) {
+      width: 20rem;
     }
   }
-
 
   @media (min-width: 450px) {
     max-width: 400px;
@@ -110,7 +109,7 @@ export const Titles = styled.div`
   margin: 4rem auto 3rem;
 
   button {
-    >svg{
+    > svg {
       width: 2.2rem;
     }
     font-weight: 600;
@@ -155,7 +154,7 @@ export const UploadImage = styled.label`
   border-radius: 8px;
   transition: all 300ms ease-in-out;
 
-  &:hover{
+  &:hover {
     filter: brightness(1.5);
   }
 
@@ -173,22 +172,21 @@ export const ButtonAction = styled.div`
   justify-content: end;
   gap: 4rem;
 
-  button:nth-child(1){
-    background-color: black;
+  button:nth-child(1) {
+    background-color: ${({ theme }) => theme.COLORS.DARK_100};
   }
 
-  @media(max-width: 1120px){
+  @media (max-width: 1120px) {
     gap: 2rem;
     flex-direction: column;
   }
 
-
   button {
     margin-top: 0;
 
-    @media(min-width: 1120px){
-      width: 20rem; 
+    @media (min-width: 1120px) {
+      width: 20rem;
       margin-top: 2.4rem;
+    }
   }
-}
-`
+`;

@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   width: 100%;
-  height: 100dvh;
+  min-height: calc(100dvh - 20rem);
 `;
 
 export const Section = styled.section`
@@ -32,11 +32,10 @@ export const Section = styled.section`
     align-self: end;
     margin-top: 2.4rem;
 
-    @media(min-width: ${({ theme }) => theme.MEDIA_QUERY.SMALL_G}){
-      width: 20rem; 
+    @media (min-width: ${({ theme }) => theme.MEDIA_QUERY.SMALL_G}) {
+      width: 20rem;
     }
   }
-
 
   @media (min-width: 450px) {
     max-width: 400px;
@@ -110,7 +109,7 @@ export const Titles = styled.div`
   margin: 4rem auto 3rem;
 
   button {
-    >svg{
+    > svg {
       width: 2.2rem;
     }
     font-weight: 600;
@@ -156,8 +155,8 @@ export const UploadImage = styled.label`
 
   transition: all 300ms ease-in-out;
 
-  &:hover{
-    filter: brightness(1.5);
+  &:hover {
+    filter: brightness(1.2);
   }
 
   input {

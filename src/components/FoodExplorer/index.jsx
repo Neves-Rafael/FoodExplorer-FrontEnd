@@ -1,5 +1,6 @@
 import { Container } from "./style";
 import explorerLogo from "../../assets/explorer-logo.svg";
+
 export function FoodExplorer() {
   return (
     <Container>

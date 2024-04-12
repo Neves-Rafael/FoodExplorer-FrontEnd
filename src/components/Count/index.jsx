@@ -1,6 +1,6 @@
-import { FiMinusCircle, FiPlusCircle } from "react-icons/fi";
 import { Container } from "./style";
 import { useState, useEffect } from "react";
+import { FiMinusCircle, FiPlusCircle } from "react-icons/fi";
 
 export function Count({ onCountChange }) {
   const [count, setCount] = useState(1);

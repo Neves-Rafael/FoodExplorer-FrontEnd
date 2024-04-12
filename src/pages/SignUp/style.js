@@ -5,7 +5,7 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
   margin: auto;
-  height: 100dvh;
+  min-height: 100dvh;
   max-width: 100%;
 
   @media (min-width: ${({ theme }) => theme.MEDIA_QUERY.LARGE}) {
@@ -26,7 +26,7 @@ export const Section = styled.section`
   width: 100%;
   padding: 4rem 1.6rem;
 
-  .loginForm{
+  .loginForm {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -38,23 +38,23 @@ export const Section = styled.section`
     }
 
     @media (min-width: ${({ theme }) => theme.MEDIA_QUERY.LARGE}) {
-      margin: 3.2rem 0 ;
+      margin: 3.2rem 0;
       max-width: 100%;
     }
   }
 
-  @media (min-width: ${({ theme }) => theme.MEDIA_QUERY.MEDIUM}){
+  @media (min-width: ${({ theme }) => theme.MEDIA_QUERY.MEDIUM}) {
     max-width: 50rem;
     padding: 6rem;
     border-radius: 1.6rem;
     background-color: ${({ theme }) => theme.COLORS.DARK_700};
-  }  
+  }
 
-  @media (min-width: ${({ theme }) => theme.MEDIA_QUERY.LARGE}){
-    >div:nth-child(1){
-    display: none;
+  @media (min-width: ${({ theme }) => theme.MEDIA_QUERY.LARGE}) {
+    > div:nth-child(1) {
+      display: none;
     }
-  } 
+  }
 `;
 
 export const MakeLogin = styled.p`
@@ -80,7 +80,7 @@ export const MakeAccount = styled.p`
 export const Logo = styled.div`
   display: none;
 
-  @media (min-width: ${({ theme }) => theme.MEDIA_QUERY.LARGE}){
+  @media (min-width: ${({ theme }) => theme.MEDIA_QUERY.LARGE}) {
     display: flex;
     flex-direction: column;
     gap: 4rem;

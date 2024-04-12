@@ -2,13 +2,12 @@ import { Container, Logo, Section, MakeLogin, MakeAccount } from "./style";
 import { Form } from "../../components/Forms";
 import { Button } from "../../components/Button";
 import { FoodExplorer } from "../../components/FoodExplorer";
-import login from "../../assets/Hamburger-rafiki.svg";
 import { useAuth } from "../../hooks/auth";
 
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import Lottie3 from 'react-lottie';
+import Lottie3 from "react-lottie";
 import animationData from "../../assets/food-animate.json";
 
 export function SignUp() {
@@ -24,20 +23,20 @@ export function SignUp() {
     autoplay: true,
     animationData: animationData,
     rendererSettings: {
-      preserveAspectRatio: 'xMidYMid slice'
-    }
-  }
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
 
   async function handleSignUp() {
-   const create = await createAccount({name, email, password});
-   if(create) navigate(-1)
+    const create = await createAccount({ name, email, password });
+    if (create) navigate(-1);
   }
 
   return (
     <Container>
       <Logo>
         <FoodExplorer />
-        <Lottie3 options={defaultOptions}/>
+        <Lottie3 options={defaultOptions} />
       </Logo>
 
       <Section>
@@ -68,11 +67,14 @@ export function SignUp() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <Button title="Criar Conta" onClick={handleSignUp}/>
+          <Button title="Criar Conta" onClick={handleSignUp} />
         </div>
 
-        <MakeAccount onClick={() => navigate(-1)}> Já possui uma conta? </MakeAccount>
+        <MakeAccount onClick={() => navigate(-1)}>
+          {" "}
+          Já possui uma conta?{" "}
+        </MakeAccount>
       </Section>
     </Container>
   );
-};
+}

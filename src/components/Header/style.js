@@ -26,7 +26,6 @@ export const MenuHamburger = styled.div`
 `;
 
 export const Logout = styled.div`
-
   display: none;
   cursor: pointer;
 
@@ -34,18 +33,17 @@ export const Logout = styled.div`
     display: block;
   }
 
-
-  &:hover{
-    path{
+  &:hover {
+    path {
       transition: all 300ms ease-in-out;
-      color: ${({theme}) => theme.COLORS.TOMATO_200}
+      color: ${({ theme }) => theme.COLORS.TOMATO_200};
     }
   }
 `;
 
-
 export const OrderCount = styled.div`
   position: relative;
+  cursor: pointer;
 
   span {
     background-color: ${({ theme }) => theme.COLORS.TOMATO_100};
@@ -63,7 +61,7 @@ export const OrderCount = styled.div`
 
 export const Logo = styled.div`
   cursor: pointer;
-  
+
   div p {
     font-size: 2.4rem;
   }
@@ -85,21 +83,21 @@ export const Requests = styled.div`
 export const MenuOptions = styled.div`
   position: relative;
   display: none;
-  
-  svg:hover{
+
+  svg:hover {
     cursor: pointer;
-    path{
-      color: ${({theme}) => theme.COLORS.CARROT_100};
+    path {
+      color: ${({ theme }) => theme.COLORS.CARROT_100};
       transition: all ease-in-out 200ms;
     }
   }
 
-  @media(min-width:1024px ){
-      display: flex;
+  @media (min-width: ${({ theme }) => theme.MEDIA_QUERY.LARGE}) {
+    display: flex;
   }
 
-  .options-header{
-    display: ${({$isopen}) => $isopen ? "flex": "none"};
+  .options-header {
+    display: ${({ $isopen }) => ($isopen ? "flex" : "none")};
     flex-direction: column;
     gap: 1rem;
     align-items: center;
@@ -109,37 +107,31 @@ export const MenuOptions = styled.div`
     left: -13rem;
     top: 6rem;
     z-index: 99;
-    background-color: ${({theme}) => theme.COLORS.LIGHT_700};
+    background-color: ${({ theme }) => theme.COLORS.LIGHT_700};
     border-radius: 8px;
     padding: 1rem 0;
 
-    p{
+    p {
       font-family: "Poppins";
       cursor: pointer;
       transition: all ease-in-out 200ms;
       text-align: center;
       width: 70%;
-      
-      &:hover{
-        color: ${({theme}) => theme.COLORS.CARROT_100}
+
+      &:hover {
+        color: ${({ theme }) => theme.COLORS.CARROT_100};
       }
     }
 
-    path:hover{
-      cursor: pointer;
-      color: black;
-      transition: all ease-in 200ms;
+    p + p:before {
+      content: "";
+      display: block;
+      margin: auto;
+      width: 20rem;
+      height: 2px;
+      background-color: ${({ theme }) => theme.COLORS.LIGHT_400};
+      opacity: 0.3;
+      margin-bottom: 1rem;
     }
-
-    p + p:before{
-        content: "";
-        display: block;
-        margin: auto;
-        width: 20rem;
-        height: 2px;
-        background-color: darkgray;
-        opacity: .3;
-        margin-bottom: 1rem;
-      }
-    }
+  }
 `;

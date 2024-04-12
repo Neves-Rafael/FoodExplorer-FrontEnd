@@ -9,13 +9,13 @@ export const Container = styled.button`
   color: ${({ theme }) => theme.COLORS.LIGHT_100};
   font-size: 1.6rem;
 
-  &:hover{
+  &:hover {
     transition: all 300ms ease-in-out;
-    color: ${({theme}) => theme.COLORS.TOMATO_200};
-    
-    path{
+    color: ${({ theme }) => theme.COLORS.TOMATO_200};
+
+    path {
       transition: all 300ms ease-in-out;
-      color: ${({theme}) => theme.COLORS.TOMATO_200};
+      color: ${({ theme }) => theme.COLORS.TOMATO_200};
     }
   }
 `;

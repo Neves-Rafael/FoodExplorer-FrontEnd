@@ -7,10 +7,9 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
 
-  p{
+  p {
     font-family: "Poppins";
     font-size: 2.4rem;
     margin-top: 4rem;
   }
 `;
-

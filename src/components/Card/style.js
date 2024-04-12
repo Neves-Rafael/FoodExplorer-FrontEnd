@@ -20,9 +20,9 @@ export const Container = styled.div`
 
   transition: all 200ms ease-in-out;
 
-  &:hover{
-    background-color: ${({theme}) => theme.COLORS.DARK_500};
-    filter: brightness(1.3);
+  &:hover {
+    background-color: ${({ theme }) => theme.COLORS.DARK_500};
+    filter: brightness(1.2);
   }
 
   img {
@@ -41,16 +41,17 @@ export const Container = styled.div`
     cursor: pointer;
     max-width: 99%;
     overflow: hidden;
+    text-transform: capitalize;
 
-    >svg{
+    > svg {
       min-width: 2rem;
     }
   }
 
-  .plate-description{
+  .plate-description {
     display: none;
     font-size: 1.4rem;
-    color: ${({theme}) => theme.COLORS.LIGHT_400};
+    color: ${({ theme }) => theme.COLORS.LIGHT_400};
     word-wrap: break-word;
     word-break: break-all;
   }
@@ -60,13 +61,14 @@ export const Container = styled.div`
     height: 3.2rem;
   }
 
-  .plate-count{
+  .plate-count {
     display: flex;
     flex-direction: column;
     gap: 2.4rem;
   }
 
-  .favorite-icon, .edit-icon {
+  .favorite-icon,
+  .edit-icon {
     position: absolute;
     right: 1.6rem;
     top: 1.6rem;
@@ -75,18 +77,18 @@ export const Container = styled.div`
     transition: all 200ms ease-in-out;
   }
 
-  .favorite-icon{
-    &:hover{
-       path {
-        color: ${({theme}) => theme.COLORS.TOMATO_400};
+  .favorite-icon {
+    &:hover {
+      path {
+        color: ${({ theme }) => theme.COLORS.TOMATO_400};
       }
     }
   }
 
-  .edit-icon{
-    &:hover{
-       path {
-        color: ${({theme}) => theme.COLORS.CARROT_100};
+  .edit-icon {
+    &:hover {
+      path {
+        color: ${({ theme }) => theme.COLORS.CARROT_100};
       }
     }
   }
@@ -96,7 +98,7 @@ export const Container = styled.div`
     font-size: 2rem;
   }
 
-  @media(min-width: ${({ theme }) => theme.MEDIA_QUERY.LARGE}){
+  @media (min-width: ${({ theme }) => theme.MEDIA_QUERY.LARGE}) {
     width: 30.4rem;
 
     img {
@@ -110,16 +112,16 @@ export const Container = styled.div`
       line-height: 140%;
     }
 
-    .plate-description{
+    .plate-description {
       display: block;
     }
 
-    .value{
+    .value {
       font-size: 3.2rem;
       line-height: 160%;
     }
 
-    .plate-count{
+    .plate-count {
       flex-direction: row;
       gap: 1.6rem;
       margin-bottom: 1.2rem;

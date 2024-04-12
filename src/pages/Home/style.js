@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  height: 100dvh;
+  min-height: 100dvh;
   display: grid;
   grid-template-areas:
     "header"
     "content";
-  grid-template-rows: 120px auto;
+  grid-template-rows: 12rem auto;
 
   > main {
     grid-area: content;
@@ -14,19 +14,18 @@ export const Container = styled.div`
     scroll-behavior: smooth;
 
     &::-webkit-scrollbar {
-    width: 12px; /* Largura da barra de rolagem inteira */
+      width: 12px;
     }
 
     &::-webkit-scrollbar-track {
-      background: none; /* Cor da área de rastreamento */
+      background: none;
     }
 
     &::-webkit-scrollbar-thumb {
-      background-color: ${({theme}) => theme.COLORS.LIGHT_600}; /* Cor do polegar de rolagem */
-      border-radius: 20px; /* Arredondamento do polegar de rolagem */
+      background-color: ${({ theme }) => theme.COLORS.LIGHT_600};
+      border-radius: 2rem;
     }
   }
-
 `;
 
 export const Banner = styled.div`
@@ -159,7 +158,7 @@ export const BannerText = styled.div`
 
   @media (min-width: 550px) {
     margin-right: 2rem;
-    
+
     h3 {
       font-size: 2.3rem;
     }

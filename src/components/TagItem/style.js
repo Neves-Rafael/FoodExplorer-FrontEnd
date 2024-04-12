@@ -20,8 +20,8 @@ export const Container = styled.div`
     background: none;
     border: none;
     display: flex;
-    
-    path{
+
+    path {
       color: ${({ theme }) => theme.COLORS.CAKE_200};
     }
   }
@@ -34,9 +34,5 @@ export const Container = styled.div`
     font-size: 1.4rem;
     padding-left: 6px;
     text-align: center;
-
-    /* &::placeholder {
-      color
-    } */
   }
 `;

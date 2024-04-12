@@ -6,14 +6,15 @@ export const Container = styled.div`
   justify-content: center;
   gap: 2rem;
 
-  >svg{
+  > svg {
     cursor: pointer;
     color: red;
 
-    &:hover{
-      line, circle{
+    &:hover {
+      line,
+      circle {
         transition: all 300ms ease-in-out;
-        color: ${({theme}) => theme.COLORS.CAKE_200};
+        color: ${({ theme }) => theme.COLORS.CAKE_200};
       }
     }
   }

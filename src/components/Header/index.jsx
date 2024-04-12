@@ -7,26 +7,36 @@ import { FoodExplorer } from "../FoodExplorer";
 import { useNavigate } from "react-router-dom";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { FoodExplorerAdmin } from "../FoodExplorerAdmin";
-import { Container, MenuHamburger, Logout, MenuOptions, OrderCount, Logo, Requests } from "./style";
+import {
+  Container,
+  MenuHamburger,
+  Logout,
+  MenuOptions,
+  OrderCount,
+  Logo,
+  Requests,
+} from "./style";
 
+import { IoIosOptions } from "react-icons/io";
 import { useAuth } from "../../hooks/auth";
 import { USER_ROLE } from "../../utils/roles";
 import { PlateContext } from "../../hooks/plateRequest";
 import { useState, useEffect, useContext, useRef } from "react";
-import { IoIosOptions } from "react-icons/io";
 
 export function Header() {
   const navigate = useNavigate();
   const { logout, user } = useAuth();
   const { plateRequest } = useContext(PlateContext);
-  const [ countPlate, setCountPlate] = useState([]);
-  const [ menuIsOpen, setMenuIsOpen ] = useState(false);
-  const [ optionsIsOpen, setOptionsIsOpen] = useState(false);
+  const [countPlate, setCountPlate] = useState([]);
+  const [menuIsOpen, setMenuIsOpen] = useState(false);
+  const [optionsIsOpen, setOptionsIsOpen] = useState(false);
   const selectRef = useRef(null);
 
   const verifyAdminRole = user.role === USER_ROLE.ADMIN;
 
-  const messageToAdminAccess = verifyAdminRole ? "Novo Prato" : `Pedidos (${countPlate ? countPlate.length : 0})`;
+  const messageToAdminAccess = verifyAdminRole
+    ? "Novo Prato"
+    : `Pedidos (${countPlate ? countPlate.length : 0})`;
 
   function handleOutsideClick(event) {
     if (selectRef.current && !selectRef.current.contains(event.target)) {
@@ -34,13 +44,13 @@ export function Header() {
     }
   }
 
-  function handleLogout(){
+  function handleLogout() {
     logout();
-    navigate("/")
+    navigate("/");
   }
-  
-  function handlerOpenOptions(){
-    setOptionsIsOpen(prevState => prevState === true ? false : true)
+
+  function handlerOpenOptions() {
+    setOptionsIsOpen((prevState) => (prevState === true ? false : true));
   }
 
   useEffect(() => {
@@ -68,25 +78,32 @@ export function Header() {
       </MenuHamburger>
 
       <Logo onClick={() => navigate("/")}>
-        {verifyAdminRole ? <FoodExplorerAdmin/> : <FoodExplorer />}
+        {verifyAdminRole ? <FoodExplorerAdmin /> : <FoodExplorer />}
       </Logo>
 
-      <InputSearch/>
+      <InputSearch />
 
       <MenuOptions $isopen={optionsIsOpen} ref={selectRef}>
         <IoIosOptions size={32} onClick={handlerOpenOptions} />
-        <div className="options-header" >
-          <p onClick={()=> navigate("/favorites")}>Favoritos</p>
-          <p onClick={()=> navigate("/order-history")}>Histórico de pedido</p>
-          <p onClick={()=> navigate("/profile")}>Perfil</p>
-          <p onClick={()=> navigate("/about")}>Quem somos</p>
+        <div className="options-header">
+          {!verifyAdminRole && (
+            <p onClick={() => navigate("/favorites")}>Favoritos</p>
+          )}
+          <p onClick={() => navigate("/order-history")}>Histórico de pedido</p>
+          <p onClick={() => navigate("/profile")}>Perfil</p>
+          <p onClick={() => navigate("/about")}>Quem somos</p>
         </div>
       </MenuOptions>
 
       <Requests>
-        <Button 
-          title={messageToAdminAccess} icon={verifyAdminRole ? null : PiReceipt} 
-          onClick={verifyAdminRole ? () => navigate("/newplate") : () => navigate("/cart")}
+        <Button
+          title={messageToAdminAccess}
+          icon={verifyAdminRole ? null : PiReceipt}
+          onClick={
+            verifyAdminRole
+              ? () => navigate("/newplate")
+              : () => navigate("/cart")
+          }
         />
       </Requests>
 
@@ -94,16 +111,19 @@ export function Header() {
         <RxExit size={32} />
       </Logout>
 
-      <OrderCount>
-        {verifyAdminRole ? null :
+      <OrderCount onClick={() => navigate("/cart")}>
+        {verifyAdminRole ? null : (
           <>
             <PiReceipt size={32} />
             <span>{countPlate ? countPlate.length : 0}</span>
           </>
-        } 
+        )}
       </OrderCount>
 
-      <SideMenu menuIsOpen={menuIsOpen} menuIsClose={() => setMenuIsOpen(false)}/>
+      <SideMenu
+        menuIsOpen={menuIsOpen}
+        menuIsClose={() => setMenuIsOpen(false)}
+      />
     </Container>
   );
 }

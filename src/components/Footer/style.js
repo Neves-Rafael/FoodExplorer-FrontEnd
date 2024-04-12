@@ -9,18 +9,19 @@ export const Container = styled.footer`
   align-items: center;
   justify-content: space-around;
 
-> p {
-  font-size: 1.2rem;
-  width: 12rem;
-  font-family: "Poppins";
-  
-  @media(min-width: 425px){
-    width: auto;
+  p {
+    font-size: 1.2rem;
+    width: 12rem;
+    font-family: "Poppins";
+
+    @media (min-width: ${({ theme }) => theme.MEDIA_QUERY.SMALL_G}) {
+      width: auto;
+    }
   }
-}
 
   > div {
     filter: contrast(0);
+
     p {
       font-size: 1.6rem;
     }
@@ -32,6 +33,12 @@ export const Container = styled.footer`
 
   @media (min-width: 800px) {
     justify-content: space-between;
-    padding: 0 10%;
+    padding: 0 15%;
+  }
+
+  @media (min-width: 1250px) {
+    justify-content: center;
+    padding: 0;
+    gap: 80rem;
   }
 `;
