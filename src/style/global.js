@@ -47,9 +47,8 @@ export default createGlobalStyle`
 
     button:hover, a:hover {
       transition: all 200ms ease-in-out;
-      filter: brightness(1.5);
+      filter: brightness(1.3);
     }    
-
 
     .red, .green, .blue, .orange, .light-blue{
       height: .8rem;

@@ -134,12 +134,10 @@ export const Titles = styled.div`
 export const Ingredients = styled.div`
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
   padding: 1rem;
   min-height: 4.8rem;
   border-radius: 8px;
   gap: 1rem;
-
   background-color: ${({ theme, $isNew }) =>
     $isNew ? "transparent" : theme.COLORS.DARK_900};
 `;

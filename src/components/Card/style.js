@@ -42,6 +42,7 @@ export const Container = styled.div`
     max-width: 99%;
     overflow: hidden;
     text-transform: capitalize;
+    text-align: center;
 
     > svg {
       min-width: 2rem;

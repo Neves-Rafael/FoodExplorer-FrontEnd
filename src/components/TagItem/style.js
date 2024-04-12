@@ -2,19 +2,15 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   background-color: ${({ theme, $isNew }) =>
-    $isNew ? "transparent" : theme.COLORS.LIGHT_500};
+    $isNew ? "transparent" : theme.COLORS.LIGHT_700};
 
   border: ${({ $isNew }) => ($isNew ? `1px dashed gray` : "none")};
 
   display: flex;
+  gap: 1rem;
   align-items: center;
   border-radius: 8px;
-  padding-right: 6px;
-  gap: 6px;
-
-  @media (min-width: 425px) {
-    max-width: 15rem;
-  }
+  padding: 0 1rem;
 
   button {
     background: none;
@@ -26,13 +22,24 @@ export const Container = styled.div`
     }
   }
 
-  input {
-    width: 100%;
+  > input {
+    width: 13rem;
+    display: flex;
+    align-items: center;
+    text-transform: capitalize;
     height: 3rem;
     background: transparent;
     border: none;
     font-size: 1.4rem;
-    padding-left: 6px;
-    text-align: center;
+    margin-left: -1rem;
+    padding: 1rem;
+  }
+
+  > div {
+    display: flex;
+    align-items: center;
+    text-transform: capitalize;
+    height: 3rem;
+    font-size: 1.4rem;
   }
 `;
