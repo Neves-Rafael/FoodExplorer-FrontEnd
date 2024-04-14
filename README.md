@@ -105,6 +105,11 @@ A aplicação possui duas personas:
     <br/>
 
 <h1 align="center">📑 Funcionamento</h1>
+    <br/>
+
+- ###### _O render possui um sistema que deixa o servidor hibernando então no primeiro acesso é normal ocorrer um delay na resposta que pode durar até 1 minuto, caso ocorra aguarde essa duração que logo após o funcionamento volta ao normal._
+
+    <br/>
 
 - ### **Fazer login**
 
@@ -135,8 +140,6 @@ A aplicação possui duas personas:
   -`/payment/:id` Página Acessada por um botão localizado na página de carrinho que gera uma solicitação e permite o usuário selecionar a forma de pagamento.
 
   -`/payment/qrcode/:id` Página Acessada por um botão localizado na página de pagamentos, o redirecionamento leva para uma página que simula um pagamento e atualiza o status do prato.
-
-  <br/>
   <br/>
 
 - ### **Administrador**
@@ -168,7 +171,7 @@ A aplicação possui duas personas:
 
 <h1 align="center">📊 Tecnologias e Licença</h1>
 
-<p align="center"> - React - Vite - Javascript - React-splide - React-icons - React router dom - React-lottie - React-toastify - Styled-components</p>
+<p align="center"> - React - Vite - Styled-components  - React-splide - React-icons - React router dom - React-lottie - React-toastify - Javascript</p>
 <br/>
 
 <p align="center"> Uso de Licença MIT: Essa licença permite o uso, modificação e distribuição do software sem restrições. </p>
