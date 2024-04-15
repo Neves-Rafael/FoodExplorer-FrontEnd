@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import { Form } from "../../components/Forms";
 import { Button } from "../../components/Button";
 import { FoodExplorer } from "../../components/FoodExplorer";
@@ -27,6 +28,13 @@ export function SignIn() {
   };
 
   function handleSessionLogin() {
+    toast.dark(
+      "No primeiro acesso pode ocorrer um delay de até 1 minuto até o servidor responder."
+    );
+    if (password.length < 6) {
+      toast.dark("Senha ou e-mail inválido.");
+      return;
+    }
     sessionLogin({ email, password });
   }
 
