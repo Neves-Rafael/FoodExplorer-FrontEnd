@@ -112,15 +112,13 @@ A aplicação possui duas personas:
 
 - ### **Fazer login**
 
-  Assim que acessar a aplicação a tela para fazer login será apresentada com a opção de criação de conta para primeiro acesso.
-
-  Se todos os dados estiverem corretos é liberado o acesso.
+  Assim que acessar a aplicação a tela para fazer login será apresentada com a opção de criação de conta para o primeiro acesso. Se todos os dados estiverem corretos é liberado o acesso.
   <br/>
   <br/>
 
 - ### **Usuário**
 
-  Após já dentro da aplicação o usuário tem os seguintes acessos:
+  Dentro da aplicação o usuário tem os seguintes acessos:
 
   -`/` Página Home que é apresentada após o login.
 
@@ -143,7 +141,7 @@ A aplicação possui duas personas:
 
 - ### **Administrador**
 
-  Além das páginas disponíveis para os usuários o administrados tem acesso a rotas especificas:
+  Além das páginas disponíveis para os usuários o administrador tem acesso a rotas especificas:
 
   -`/newplate` Página Acessada por um botão localizado no `Header`
   que permite adicionar um novo prato.
