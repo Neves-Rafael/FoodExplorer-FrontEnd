@@ -47,7 +47,7 @@ export const Section = styled.section`
   }
 `;
 
-export const Line1 = styled.div`
+export const FirstGroupInfo = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -74,7 +74,7 @@ export const Line1 = styled.div`
   }
 `;
 
-export const Line2 = styled.div`
+export const SecondGroupInfo = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;

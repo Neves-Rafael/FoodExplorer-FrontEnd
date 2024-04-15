@@ -105,11 +105,10 @@ A aplicação possui duas personas:
     <br/>
 
 <h1 align="center">📑 Funcionamento</h1>
-    <br/>
 
-- ###### _O render possui um sistema que deixa o servidor hibernando então no primeiro acesso é normal ocorrer um delay na resposta que pode durar até 1 minuto, caso ocorra aguarde essa duração que logo após o funcionamento volta ao normal._
+###### _O render possui um sistema que deixa o servidor hibernando então no primeiro acesso é normal ocorrer um delay na resposta que pode durar até 1 minuto, caso ocorra aguarde essa duração que logo após o funcionamento volta ao normal._
 
-    <br/>
+<br/>
 
 - ### **Fazer login**
 

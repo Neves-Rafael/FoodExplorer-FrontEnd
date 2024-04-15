@@ -13,8 +13,8 @@ import { ButtonText } from "../../components/ButtonText";
 import {
   Container,
   Section,
-  Line1,
-  Line2,
+  FirstGroupInfo,
+  SecondGroupInfo,
   Titles,
   Ingredients,
   UploadImage,
@@ -95,7 +95,7 @@ export function NewPlate() {
       </Titles>
 
       <Section>
-        <Line1>
+        <FirstGroupInfo>
           <div>
             <p>Imagem do prato</p>
             <UploadImage htmlFor="image">
@@ -123,9 +123,9 @@ export function NewPlate() {
               placeholder={"Exemplo: Refeição"}
             />
           </div>
-        </Line1>
+        </FirstGroupInfo>
 
-        <Line2>
+        <SecondGroupInfo>
           <div>
             <p>Ingredients</p>
             <Ingredients>
@@ -156,7 +156,7 @@ export function NewPlate() {
               value={value}
             />
           </div>
-        </Line2>
+        </SecondGroupInfo>
 
         <div>
           <p>Descrição</p>

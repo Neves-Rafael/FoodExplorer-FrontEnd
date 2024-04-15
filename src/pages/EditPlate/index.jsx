@@ -16,8 +16,8 @@ import { Modal } from "../../components/Modal";
 import {
   Container,
   Section,
-  Line1,
-  Line2,
+  FirstGroupInfo,
+  SecondGroupInfo,
   Titles,
   Ingredients,
   UploadImage,
@@ -128,7 +128,7 @@ export function EditPlate() {
       </Titles>
 
       <Section>
-        <Line1>
+        <FirstGroupInfo>
           <div>
             <p>Imagem do prato</p>
             <UploadImage htmlFor="image">
@@ -156,9 +156,9 @@ export function EditPlate() {
               category={plateToUpdate.category}
             />
           </div>
-        </Line1>
+        </FirstGroupInfo>
 
-        <Line2>
+        <SecondGroupInfo>
           <div>
             <p>Ingredients</p>
             <Ingredients>
@@ -185,7 +185,7 @@ export function EditPlate() {
             <p>Preço</p>
             <Input onChange={(e) => setValue(e.target.value)} value={value} />
           </div>
-        </Line2>
+        </SecondGroupInfo>
 
         <div>
           <p>Descrição</p>

@@ -54,7 +54,8 @@ export const Container = styled.div`
     font-size: 1.4rem;
     color: ${({ theme }) => theme.COLORS.LIGHT_400};
     word-wrap: break-word;
-    word-break: break-all;
+    max-height: 5rem;
+    overflow: hidden;
   }
 
   button {
