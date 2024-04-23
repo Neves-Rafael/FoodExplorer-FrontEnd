@@ -54,12 +54,12 @@ export function Payment() {
   ];
 
   function redirectToPayment() {
+    const path = "https://foodexplorer-delivery.netlify.app"
+    
     window.open(
-      `${"https://foodexplorer-delivery.netlify.app"}/payment/qrcode/${id}`,
+      `${path}/payment/qrcode/${id}`,
       "_blank"
     );
-    //atualizar para local de deploy do site
-
     updateStatusPayment();
   }
 
